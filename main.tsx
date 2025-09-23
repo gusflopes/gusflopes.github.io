@@ -229,10 +229,9 @@ export default function GusFLopesLanding() {
 
           {/* Bento Grid */}
           <div className="mt-8 grid grid-cols-3 auto-rows-fr gap-6" style={{ minHeight: '600px' }}>
-            {/* Card 1 - Large (2x2) */}
-            <InsightCard
+            {/* Card 1 - Horizontal Hero (2x2) */}
+            <HeroCardHorizontal
               insight={typedInsightsData[0]}
-              size="large"
               index={0}
             />
 
@@ -509,7 +508,7 @@ function InsightCard({ insight, size, index }: InsightCardProps) {
   const getImageHeight = () => {
     switch (size) {
       case 'large':
-        return 'h-64'; // Maior para o card 2x2
+        return 'h-[450px]'; // Hero image dominante para o card 2x2 (~75% da altura de 600px)
       case 'medium':
         return 'h-40'; // Médio para o card 2x1
       default:
@@ -614,6 +613,107 @@ function InsightCard({ insight, size, index }: InsightCardProps) {
               <span
                 key={tag}
                 className="rounded-full border border-[#4a7ba7]/25 bg-[#2d5a87]/15 px-2.5 py-1 text-xs text-[#f5f1ea]/90"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </CardComponent>
+    </motion.div>
+  );
+}
+
+
+// Componente alternativo para teste - Layout Horizontal
+function HeroCardHorizontal({ insight, index }: { insight: InsightData; index: number }) {
+  const { type, date, title, description, tags, imageUrl, link, isExternal } = insight;
+
+  const getIcon = () => {
+    switch (type) {
+      case 'video':
+        return <Play className="h-4 w-4" />;
+      case 'substack':
+        return <ExternalLink className="h-4 w-4" />;
+      default:
+        return <FileText className="h-4 w-4" />;
+    }
+  };
+
+  const getTypeLabel = () => {
+    switch (type) {
+      case 'video':
+        return 'Vídeo';
+      case 'substack':
+        return 'Substack';
+      default:
+        return 'Artigo';
+    }
+  };
+
+  const CardComponent = isExternal ? 'a' : 'button';
+  const cardProps = isExternal
+    ? { href: link, target: '_blank', rel: 'noopener noreferrer' }
+    : { onClick: () => window.location.href = link };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      viewport={{ once: true }}
+      className="col-span-2 row-span-2"
+    >
+      <CardComponent
+        {...cardProps}
+        className="group relative rounded-2xl border border-[#4a7ba7]/30 bg-[#1e3a5f]/20 backdrop-blur-md shadow-2xl shadow-black/30 hover:bg-[#2d5a87]/30 transition-all duration-300 overflow-hidden h-full flex text-left w-full min-h-[600px]"
+      >
+        {/* Image - Left Side (50%) */}
+        <div className="relative w-1/2 h-full overflow-hidden">
+          <img
+            src={imageUrl}
+            alt={title}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-black/20" />
+
+          {/* Type Badge */}
+          <div className="absolute top-4 left-4 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#1e3a5f]/90 backdrop-blur-sm border border-[#4a7ba7]/30">
+            {getIcon()}
+            <span className="text-sm font-medium text-[#f4a661]">{getTypeLabel()}</span>
+          </div>
+
+          {/* External Link Icon */}
+          {isExternal && (
+            <div className="absolute top-4 right-4 p-2 rounded-full bg-[#1e3a5f]/90 backdrop-blur-sm border border-[#4a7ba7]/30">
+              <ExternalLink className="h-4 w-4 text-[#f4a661]" />
+            </div>
+          )}
+        </div>
+
+        {/* Content - Right Side (50%) */}
+        <div className="w-1/2 h-full flex flex-col justify-center p-8">
+          {/* Date */}
+          <span className="text-sm text-[#f5f1ea]/60 font-medium mb-3">
+            {new Date(date).toLocaleDateString('pt-BR')}
+          </span>
+
+          {/* Title */}
+          <h3 className="font-bold text-2xl tracking-tight group-hover:text-[#f4a661] mb-4 leading-tight">
+            {title}
+          </h3>
+
+          {/* Description */}
+          <p className="text-white/80 leading-relaxed mb-6 text-lg">
+            {description}
+          </p>
+
+          {/* Tags */}
+          <div className="flex flex-wrap gap-2 mt-auto">
+            {tags.slice(0, 4).map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full border border-[#4a7ba7]/25 bg-[#2d5a87]/15 px-3 py-1.5 text-sm text-[#f5f1ea]/90"
               >
                 {tag}
               </span>
