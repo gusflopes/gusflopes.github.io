@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pattern Showcase - gusflopes.dev</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1d24 0%, #1e3a5f 50%, #1a1d24 100%);
+            min-height: 100vh;
+        }
+
+        .pattern-card {
+            height: 200px;
+            border-radius: 16px;
+            border: 1px solid rgba(74, 123, 167, 0.3);
+            background: rgba(30, 58, 95, 0.2);
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pattern-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(244, 166, 97, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .pattern-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+        }
+
+        .pattern-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 29, 36, 0.9);
+            color: #f5f1ea;
+            padding: 12px 16px;
+            font-weight: 600;
+            font-size: 14px;
+            z-index: 10;
+            backdrop-filter: blur(4px);
+        }
+
+        /* Pattern 1: Círculos */
+        .pattern-circles {
+            background-image: radial-gradient(circle at 20px 20px, rgba(244,166,97,0.3) 3px, transparent 3px);
+            background-size: 40px 40px;
+        }
+
+        /* Pattern 2: Estrelas */
+        .pattern-stars {
+            background-image:
+                radial-gradient(2px 2px at 20px 30px, rgba(244,166,97,0.4), transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(244,166,97,0.4), transparent),
+                radial-gradient(1px 1px at 90px 40px, rgba(244,166,97,0.4), transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(244,166,97,0.4), transparent),
+                radial-gradient(2px 2px at 160px 30px, rgba(244,166,97,0.4), transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+        }
+
+        /* Pattern 3: Hexágonos */
+        .pattern-hexagons {
+            background-image:
+                radial-gradient(circle at 50% 50%, transparent 20%, rgba(244,166,97,0.3) 21%, rgba(244,166,97,0.3) 30%, transparent 31%);
+            background-size: 50px 43px;
+            background-position: 0 0, 25px 22px;
+        }
+
+        /* Pattern 4: Quadrados */
+        .pattern-squares {
+            background-image:
+                linear-gradient(90deg, rgba(244,166,97,0.3) 0%, rgba(244,166,97,0.3) 3px, transparent 3px, transparent 100%),
+                linear-gradient(0deg, rgba(244,166,97,0.3) 0%, rgba(244,166,97,0.3) 3px, transparent 3px, transparent 100%);
+            background-size: 30px 30px;
+        }
+
+        /* Pattern 5: Losangos */
+        .pattern-diamonds {
+            background-image:
+                linear-gradient(45deg, transparent 40%, rgba(244,166,97,0.3) 50%, transparent 60%),
+                linear-gradient(-45deg, transparent 40%, rgba(244,166,97,0.3) 50%, transparent 60%);
+            background-size: 40px 40px;
+        }
+
+        /* Pattern 6: Cruzes */
+        .pattern-crosses {
+            background-image:
+                linear-gradient(90deg, transparent 45%, rgba(244,166,97,0.4) 50%, transparent 55%),
+                linear-gradient(0deg, transparent 45%, rgba(244,166,97,0.4) 50%, transparent 55%);
+            background-size: 30px 30px;
+        }
+
+        /* Pattern 7: Diagonal Stripes */
+        .pattern-stripes {
+            background-image: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 15px,
+                rgba(244,166,97,0.2) 15px,
+                rgba(244,166,97,0.2) 17px
+            );
+        }
+
+        /* Pattern 8: Zigzag */
+        .pattern-zigzag {
+            background-image:
+                linear-gradient(135deg, rgba(244,166,97,0.3) 25%, transparent 25%),
+                linear-gradient(225deg, rgba(244,166,97,0.3) 25%, transparent 25%),
+                linear-gradient(45deg, rgba(244,166,97,0.3) 25%, transparent 25%),
+                linear-gradient(315deg, rgba(244,166,97,0.3) 25%, transparent 25%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 0, 10px -10px, 0px 10px;
+        }
+
+        /* Pattern 9: Ondas */
+        .pattern-waves {
+            background-image: radial-gradient(ellipse at center, transparent 20%, rgba(244,166,97,0.2) 50%, transparent 70%);
+            background-size: 60px 30px;
+            animation: wave 4s ease-in-out infinite alternate;
+        }
+
+        /* Pattern 10: Noise/Grain */
+        .pattern-noise {
+            background-image:
+                radial-gradient(circle at 25% 25%, rgba(244,166,97,0.1) 1px, transparent 1px),
+                radial-gradient(circle at 75% 75%, rgba(244,166,97,0.1) 1px, transparent 1px),
+                radial-gradient(circle at 50% 50%, rgba(244,166,97,0.1) 0.5px, transparent 0.5px),
+                radial-gradient(circle at 30% 80%, rgba(244,166,97,0.1) 1px, transparent 1px),
+                radial-gradient(circle at 80% 20%, rgba(244,166,97,0.1) 1px, transparent 1px);
+            background-size: 15px 15px, 20px 20px, 12px 12px, 18px 18px, 25px 25px;
+        }
+
+        /* Pattern 11: Circuitos */
+        .pattern-circuits {
+            background-image:
+                linear-gradient(90deg, transparent 47%, rgba(244,166,97,0.3) 49%, rgba(244,166,97,0.3) 51%, transparent 53%),
+                linear-gradient(0deg, transparent 47%, rgba(244,166,97,0.3) 49%, rgba(244,166,97,0.3) 51%, transparent 53%),
+                radial-gradient(circle at 25px 25px, rgba(244,166,97,0.4) 2px, transparent 2px),
+                radial-gradient(circle at 75px 75px, rgba(244,166,97,0.4) 2px, transparent 2px);
+            background-size: 50px 50px, 50px 50px, 100px 100px, 100px 100px;
+        }
+
+        /* Pattern 12: Constellation */
+        .pattern-constellation {
+            background-image:
+                radial-gradient(circle at 20px 20px, rgba(244,166,97,0.4) 2px, transparent 2px),
+                radial-gradient(circle at 80px 40px, rgba(244,166,97,0.4) 2px, transparent 2px),
+                radial-gradient(circle at 40px 80px, rgba(244,166,97,0.4) 2px, transparent 2px),
+                linear-gradient(33deg, transparent 48%, rgba(244,166,97,0.2) 49%, rgba(244,166,97,0.2) 51%, transparent 52%),
+                linear-gradient(127deg, transparent 48%, rgba(244,166,97,0.2) 49%, rgba(244,166,97,0.2) 51%, transparent 52%);
+            background-size: 100px 100px;
+        }
+
+        /* Pattern 13: Binary Dots */
+        .pattern-binary {
+            background-image:
+                radial-gradient(circle at 20px 20px, rgba(244,166,97,0.4) 1px, transparent 1px),
+                radial-gradient(circle at 60px 20px, rgba(244,166,97,0.2) 1px, transparent 1px),
+                radial-gradient(circle at 20px 60px, rgba(244,166,97,0.4) 1px, transparent 1px),
+                radial-gradient(circle at 60px 60px, rgba(244,166,97,0.4) 1px, transparent 1px),
+                radial-gradient(circle at 40px 40px, rgba(244,166,97,0.2) 1px, transparent 1px);
+            background-size: 80px 80px;
+        }
+
+        /* Pattern 14: Pixel Pattern */
+        .pattern-pixels {
+            background-image:
+                linear-gradient(90deg, rgba(244,166,97,0.3) 0%, rgba(244,166,97,0.3) 1px, transparent 1px, transparent 100%),
+                linear-gradient(0deg, rgba(244,166,97,0.3) 0%, rgba(244,166,97,0.3) 1px, transparent 1px, transparent 100%);
+            background-size: 8px 8px;
+        }
+
+        /* Pattern 15: Data Matrix */
+        .pattern-matrix {
+            background-image:
+                radial-gradient(circle at 10px 10px, rgba(244,166,97,0.3) 1px, transparent 1px),
+                radial-gradient(circle at 30px 10px, rgba(244,166,97,0.1) 1px, transparent 1px),
+                radial-gradient(circle at 10px 30px, rgba(244,166,97,0.2) 1px, transparent 1px),
+                radial-gradient(circle at 30px 30px, rgba(244,166,97,0.4) 1px, transparent 1px),
+                radial-gradient(circle at 50px 10px, rgba(244,166,97,0.2) 1px, transparent 1px),
+                radial-gradient(circle at 50px 30px, rgba(244,166,97,0.1) 1px, transparent 1px);
+            background-size: 60px 40px;
+        }
+
+        @keyframes wave {
+            0% { background-position: 0 0; }
+            100% { background-position: 60px 0; }
+        }
+    </style>
+</head>
+<body class="text-slate-100">
+    <!-- Header -->
+    <header class="py-8 text-center">
+        <h1 class="text-4xl font-bold text-[#f5f1ea] mb-4">Pattern Showcase</h1>
+        <p class="text-lg text-white/80 max-w-2xl mx-auto">
+            Teste visual de padrões para o site <span class="text-[#f4a661] font-semibold">gusflopes.dev</span>
+        </p>
+        <p class="text-sm text-white/60 mt-2">
+            Passe o mouse sobre os cards para destacar • Escolha o pattern que mais combina
+        </p>
+    </header>
+
+    <!-- Patterns Grid -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- Pattern 1: Círculos -->
+            <div class="pattern-card">
+                <div class="pattern-overlay pattern-circles"></div>
+                <div class="pattern-label">
+                    Círculos (Atual)
+                </div>
+            </div>
+
+            <!-- Pattern 2: Estrelas -->
+            <div class="pattern-card">
+                <div class="pattern-overlay pattern-stars"></div>
+                <div class="pattern-label">
+                    Estrelas ⭐
+                </div>
+            </div>
+
+            <!-- Pattern 3: Hexágonos -->
+            <div class="pattern-card">
+                <div class="pattern-overlay pattern-hexagons"></div>
+                <div class="pattern-label">
+                    Hexágonos 🔶
+                </div>
+            </div>
+
+            <!-- Pattern 4: Quadrados -->
+            <div class="pattern-card">
+                <div class="pattern-overlay pattern-squares"></div>
+                <div class="pattern-label">
+                    Quadrados ⬜
+                </div>
+            </div>
+
+            <!-- Pattern 5: Losangos -->
+            <div class="pattern-card">
+                <div class="pattern-overlay pattern-diamonds"></div>
+                <div class="pattern-label">
+                    Losangos 💎
+                </div>
+            </div>
+
+            <!-- Pattern 6: Cruzes -->
+            <div class="pattern-card">
+                <div class="pattern-overlay pattern-crosses"></div>
+                <div class="pattern-label">
+                    Cruzes ➕
+                </div>
+            </div>
+
+            <!-- Pattern 7: Diagonal Stripes -->
+            <div class="pattern-card">
+                <div class="pattern-overlay pattern-stripes"></div>
+                <div class="pattern-label">
+                    Diagonal Stripes 📐
+                </div>
+            </div>
+
+            <!-- Pattern 8: Zigzag -->
+            <div class="pattern-card">
+                <div class="pattern-overlay pattern-zigzag"></div>
+                <div class="pattern-label">
+                    Zigzag ⚡
+                </div>
+            </div>
+
+            <!-- Pattern 9: Ondas -->
+            <div class="pattern-card">
+                <div class="pattern-overlay pattern-waves"></div>
+                <div class="pattern-label">
+                    Ondas 🌊 (Animado)
+                </div>
+            </div>
+
+            <!-- Pattern 10: Noise/Grain -->
+            <div class="pattern-card">
+                <div class="pattern-overlay pattern-noise"></div>
+                <div class="pattern-label">
+                    Noise/Grain 📺
+                </div>
+            </div>
+
+            <!-- Pattern 11: Circuitos -->
+            <div class="pattern-card">
+                <div class="pattern-overlay pattern-circuits"></div>
+                <div class="pattern-label">
+                    Circuitos 🔌
+                </div>
+            </div>
+
+            <!-- Pattern 12: Constellation -->
+            <div class="pattern-card">
+                <div class="pattern-overlay pattern-constellation"></div>
+                <div class="pattern-label">
+                    Constellation ✨
+                </div>
+            </div>
+
+            <!-- Pattern 13: Binary Dots -->
+            <div class="pattern-card">
+                <div class="pattern-overlay pattern-binary"></div>
+                <div class="pattern-label">
+                    Binary Dots 💾
+                </div>
+            </div>
+
+            <!-- Pattern 14: Pixel Pattern -->
+            <div class="pattern-card">
+                <div class="pattern-overlay pattern-pixels"></div>
+                <div class="pattern-label">
+                    Pixel Pattern 🎮
+                </div>
+            </div>
+
+            <!-- Pattern 15: Data Matrix -->
+            <div class="pattern-card">
+                <div class="pattern-overlay pattern-matrix"></div>
+                <div class="pattern-label">
+                    Data Matrix 🔢
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Instructions -->
+        <div class="mt-12 text-center">
+            <div class="bg-[#1e3a5f]/20 rounded-2xl p-6 border border-[#4a7ba7]/30 backdrop-blur-sm max-w-2xl mx-auto">
+                <h3 class="text-xl font-semibold text-[#f4a661] mb-3">Como usar</h3>
+                <p class="text-white/80 leading-relaxed">
+                    Este showcase permite testar diferentes padrões visuais para o site.
+                    Após validação desta página base, adicionarei todos os patterns mencionados
+                    para você comparar e escolher o melhor.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 text-white/60 text-sm border-t border-white/10">
+        Pattern Showcase • gusflopes.dev • Desenvolvido para testes visuais
+    </footer>
+</body>
+</html>

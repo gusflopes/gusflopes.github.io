@@ -1,7 +1,7 @@
+import { motion } from "framer-motion";
+import { Boxes, Cpu, Github, Linkedin, Mail, Settings, TerminalSquare } from "lucide-react";
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, TerminalSquare, Cpu, Boxes, Settings } from "lucide-react";
 
 /**
  * gusflopes.dev – Single‑file landing page
@@ -157,8 +157,19 @@ export default function GusFLopesLanding() {
       </section>
 
       {/* Content (Articles & Videos) */}
-      <section id="content" className="py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section id="content" className="relative py-20 bg-gradient-to-br from-[#1a1d24]/60 via-[#1e3a5f]/40 to-[#1a1d24]/60">
+        <div className="absolute inset-0 opacity-80" style={{
+          backgroundImage: `
+            radial-gradient(circle at 10px 10px, rgba(244,166,97,0.5) 2px, transparent 2px),
+            radial-gradient(circle at 30px 10px, rgba(244,166,97,0.2) 1px, transparent 1px),
+            radial-gradient(circle at 10px 30px, rgba(244,166,97,0.3) 1px, transparent 1px),
+            radial-gradient(circle at 30px 30px, rgba(244,166,97,0.6) 2px, transparent 2px),
+            radial-gradient(circle at 50px 10px, rgba(244,166,97,0.3) 1px, transparent 1px),
+            radial-gradient(circle at 50px 30px, rgba(244,166,97,0.2) 1px, transparent 1px)
+          `,
+          backgroundSize: "60px 40px"
+        }} />
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Header title="Conteúdo Recente" subtitle="Artigos, vídeos e insights sobre tecnologia, IA e arquitetura de software." />
           <div className="mt-8 grid md:grid-cols-3 gap-6">
             {Array.from({ length: 3 }).map((_, i) => (
@@ -196,10 +207,17 @@ export default function GusFLopesLanding() {
       </section>
 
       {/* Insights & CTA */}
-      <section className="relative py-20 lg:py-28 bg-gradient-to-br from-[#1a1d24] via-[#1e3a5f] to-[#1a1d24]">
-        <div className="absolute inset-0 opacity-20" style={{
-          backgroundImage: "radial-gradient(circle at 20px 20px, rgba(244,166,97,0.1) 2px, transparent 2px)",
-          backgroundSize: "40px 40px"
+      <section className="relative py-20 lg:py-28 bg-gradient-to-br from-[#1a1d24]/60 via-[#1e3a5f]/40 to-[#1a1d24]/60">
+        <div className="absolute inset-0 opacity-80" style={{
+          backgroundImage: `
+            radial-gradient(circle at 10px 10px, rgba(244,166,97,0.5) 2px, transparent 2px),
+            radial-gradient(circle at 30px 10px, rgba(244,166,97,0.2) 1px, transparent 1px),
+            radial-gradient(circle at 10px 30px, rgba(244,166,97,0.3) 1px, transparent 1px),
+            radial-gradient(circle at 30px 30px, rgba(244,166,97,0.6) 2px, transparent 2px),
+            radial-gradient(circle at 50px 10px, rgba(244,166,97,0.3) 1px, transparent 1px),
+            radial-gradient(circle at 50px 30px, rgba(244,166,97,0.2) 1px, transparent 1px)
+          `,
+          backgroundSize: "60px 40px"
         }} />
         <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
@@ -207,7 +225,7 @@ export default function GusFLopesLanding() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="bg-[#1e3a5f]/40 rounded-3xl p-8 lg:p-12 border border-[#4a7ba7]/40 shadow-2xl backdrop-blur-sm"
+            className="bg-[#1e3a5f]/40 rounded-3xl p-8 lg:p-12 border border-[#4a7ba7]/30 shadow-2xl backdrop-blur-sm"
           >
             <h2 className="text-3xl lg:text-4xl font-bold text-[#f5f1ea] mb-6">
               Construindo o Futuro da Tecnologia
@@ -257,8 +275,19 @@ export default function GusFLopesLanding() {
       </section>
 
       {/* Contact */}
-      <section id="contact" className="py-20">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <section id="contact" className="relative py-20 bg-gradient-to-br from-[#1a1d24]/60 via-[#1e3a5f]/40 to-[#1a1d24]/60">
+        <div className="absolute inset-0 opacity-80" style={{
+          backgroundImage: `
+            radial-gradient(circle at 10px 10px, rgba(244,166,97,0.5) 2px, transparent 2px),
+            radial-gradient(circle at 30px 10px, rgba(244,166,97,0.2) 1px, transparent 1px),
+            radial-gradient(circle at 10px 30px, rgba(244,166,97,0.3) 1px, transparent 1px),
+            radial-gradient(circle at 30px 30px, rgba(244,166,97,0.6) 2px, transparent 2px),
+            radial-gradient(circle at 50px 10px, rgba(244,166,97,0.3) 1px, transparent 1px),
+            radial-gradient(circle at 50px 30px, rgba(244,166,97,0.2) 1px, transparent 1px)
+          `,
+          backgroundSize: "60px 40px"
+        }} />
+        <div className="relative z-10 mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
           <Header title="Vamos conversar" subtitle="Aberto a colaborações, consultoria e bons papos sobre tecnologia." />
           <div className="mt-8 flex items-center justify-center gap-6">
             <a aria-label="GitHub" href="https://github.com/gusflopes" className="rounded-xl border border-[#4a7ba7]/30 bg-[#2d5a87]/20 hover:bg-[#2d5a87]/40 px-6 py-3 text-lg inline-flex items-center gap-2"><Github className="h-6 w-6" />GitHub</a>
