@@ -1,0 +1,202 @@
+[
+  {
+    "type": "article",
+    "date": "2025-01-20",
+    "title": "Como Implementar RAG em Produção",
+    "description": "Guia completo para implementar Retrieval-Augmented Generation em ambientes de produção, cobrindo desde a escolha dos embeddings até o deployment.",
+    "tags": ["IA", "RAG", "Python", "MLOps"],
+    "imageUrl": "https://picsum.photos/800/600?random=1",
+    "link": "/blog/implementar-rag-producao",
+    "isExternal": false
+  },
+  {
+    "type": "video",
+    "date": "2025-01-18",
+    "title": "Arquitetura de Microsserviços: Padrões e Anti-padrões",
+    "description": "Apresentação sobre os principais padrões de design para microsserviços e os erros mais comuns que devemos evitar.",
+    "tags": ["Arquitetura", "Microsserviços", "Design Patterns"],
+    "imageUrl": "https://picsum.photos/800/600?random=2",
+    "link": "https://www.youtube.com/@hubdev-tech",
+    "isExternal": true
+  },
+  {
+    "type": "substack",
+    "date": "2025-01-16",
+    "title": "O Futuro da Observabilidade em 2025",
+    "description": "Análise das tendências emergentes em observabilidade, incluindo OpenTelemetry, eBPF e as novas ferramentas de monitoring.",
+    "tags": ["DevOps", "Observabilidade", "Monitoring"],
+    "imageUrl": "https://picsum.photos/800/600?random=3",
+    "link": "https://www.youtube.com/@hubdev-tech",
+    "isExternal": true
+  },
+  {
+    "type": "article",
+    "date": "2025-01-14",
+    "title": "TypeScript para Arquitetos de Software",
+    "description": "Como usar TypeScript de forma avançada em projetos enterprise, explorando tipos condicionais, decorators e design patterns.",
+    "tags": ["TypeScript", "Arquitetura", "Frontend"],
+    "imageUrl": "https://picsum.photos/800/600?random=4",
+    "link": "/blog/typescript-arquitetos",
+    "isExternal": false
+  },
+  {
+    "type": "video",
+    "date": "2025-01-12",
+    "title": "Kubernetes na Prática: Do Zero ao Deploy",
+    "description": "Tutorial hands-on mostrando como configurar um cluster Kubernetes completo com networking, storage e monitoramento.",
+    "tags": ["Kubernetes", "DevOps", "Container"],
+    "imageUrl": "https://picsum.photos/800/600?random=5",
+    "link": "https://www.youtube.com/@hubdev-tech",
+    "isExternal": true
+  },
+  {
+    "type": "substack",
+    "date": "2025-01-10",
+    "title": "Event-Driven Architecture: Lessons Learned",
+    "description": "Reflexões sobre 3 anos implementando arquiteturas orientadas a eventos em escala, incluindo sucessos e fracassos.",
+    "tags": ["Arquitetura", "Event-Driven", "Microservices"],
+    "imageUrl": "https://picsum.photos/800/600?random=6",
+    "link": "https://www.youtube.com/@hubdev-tech",
+    "isExternal": true
+  },
+  {
+    "type": "article",
+    "date": "2025-01-08",
+    "title": "Otimizando Performance com React Server Components",
+    "description": "Estratégias práticas para melhorar performance de aplicações React usando Server Components e Streaming SSR.",
+    "tags": ["React", "Performance", "SSR"],
+    "imageUrl": "https://picsum.photos/800/600?random=7",
+    "link": "/blog/react-server-components",
+    "isExternal": false
+  },
+  {
+    "type": "video",
+    "date": "2025-01-06",
+    "title": "GitOps com ArgoCD: Workshop Completo",
+    "description": "Workshop prático implementando GitOps usando ArgoCD, desde a configuração básica até cenários avançados de deployment.",
+    "tags": ["GitOps", "ArgoCD", "CI/CD"],
+    "imageUrl": "https://picsum.photos/800/600?random=8",
+    "link": "https://www.youtube.com/@hubdev-tech",
+    "isExternal": true
+  },
+  {
+    "type": "substack",
+    "date": "2025-01-04",
+    "title": "Database per Service: Mito ou Realidade?",
+    "description": "Análise crítica do padrão 'database per service' em microsserviços, quando usar e quando evitar.",
+    "tags": ["Database", "Microsserviços", "Data"],
+    "imageUrl": "https://picsum.photos/800/600?random=9",
+    "link": "https://www.youtube.com/@hubdev-tech",
+    "isExternal": true
+  },
+  {
+    "type": "article",
+    "date": "2025-01-02",
+    "title": "Prompt Engineering para Desenvolvedores",
+    "description": "Técnicas avançadas de prompt engineering para aumentar produtividade no desenvolvimento com LLMs como GPT-4 e Claude.",
+    "tags": ["IA", "Prompt Engineering", "Produtividade"],
+    "imageUrl": "https://picsum.photos/800/600?random=10",
+    "link": "/blog/prompt-engineering-devs",
+    "isExternal": false
+  },
+  {
+    "type": "video",
+    "date": "2024-12-30",
+    "title": "Terraform: Infraestrutura Imutável na AWS",
+    "description": "Como implementar infraestrutura imutável usando Terraform na AWS, incluindo blue-green deployments e rollbacks.",
+    "tags": ["Terraform", "AWS", "IaC"],
+    "imageUrl": "https://picsum.photos/800/600?random=11",
+    "link": "https://www.youtube.com/@hubdev-tech",
+    "isExternal": true
+  },
+  {
+    "type": "substack",
+    "date": "2024-12-28",
+    "title": "A Arte da Code Review: Além do Código",
+    "description": "Como fazer code reviews que realmente agregam valor, focando em arquitetura, testabilidade e maintainability.",
+    "tags": ["Code Review", "Qualidade", "Team"],
+    "imageUrl": "https://picsum.photos/800/600?random=12",
+    "link": "https://www.youtube.com/@hubdev-tech",
+    "isExternal": true
+  },
+  {
+    "type": "article",
+    "date": "2024-12-26",
+    "title": "WebAssembly: O Futuro do Frontend?",
+    "description": "Explorando as possibilidades do WebAssembly para aplicações frontend, incluindo casos de uso e limitações atuais.",
+    "tags": ["WebAssembly", "Frontend", "Performance"],
+    "imageUrl": "https://picsum.photos/800/600?random=13",
+    "link": "/blog/webassembly-frontend",
+    "isExternal": false
+  },
+  {
+    "type": "video",
+    "date": "2024-12-24",
+    "title": "Monorepo vs Multirepo: Battle Royale",
+    "description": "Debate estruturado comparando estratégias de organização de código: monorepo vs multirepo, com casos reais.",
+    "tags": ["Monorepo", "Git", "Organização"],
+    "imageUrl": "https://picsum.photos/800/600?random=14",
+    "link": "https://www.youtube.com/@hubdev-tech",
+    "isExternal": true
+  },
+  {
+    "type": "substack",
+    "date": "2024-12-22",
+    "title": "Serverless: Quando Usar e Quando Fugir",
+    "description": "Análise pragmática de quando serverless faz sentido e quando pode ser um tiro no pé, com exemplos reais.",
+    "tags": ["Serverless", "AWS Lambda", "Cloud"],
+    "imageUrl": "https://picsum.photos/800/600?random=15",
+    "link": "https://www.youtube.com/@hubdev-tech",
+    "isExternal": true
+  },
+  {
+    "type": "article",
+    "date": "2024-12-20",
+    "title": "Testing em Microservices: Contract Testing",
+    "description": "Como implementar contract testing para garantir a comunicação entre microservices usando Pact e outras ferramentas.",
+    "tags": ["Testing", "Contract Testing", "Microservices"],
+    "imageUrl": "https://picsum.photos/800/600?random=16",
+    "link": "/blog/contract-testing-microservices",
+    "isExternal": false
+  },
+  {
+    "type": "video",
+    "date": "2024-12-18",
+    "title": "Redis: Muito Além do Cache",
+    "description": "Explorando funcionalidades avançadas do Redis: pub/sub, streams, modules e casos de uso criativos.",
+    "tags": ["Redis", "Database", "Cache"],
+    "imageUrl": "https://picsum.photos/800/600?random=17",
+    "link": "https://www.youtube.com/@hubdev-tech",
+    "isExternal": true
+  },
+  {
+    "type": "substack",
+    "date": "2024-12-16",
+    "title": "DDD na Prática: Bounded Contexts Reais",
+    "description": "Como aplicar Domain-Driven Design em projetos reais, com exemplos de bounded contexts e aggregate design.",
+    "tags": ["DDD", "Domain Design", "Arquitetura"],
+    "imageUrl": "https://picsum.photos/800/600?random=18",
+    "link": "https://www.youtube.com/@hubdev-tech",
+    "isExternal": true
+  },
+  {
+    "type": "article",
+    "date": "2024-12-14",
+    "title": "API Design: REST vs GraphQL vs gRPC",
+    "description": "Comparação detalhada entre diferentes paradigmas de API, quando usar cada um e trade-offs envolvidos.",
+    "tags": ["API", "REST", "GraphQL", "gRPC"],
+    "imageUrl": "https://picsum.photos/800/600?random=19",
+    "link": "/blog/api-design-comparison",
+    "isExternal": false
+  },
+  {
+    "type": "video",
+    "date": "2024-12-12",
+    "title": "Chaos Engineering: Quebrando para Fortalecer",
+    "description": "Introdução prática ao Chaos Engineering, implementando experimentos controlados para melhorar resiliência.",
+    "tags": ["Chaos Engineering", "Resiliência", "SRE"],
+    "imageUrl": "https://picsum.photos/800/600?random=20",
+    "link": "https://www.youtube.com/@hubdev-tech",
+    "isExternal": true
+  }
+]

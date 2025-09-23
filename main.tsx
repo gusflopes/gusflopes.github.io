@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Boxes, Cpu, Github, Linkedin, Settings, TerminalSquare, Youtube } from "lucide-react";
+import { Boxes, Cpu, Github, Linkedin, Settings, TerminalSquare, Youtube, FileText, Play, ExternalLink } from "lucide-react";
 import React from "react";
 import { createRoot } from "react-dom/client";
 
@@ -13,6 +13,23 @@ import { createRoot } from "react-dom/client";
  */
 
 const BACKGROUND_URL = "./wallpaper.jpg"; // e.g. "/images/gus-wallpaper.jpg"
+
+// Import insights data
+import insightsData from './insights-data.json';
+
+// Type for insights data
+type InsightData = {
+  type: 'article' | 'video' | 'substack';
+  date: string;
+  title: string;
+  description: string;
+  tags: string[];
+  imageUrl: string;
+  link: string;
+  isExternal: boolean;
+};
+
+const typedInsightsData = insightsData as InsightData[];
 
 const nav = [
   { label: "Insights", href: "#content" },
@@ -208,18 +225,55 @@ export default function GusFLopesLanding() {
           backgroundSize: "60px 40px"
         }} />
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Header title="Conteúdo Recente" subtitle="Artigos, vídeos e insights sobre tecnologia, IA e arquitetura de software." />
-          <div className="mt-8 grid md:grid-cols-3 gap-6">
-            {Array.from({ length: 3 }).map((_, i) => (
-              <ContentCard key={i}
-                title={i === 0 ? "Como Implementar RAG em Produção" : i === 1 ? "Palestra: Arquitetura de Microsserviços" : "DevOps e Observabilidade"}
-                description={i === 0 ? "Guia prático para implementar Retrieval-Augmented Generation em ambientes de produção." : i === 1 ? "Vídeo da minha apresentação sobre padrões e boas práticas em microsserviços." : "Estratégias para implementar observabilidade efetiva em sistemas distribuídos."}
-                type={i === 1 ? "video" : "article"}
-                date="2025-01-15"
-                tags={i === 0 ? ["IA", "RAG", "Python"] : i === 1 ? ["Arquitetura", "Microsserviços", "YouTube"] : ["DevOps", "Observabilidade", "Monitoring"]}
-                href="#"
-              />
-            ))}
+          <Header title="Insights Recentes" subtitle="Artigos, vídeos e insights sobre tecnologia, IA e arquitetura de software." />
+
+          {/* Bento Grid */}
+          <div className="mt-8 grid grid-cols-3 auto-rows-fr gap-6" style={{ minHeight: '600px' }}>
+            {/* Card 1 - Large (2x2) */}
+            <InsightCard
+              insight={typedInsightsData[0]}
+              size="large"
+              index={0}
+            />
+
+            {/* Card 2 - Small (1x1) */}
+            <InsightCard
+              insight={typedInsightsData[1]}
+              size="small"
+              index={1}
+            />
+
+            {/* Card 3 - Small (1x1) */}
+            <InsightCard
+              insight={typedInsightsData[2]}
+              size="small"
+              index={2}
+            />
+
+            {/* Card 4 - Small (1x1) */}
+            <InsightCard
+              insight={typedInsightsData[3]}
+              size="small"
+              index={3}
+            />
+
+            {/* Card 5 - Medium (2x1) */}
+            <InsightCard
+              insight={typedInsightsData[4]}
+              size="medium"
+              index={4}
+            />
+          </div>
+
+          {/* Ver Mais Button */}
+          <div className="mt-12 text-center">
+            <button
+              onClick={() => smoothScrollTo('projects')}
+              className="inline-flex items-center gap-2 rounded-xl border border-[#4a7ba7]/40 bg-[#2d5a87]/20 hover:bg-[#2d5a87]/40 px-8 py-4 text-lg font-medium transition-all hover:scale-105"
+            >
+              <FileText className="h-5 w-5" />
+              Ver Mais Insights
+            </button>
           </div>
         </div>
       </section>
@@ -401,42 +455,173 @@ function Card({ title, description, tags, href }: { title: string; description: 
   );
 }
 
-function ContentCard({ title, description, type, date, tags, href }: {
-  title: string;
-  description: string;
-  type: 'article' | 'video';
-  date: string;
-  tags: string[];
-  href: string
-}) {
+interface InsightCardProps {
+  insight: {
+    type: 'article' | 'video' | 'substack';
+    date: string;
+    title: string;
+    description: string;
+    tags: string[];
+    imageUrl: string;
+    link: string;
+    isExternal: boolean;
+  };
+  size: 'large' | 'medium' | 'small';
+  index: number;
+}
+
+function InsightCard({ insight, size, index }: InsightCardProps) {
+  const { type, date, title, description, tags, imageUrl, link, isExternal } = insight;
+
+  const getIcon = () => {
+    switch (type) {
+      case 'video':
+        return <Play className="h-4 w-4" />;
+      case 'substack':
+        return <ExternalLink className="h-4 w-4" />;
+      default:
+        return <FileText className="h-4 w-4" />;
+    }
+  };
+
+  const getTypeLabel = () => {
+    switch (type) {
+      case 'video':
+        return 'Vídeo';
+      case 'substack':
+        return 'Substack';
+      default:
+        return 'Artigo';
+    }
+  };
+
+  const getSizeClasses = () => {
+    switch (size) {
+      case 'large':
+        return 'col-span-2 row-span-2';
+      case 'medium':
+        return 'col-span-2 row-span-1';
+      default:
+        return 'col-span-1 row-span-1';
+    }
+  };
+
+  const getImageHeight = () => {
+    switch (size) {
+      case 'large':
+        return 'h-64'; // Maior para o card 2x2
+      case 'medium':
+        return 'h-40'; // Médio para o card 2x1
+      default:
+        return 'h-40'; // Altura fixa adequada para os cards 1x1
+    }
+  };
+
+  const getContentPadding = () => {
+    switch (size) {
+      case 'large':
+        return 'p-6';
+      case 'medium':
+        return 'p-4';
+      default:
+        return 'p-4';
+    }
+  };
+
+  const getMinHeight = () => {
+    switch (size) {
+      case 'large':
+        return 'min-h-[600px]'; // Card grande 2x2
+      case 'medium':
+        return 'min-h-[280px]'; // Card médio 2x1
+      default:
+        return 'min-h-[320px]'; // Card pequeno 1x1 - altura suficiente para imagem + conteúdo
+    }
+  };
+
+  const CardComponent = isExternal ? 'a' : 'button';
+  const cardProps = isExternal
+    ? { href: link, target: '_blank', rel: 'noopener noreferrer' }
+    : { onClick: () => window.location.href = link };
+
   return (
-    <a href={href} className="group rounded-2xl border border-[#4a7ba7]/30 bg-[#1e3a5f]/20 p-6 backdrop-blur-md shadow-2xl shadow-black/30 hover:bg-[#2d5a87]/30 transition">
-      <div className="flex items-start justify-between gap-4 mb-3">
-        <div className="flex items-center gap-2">
-          {type === 'video' ? (
-            <svg className="h-5 w-5 text-[#f4a661]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-            </svg>
-          ) : (
-            <svg className="h-5 w-5 text-[#f4a661]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      viewport={{ once: true }}
+      className={`${getSizeClasses()}`}
+    >
+      <CardComponent
+        {...cardProps}
+        className={`group relative rounded-2xl border border-[#4a7ba7]/30 bg-[#1e3a5f]/20 backdrop-blur-md shadow-2xl shadow-black/30 hover:bg-[#2d5a87]/30 transition-all duration-300 overflow-hidden h-full flex flex-col text-left w-full ${getMinHeight()}`}
+      >
+        {/* Image */}
+        <div className={`relative overflow-hidden ${getImageHeight()}`}>
+          <img
+            src={imageUrl}
+            alt={title}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+
+          {/* Type Badge */}
+          <div className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#1e3a5f]/90 backdrop-blur-sm border border-[#4a7ba7]/30">
+            {getIcon()}
+            <span className="text-xs font-medium text-[#f4a661]">{getTypeLabel()}</span>
+          </div>
+
+          {/* External Link Icon */}
+          {isExternal && (
+            <div className="absolute top-3 right-3 p-1.5 rounded-full bg-[#1e3a5f]/90 backdrop-blur-sm border border-[#4a7ba7]/30">
+              <ExternalLink className="h-3 w-3 text-[#f4a661]" />
+            </div>
           )}
-          <span className="text-xs text-[#f5f1ea]/70 font-medium">
-            {type === 'video' ? 'Vídeo' : 'Artigo'} • {new Date(date).toLocaleDateString('pt-BR')}
-          </span>
         </div>
-      </div>
-      <h3 className="font-semibold text-lg tracking-tight group-hover:text-[#f4a661] mb-2">{title}</h3>
-      <p className="text-base text-white/80 leading-relaxed mb-4">{description}</p>
-      <div className="flex flex-wrap gap-2">
-        {tags.map((t) => (
-          <span key={t} className="rounded-full border border-[#4a7ba7]/25 bg-[#2d5a87]/15 px-3 py-1 text-sm text-[#f5f1ea]/90">
-            {t}
+
+        {/* Content */}
+        <div className={`flex-1 flex flex-col ${getContentPadding()}`}>
+          {/* Date */}
+          <span className="text-xs text-[#f5f1ea]/60 font-medium mb-2">
+            {new Date(date).toLocaleDateString('pt-BR')}
           </span>
-        ))}
-      </div>
-    </a>
+
+          {/* Title */}
+          <h3 className={`font-semibold tracking-tight group-hover:text-[#f4a661] mb-2 ${
+            size === 'large' ? 'text-xl' : 'text-lg'
+          }`}>
+            {title}
+          </h3>
+
+          {/* Description */}
+          <p
+            className={`text-white/80 leading-relaxed mb-4 flex-1 ${
+              size === 'large' ? 'text-base' : 'text-sm'
+            }`}
+            style={size !== 'large' ? {
+              display: '-webkit-box',
+              WebkitLineClamp: 3,
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden'
+            } : {}}
+          >
+            {description}
+          </p>
+
+          {/* Tags */}
+          <div className="flex flex-wrap gap-1.5 mt-auto">
+            {tags.slice(0, size === 'large' ? 4 : 3).map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full border border-[#4a7ba7]/25 bg-[#2d5a87]/15 px-2.5 py-1 text-xs text-[#f5f1ea]/90"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </CardComponent>
+    </motion.div>
   );
 }
 
