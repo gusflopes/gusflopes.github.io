@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Boxes, Cpu, Github, Linkedin, Mail, Settings, TerminalSquare } from "lucide-react";
+import { Boxes, Cpu, Github, Linkedin, Settings, TerminalSquare, Youtube } from "lucide-react";
 import React from "react";
 import { createRoot } from "react-dom/client";
 
@@ -15,10 +15,10 @@ import { createRoot } from "react-dom/client";
 const BACKGROUND_URL = "./wallpaper.jpg"; // e.g. "/images/gus-wallpaper.jpg"
 
 const nav = [
-  { label: "Conteúdo", href: "#content" },
-  { label: "Assuntos", href: "#about" },
-  { label: "Projetos", href: "#projects" },
-  { label: "Contato", href: "#contact" },
+  { label: "Insights", href: "#content" },
+  { label: "Stack", href: "#about" },
+  { label: "Cases", href: "#projects" },
+  { label: "Conectar", href: "#contact" },
 ];
 
 export default function GusFLopesLanding() {
@@ -33,6 +33,34 @@ export default function GusFLopesLanding() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const smoothScrollTo = (elementId: string) => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      const targetPosition = element.offsetTop - 80; // Offset para o header fixo
+      const startPosition = window.pageYOffset;
+      const distance = targetPosition - startPosition;
+      const duration = 1000; // 1 segundo
+      let start: number | null = null;
+
+      function animation(currentTime: number) {
+        if (start === null) start = currentTime;
+        const timeElapsed = currentTime - start;
+        const run = easeInOutQuad(timeElapsed, startPosition, distance, duration);
+        window.scrollTo(0, run);
+        if (timeElapsed < duration) requestAnimationFrame(animation);
+      }
+
+      function easeInOutQuad(t: number, b: number, c: number, d: number) {
+        t /= d / 2;
+        if (t < 1) return c / 2 * t * t + b;
+        t--;
+        return -c / 2 * (t * (t - 2) - 1) + b;
+      }
+
+      requestAnimationFrame(animation);
+    }
+  };
 
   return (
     <div className="min-h-screen text-slate-100 bg-transparent selection:bg-[#d4863a]/40 selection:text-white">
@@ -58,14 +86,18 @@ export default function GusFLopesLanding() {
             </a>
             <nav className="hidden md:flex items-center gap-8 text-sm">
               {nav.map((n) => (
-                <a key={n.href} href={n.href} className="hover:text-[#f4a661] text-white/80 transition-colors">
+                <button
+                  key={n.href}
+                  onClick={() => smoothScrollTo(n.href.replace('#', ''))}
+                  className="hover:text-[#f4a661] text-white/80 transition-colors"
+                >
                   {n.label}
-                </a>
+                </button>
               ))}
               <div className="hidden md:flex items-center gap-4">
                 <a aria-label="GitHub" href="https://github.com/gusflopes" className="hover:text-[#f4a661] text-white/80"><Github className="h-5 w-5" /></a>
                 <a aria-label="LinkedIn" href="https://www.linkedin.com/in/gusflopes" className="hover:text-[#f4a661] text-white/80"><Linkedin className="h-5 w-5" /></a>
-                <a aria-label="E-mail" href="#contact" className="hover:text-[#f4a661] text-white/80"><Mail className="h-5 w-5" /></a>
+                <a aria-label="YouTube" href="https://www.youtube.com/@devHub" className="hover:text-[#f4a661] text-white/80"><Youtube className="h-5 w-5" /></a>
               </div>
             </nav>
           </div>
@@ -113,12 +145,18 @@ export default function GusFLopesLanding() {
               </div>
 
               <div className="mt-10 flex flex-wrap gap-3">
-                <a href="#content" className="inline-flex items-center gap-2 rounded-xl bg-[#d4863a] hover:bg-[#c47b47] px-6 py-3 text-lg font-medium shadow-lg shadow-[#d4863a]/30">
+                <button
+                  onClick={() => smoothScrollTo('content')}
+                  className="inline-flex items-center gap-2 rounded-xl bg-[#d4863a] hover:bg-[#c47b47] px-6 py-3 text-lg font-medium shadow-lg shadow-[#d4863a]/30"
+                >
                   Ver Conteúdo Recente
-                </a>
-                <a href="#about" className="inline-flex items-center gap-2 rounded-xl border border-[#4a7ba7]/30 bg-[#2d5a87]/20 hover:bg-[#2d5a87]/40 px-6 py-3 text-lg font-medium">
+                </button>
+                <button
+                  onClick={() => smoothScrollTo('about')}
+                  className="inline-flex items-center gap-2 rounded-xl border border-[#4a7ba7]/30 bg-[#2d5a87]/20 hover:bg-[#2d5a87]/40 px-6 py-3 text-lg font-medium"
+                >
                   Conhecer Assuntos
-                </a>
+                </button>
               </div>
             </div>
 
@@ -191,17 +229,20 @@ export default function GusFLopesLanding() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-6">
             <Feature
-              icon={<Cpu className="h-6 w-6" />}
+              icon={<Cpu className="h-8 w-8" />}
               title="IA aplicada"
-              desc="Modelagem, avaliação e integração de LLMs, geração aumentada por recuperação (RAG) e agentes em produção." />
+              desc="Modelagem, avaliação e integração de LLMs, geração aumentada por recuperação (RAG) e agentes em produção."
+              index={0} />
             <Feature
-              icon={<Boxes className="h-6 w-6" />}
+              icon={<Boxes className="h-8 w-8" />}
               title="Arquitetura & Plataforma"
-              desc="Sistemas distribuídos, microsserviços, mensageria, observabilidade e boas práticas de engenharia." />
+              desc="Sistemas distribuídos, microsserviços, mensageria, observabilidade e boas práticas de engenharia."
+              index={1} />
             <Feature
-              icon={<Settings className="h-6 w-6" />}
+              icon={<Settings className="h-8 w-8" />}
               title="DevOps & Cloud"
-              desc="Automação, CI/CD, infraestrutura como código e cultura de confiabilidade." />
+              desc="Automação, CI/CD, infraestrutura como código e cultura de confiabilidade."
+              index={2} />
           </div>
         </div>
       </section>
@@ -240,18 +281,18 @@ export default function GusFLopesLanding() {
               arquitetura de software e DevOps — sempre com foco em criar valor e impacto duradouro.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="#contact"
+              <button
+                onClick={() => smoothScrollTo('contact')}
                 className="inline-flex items-center gap-2 rounded-xl bg-[#d4863a] hover:bg-[#c47b47] px-6 py-3 text-lg font-medium shadow-lg shadow-[#d4863a]/40 transition-all hover:scale-105"
               >
                 Vamos Conversar
-              </a>
-              <a
-                href="#content"
+              </button>
+              <button
+                onClick={() => smoothScrollTo('content')}
                 className="inline-flex items-center gap-2 rounded-xl border border-[#4a7ba7]/40 bg-[#2d5a87]/20 hover:bg-[#2d5a87]/40 px-6 py-3 text-lg font-medium transition-all"
               >
                 Explorar Conteúdo
-              </a>
+              </button>
             </div>
           </motion.div>
         </div>
@@ -292,7 +333,7 @@ export default function GusFLopesLanding() {
           <div className="mt-8 flex items-center justify-center gap-6">
             <a aria-label="GitHub" href="https://github.com/gusflopes" className="rounded-xl border border-[#4a7ba7]/30 bg-[#2d5a87]/20 hover:bg-[#2d5a87]/40 px-6 py-3 text-lg inline-flex items-center gap-2"><Github className="h-6 w-6" />GitHub</a>
             <a aria-label="LinkedIn" href="https://www.linkedin.com/in/gusflopes" className="rounded-xl border border-[#4a7ba7]/30 bg-[#2d5a87]/20 hover:bg-[#2d5a87]/40 px-6 py-3 text-lg inline-flex items-center gap-2"><Linkedin className="h-6 w-6" />LinkedIn</a>
-            <a aria-label="E-mail" href="mailto:hello@gusflopes.dev" className="rounded-xl bg-[#d4863a] hover:bg-[#c47b47] px-6 py-3 text-lg inline-flex items-center gap-2 font-medium shadow-lg shadow-[#d4863a]/30"><Mail className="h-6 w-6" />E-mail</a>
+            <a aria-label="YouTube" href="https://www.youtube.com/@devHub" className="rounded-xl border border-[#4a7ba7]/30 bg-[#2d5a87]/20 hover:bg-[#2d5a87]/40 px-6 py-3 text-lg inline-flex items-center gap-2"><Youtube className="h-6 w-6" />devHub</a>
           </div>
         </div>
       </section>
@@ -320,15 +361,25 @@ function Header({ title, subtitle }: { title: string; subtitle?: string }) {
   );
 }
 
-function Feature({ icon, title, desc }: { icon: React.ReactNode; title: string; desc: string }) {
+function Feature({ icon, title, desc, index }: { icon: React.ReactNode; title: string; desc: string; index: number }) {
   return (
-    <div className="rounded-2xl border border-[#4a7ba7]/20 bg-[#1e3a5f]/10 p-6 backdrop-blur-sm shadow-xl shadow-black/20">
-      <div className="flex items-center gap-3">
-        <div className="h-10 w-10 rounded-xl bg-[#d4863a]/20 flex items-center justify-center text-[#f4a661]">{icon}</div>
-        <h3 className="font-semibold">{title}</h3>
+    <motion.div
+      initial={{ opacity: 0, x: -50 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.2 }}
+      viewport={{ once: true }}
+      whileHover={{
+        scale: 1.02,
+        boxShadow: "0 25px 50px rgba(0, 0, 0, 0.4)"
+      }}
+      className="rounded-2xl border border-[#4a7ba7]/20 bg-[#1e3a5f]/10 p-8 lg:p-10 backdrop-blur-sm shadow-xl shadow-black/20"
+    >
+      <div className="flex items-center gap-4">
+        <div className="h-14 w-14 rounded-xl bg-[#d4863a]/20 flex items-center justify-center text-[#f4a661]">{icon}</div>
+        <h3 className="font-semibold text-lg lg:text-xl text-[#f4a661]">{title}</h3>
       </div>
-      <p className="mt-3 text-white/80 text-base leading-relaxed">{desc}</p>
-    </div>
+      <p className="mt-4 text-white/90 text-base lg:text-lg leading-relaxed">{desc}</p>
+    </motion.div>
   );
 }
 
