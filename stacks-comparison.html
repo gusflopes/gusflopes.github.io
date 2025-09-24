@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stack Layouts Comparison - Gus F. Lopes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .hexagon {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #4a7ba7, #2d5a87);
+            margin: 50px auto;
+            position: relative;
+            border-radius: 20px;
+            transform: rotate(30deg);
+        }
+
+        .hexagon:before,
+        .hexagon:after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+        }
+
+        .hexagon:before {
+            bottom: 100%;
+            border-bottom: 58px solid #4a7ba7;
+        }
+
+        .hexagon:after {
+            top: 100%;
+            border-top: 58px solid #2d5a87;
+        }
+
+        .hexagon-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-30deg);
+            text-align: center;
+            color: white;
+            width: 140px;
+        }
+
+        .hex-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hex-card {
+            background: linear-gradient(135deg, rgba(74, 123, 167, 0.2), rgba(45, 90, 135, 0.3));
+            border: 1px solid rgba(74, 123, 167, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            clip-path: polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%);
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hex-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #3b82f6 100%);
+            min-height: 100vh;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- Header -->
+    <header class="py-8 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h1 class="text-4xl font-bold text-center mb-4">Stack Layouts Comparison</h1>
+            <p class="text-xl text-center text-white/80">Comparação entre layout em círculos (olímpico) e hexágonos</p>
+            <div class="text-center mt-4">
+                <a href="/" class="inline-block px-6 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors">
+                    ← Voltar para o site principal
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Current Olympic Layout -->
+    <section class="py-12 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-8">Layout Atual: Círculos Olímpicos</h2>
+
+            <!-- Olympic Circles Layout -->
+            <div class="relative">
+                <div class="flex flex-col items-center gap-8 lg:gap-12 min-h-[600px] py-8">
+                    <!-- Top Row: 2 circles (.NET and Innovation) -->
+                    <div class="flex justify-center gap-16 lg:gap-24">
+                        <div class="w-72 h-72 rounded-full border border-blue-400/30 backdrop-blur-md shadow-2xl bg-gradient-to-br from-blue-500/20 to-blue-600/20 flex flex-col items-center justify-center text-center p-8">
+                            <div class="p-4 rounded-full bg-blue-500/30 text-blue-400 mb-4">
+                                <svg class="h-12 w-12" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
+                                </svg>
+                            </div>
+                            <h3 class="font-bold text-lg text-white mb-2">.NET & Software Architecture</h3>
+                            <p class="text-sm text-white/70 mb-4">Código que escala negócios</p>
+                            <span class="px-3 py-1 rounded-full text-xs font-medium border bg-green-500/20 text-green-400 border-green-400/30">Expert</span>
+                        </div>
+
+                        <div class="w-72 h-72 rounded-full border border-cyan-400/30 backdrop-blur-md shadow-2xl bg-gradient-to-br from-cyan-500/20 to-blue-400/20 flex flex-col items-center justify-center text-center p-8">
+                            <div class="p-4 rounded-full bg-cyan-500/30 text-cyan-400 mb-4">
+                                <svg class="h-12 w-12" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 1L13.5 2.5L16.17 5.17L10.58 10.76C10.22 10.54 9.82 10.4 9.39 10.33L8.39 9.33L7 10.72L9.18 12.9C9.1 13.11 9.06 13.33 9.06 13.56C9.06 14.13 9.33 14.64 9.77 15.02L16.95 22.2L18.36 20.79L11.18 13.61C11.64 13.32 11.94 12.83 11.94 12.25C11.94 11.53 11.42 10.94 10.75 10.75L15.5 6H17V4H15L12.42 1.42C12.78 1.16 13.21 1 13.67 1C14.54 1 15.26 1.72 15.26 2.59C15.26 3.46 14.54 4.18 13.67 4.18H12.33V5.82H13.67C15.39 5.82 16.8 4.41 16.8 2.69C16.8 0.97 15.39 -0.44 13.67 -0.44C11.95 -0.44 10.54 0.97 10.54 2.69H12.18C12.18 1.82 12.9 1.1 13.77 1.1C14.64 1.1 15.36 1.82 15.36 2.69C15.36 3.56 14.64 4.28 13.77 4.28H12.43V5.92H13.77C15.49 5.92 16.9 4.51 16.9 2.79C16.9 1.07 15.49 -0.34 13.77 -0.34Z"/>
+                                </svg>
+                            </div>
+                            <h3 class="font-bold text-lg text-white mb-2">Innovation & Rapid Prototyping</h3>
+                            <p class="text-sm text-white/70 mb-4">Da ideia ao MVP em 48h</p>
+                            <span class="px-3 py-1 rounded-full text-xs font-medium border bg-blue-500/20 text-blue-400 border-blue-400/30">Advanced</span>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Row: 3 circles (DDD, Business, Platform) -->
+                    <div class="flex justify-center gap-12 lg:gap-16">
+                        <div class="w-72 h-72 rounded-full border border-purple-400/30 backdrop-blur-md shadow-2xl bg-gradient-to-br from-purple-500/20 to-indigo-500/20 flex flex-col items-center justify-center text-center p-8">
+                            <div class="p-4 rounded-full bg-purple-500/30 text-purple-400 mb-4">
+                                <svg class="h-12 w-12" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M9,11H7l1.5-4.5h4L14,11h-2l1,2.5L9,11M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4Z"/>
+                                </svg>
+                            </div>
+                            <h3 class="font-bold text-lg text-white mb-2">Domain-Driven Design</h3>
+                            <p class="text-sm text-white/70 mb-4">Software que fala a linguagem do negócio</p>
+                            <span class="px-3 py-1 rounded-full text-xs font-medium border bg-green-500/20 text-green-400 border-green-400/30">Expert</span>
+                        </div>
+
+                        <div class="w-72 h-72 rounded-full border border-orange-400/30 backdrop-blur-md shadow-2xl bg-gradient-to-br from-orange-500/20 to-yellow-500/20 flex flex-col items-center justify-center text-center p-8">
+                            <div class="p-4 rounded-full bg-orange-500/30 text-orange-400 mb-4">
+                                <svg class="h-12 w-12" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12,7V3H2V21H22V7H12M6,19H4V17H6V19M6,15H4V13H6V15M6,11H4V9H6V11M6,7H4V5H6V7M10,19H8V17H10V19M10,15H8V13H10V15M10,11H8V9H10V11M10,7H8V5H10V7M20,19H12V17H20V19M20,15H12V13H20V15M20,11H12V9H20V11Z"/>
+                                </svg>
+                            </div>
+                            <h3 class="font-bold text-lg text-white mb-2">Business & Technology Bridge</h3>
+                            <p class="text-sm text-white/70 mb-4">Conectando negócio e tecnologia</p>
+                            <span class="px-3 py-1 rounded-full text-xs font-medium border bg-green-500/20 text-green-400 border-green-400/30">Expert</span>
+                        </div>
+
+                        <div class="w-72 h-72 rounded-full border border-red-400/30 backdrop-blur-md shadow-2xl bg-gradient-to-br from-orange-600/20 to-red-500/20 flex flex-col items-center justify-center text-center p-8">
+                            <div class="p-4 rounded-full bg-red-500/30 text-red-400 mb-4">
+                                <svg class="h-12 w-12" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M6.5,2C7.91,2 9.04,3.04 9.21,4.41L12,12L14.79,4.41C14.96,3.04 16.09,2 17.5,2A2.5,2.5 0 0,1 20,4.5A2.5,2.5 0 0,1 17.5,7C16.09,7 14.96,5.96 14.79,4.59L12,13L9.21,4.59C9.04,5.96 7.91,7 6.5,7A2.5,2.5 0 0,1 4,4.5A2.5,2.5 0 0,1 6.5,2M19,15H5A1,1 0 0,0 4,16V19A1,1 0 0,0 5,20H19A1,1 0 0,0 20,19V16A1,1 0 0,0 19,15Z"/>
+                                </svg>
+                            </div>
+                            <h3 class="font-bold text-lg text-white mb-2">Platform & DevOps Engineering</h3>
+                            <p class="text-sm text-white/70 mb-4">Infraestrutura que escala</p>
+                            <span class="px-3 py-1 rounded-full text-xs font-medium border bg-blue-500/20 text-blue-400 border-blue-400/30">Advanced</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hexagon Alternative -->
+    <section class="py-12 px-4 bg-black/20">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-8">Alternativa: Layout com Hexágonos</h2>
+
+            <!-- Hexagon Grid -->
+            <div class="hex-grid">
+                <!-- .NET -->
+                <div class="hex-card" style="background: linear-gradient(135deg, rgba(0, 120, 212, 0.2), rgba(0, 120, 212, 0.3));">
+                    <div class="p-3 rounded-full bg-blue-500/30 text-blue-400 mb-3">
+                        <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
+                        </svg>
+                    </div>
+                    <h4 class="font-bold text-sm mb-1">.NET & Software Architecture</h4>
+                    <p class="text-xs text-white/70">Código que escala negócios</p>
+                </div>
+
+                <!-- Innovation -->
+                <div class="hex-card" style="background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(0, 212, 255, 0.3));">
+                    <div class="p-3 rounded-full bg-cyan-500/30 text-cyan-400 mb-3">
+                        <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2Z"/>
+                        </svg>
+                    </div>
+                    <h4 class="font-bold text-sm mb-1">Innovation & Rapid Prototyping</h4>
+                    <p class="text-xs text-white/70">Da ideia ao MVP em 48h</p>
+                </div>
+
+                <!-- Business (central position) -->
+                <div class="hex-card col-start-2" style="background: linear-gradient(135deg, rgba(212, 134, 58, 0.2), rgba(212, 134, 58, 0.3));">
+                    <div class="p-3 rounded-full bg-orange-500/30 text-orange-400 mb-3">
+                        <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12,7V3H2V21H22V7H12M6,19H4V17H6V19M6,15H4V13H6V15M6,11H4V9H6V11M6,7H4V5H6V7M10,19H8V17H10V19M10,15H8V13H10V15M10,11H8V9H10V11M10,7H8V5H10V7M20,19H12V17H20V19M20,15H12V13H20V15M20,11H12V9H20V11Z"/>
+                        </svg>
+                    </div>
+                    <h4 class="font-bold text-sm mb-1">Business & Technology Bridge</h4>
+                    <p class="text-xs text-white/70">Conectando negócio e tecnologia</p>
+                </div>
+
+                <!-- DDD -->
+                <div class="hex-card" style="background: linear-gradient(135deg, rgba(123, 104, 238, 0.2), rgba(123, 104, 238, 0.3));">
+                    <div class="p-3 rounded-full bg-purple-500/30 text-purple-400 mb-3">
+                        <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M9,11H7l1.5-4.5h4L14,11h-2l1,2.5L9,11M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4Z"/>
+                        </svg>
+                    </div>
+                    <h4 class="font-bold text-sm mb-1">Domain-Driven Design</h4>
+                    <p class="text-xs text-white/70">Software que fala a linguagem do negócio</p>
+                </div>
+
+                <!-- Platform -->
+                <div class="hex-card" style="background: linear-gradient(135deg, rgba(255, 153, 0, 0.2), rgba(255, 153, 0, 0.3));">
+                    <div class="p-3 rounded-full bg-red-500/30 text-red-400 mb-3">
+                        <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M6.5,2C7.91,2 9.04,3.04 9.21,4.41L12,12L14.79,4.41C14.96,3.04 16.09,2 17.5,2A2.5,2.5 0 0,1 20,4.5A2.5,2.5 0 0,1 17.5,7C16.09,7 14.96,5.96 14.79,4.59L12,13L9.21,4.59C9.04,5.96 7.91,7 6.5,7A2.5,2.5 0 0,1 4,4.5A2.5,2.5 0 0,1 6.5,2M19,15H5A1,1 0 0,0 4,16V19A1,1 0 0,0 5,20H19A1,1 0 0,0 20,19V16A1,1 0 0,0 19,15Z"/>
+                        </svg>
+                    </div>
+                    <h4 class="font-bold text-sm mb-1">Platform & DevOps Engineering</h4>
+                    <p class="text-xs text-white/70">Infraestrutura que escala</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Summary -->
+    <section class="py-12 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-8">Comparação dos Layouts</h2>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
+                    <h3 class="text-xl font-bold mb-4 text-green-400">✓ Círculos Olímpicos (Atual)</h3>
+                    <ul class="space-y-2 text-white/80">
+                        <li>• Mais espaço para conteúdo</li>
+                        <li>• Layout familiar e harmônico</li>
+                        <li>• Boa hierarquia visual</li>
+                        <li>• Funciona bem em mobile</li>
+                        <li>• Conexões visuais claras</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
+                    <h3 class="text-xl font-bold mb-4 text-blue-400">⬢ Hexágonos (Alternativa)</h3>
+                    <ul class="space-y-2 text-white/80">
+                        <li>• Visual mais tecnológico</li>
+                        <li>• Padrão geométrico interessante</li>
+                        <li>• Mais compacto</li>
+                        <li>• Difícil de ler em mobile</li>
+                        <li>• Menos espaço para conteúdo</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p class="text-lg text-white/80">
+                    <strong>Recomendação:</strong> Manter o layout de círculos olímpicos para melhor usabilidade e legibilidade.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-4 text-center">
+        <div class="max-w-6xl mx-auto">
+            <p class="text-white/60">© 2024 Gus F. Lopes - Comparação de Layouts para Stack Section</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Boxes, Cpu, Github, Linkedin, Settings, TerminalSquare, Youtube, FileText, Play, ExternalLink } from "lucide-react";
+import { Bot, Brain, Building, Cloud, Code, ExternalLink, FileText, Github, Linkedin, Play, TerminalSquare, Youtube } from "lucide-react";
 import React from "react";
 import { createRoot } from "react-dom/client";
 
@@ -277,26 +277,48 @@ export default function GusFLopesLanding() {
         </div>
       </section>
 
-      {/* Highlights */}
+      {/* Stack Showcase */}
       <section id="about" className="py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-6">
-            <Feature
-              icon={<Cpu className="h-8 w-8" />}
-              title="IA aplicada"
-              desc="Modelagem, avaliação e integração de LLMs, geração aumentada por recuperação (RAG) e agentes em produção."
-              index={0} />
-            <Feature
-              icon={<Boxes className="h-8 w-8" />}
-              title="Arquitetura & Plataforma"
-              desc="Sistemas distribuídos, microsserviços, mensageria, observabilidade e boas práticas de engenharia."
-              index={1} />
-            <Feature
-              icon={<Settings className="h-8 w-8" />}
-              title="DevOps & Cloud"
-              desc="Automação, CI/CD, infraestrutura como código e cultura de confiabilidade."
-              index={2} />
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-[#f5f1ea] mb-4">
+              Engenharia de Software Multidisciplinar
+            </h2>
+            <p className="text-lg text-white/80 max-w-3xl mx-auto">
+              A intersecção única entre <span className="text-[#f4a661] font-semibold">excelência técnica</span> e
+              <span className="text-[#f4a661] font-semibold"> visão de negócio</span>.
+              Especialização vertical em .NET + amplitude horizontal que conecta tecnologia e valor.
+            </p>
           </div>
+
+          {/* Olympic Circles Layout */}
+          <div className="relative">
+            {/* Container for Olympic-style layout */}
+            <div className="flex flex-col items-center gap-8 lg:gap-12 min-h-[600px] py-8">
+
+              {/* Top Row: 2 circles (.NET and Innovation) */}
+              <div className="flex justify-center gap-16 lg:gap-24">
+                <StackCard stack={stacksData.find(s => s.id === 'dotnet')!} index={0} isCircle={true} />
+                <StackCard stack={stacksData.find(s => s.id === 'innovation')!} index={1} isCircle={true} />
+              </div>
+
+              {/* Bottom Row: 3 circles (DDD, Business, Platform) */}
+              <div className="flex justify-center gap-12 lg:gap-16">
+                <StackCard stack={stacksData.find(s => s.id === 'ddd')!} index={2} isCircle={true} />
+                <StackCard stack={stacksData.find(s => s.id === 'business')!} index={3} isCircle={true} />
+                <StackCard stack={stacksData.find(s => s.id === 'platform')!} index={4} isCircle={true} />
+              </div>
+            </div>
+
+
+            {/* Mobile Layout */}
+            <div className="lg:hidden grid grid-cols-1 gap-6 mt-8">
+              {stacksData.map((stack, index) => (
+                <StackCard key={stack.id} stack={stack} index={index} />
+              ))}
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -322,16 +344,18 @@ export default function GusFLopesLanding() {
             className="bg-[#1e3a5f]/40 rounded-3xl p-8 lg:p-12 border border-[#4a7ba7]/30 shadow-2xl backdrop-blur-sm"
           >
             <h2 className="text-3xl lg:text-4xl font-bold text-[#f5f1ea] mb-6">
-              Construindo o Futuro da Tecnologia
+              A Ponte Entre Mundos
             </h2>
             <p className="text-lg text-[#f5f1ea]/90 leading-relaxed max-w-2xl mx-auto mb-6">
-              Acredito que a verdadeira inovação acontece na <span className="text-[#f4a661] font-semibold">intersecção entre arte e engenharia</span>.
-              Cada sistema que construo, cada arquitetura que projeto, e cada solução que desenvolvo reflete essa filosofia:
-              tecnologia que não apenas funciona, mas inspira.
+              Não sou apenas um programador que aprendeu negócios, nem um empresário que programa.
+              Sou a <span className="text-[#f4a661] font-semibold">ponte multidisciplinar</span> entre mundos:
+              advogado + contador + engenheiro de software aplicando <span className="text-[#f4a661] font-semibold">DORA metrics</span>
+              e <span className="text-[#f4a661] font-semibold">Team Topologies</span> para gerar valor real.
             </p>
             <p className="text-base text-[#f5f1ea]/80 leading-relaxed max-w-xl mx-auto mb-8">
-              Através de conteúdo prático e insights reais, compartilho o que aprendo navegando entre IA,
-              arquitetura de software e DevOps — sempre com foco em criar valor e impacto duradouro.
+              Da metodologia <strong>Prototype First</strong> com n8n ao caminho para <strong>Microsoft MVP</strong> em .NET,
+              construo sistemas que escalam negócios através de <strong>Domain-Driven Design</strong> aplicado e
+              <strong>Engineering Excellence</strong> que conecta tecnologia e impacto financeiro.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
@@ -414,24 +438,233 @@ function Header({ title, subtitle }: { title: string; subtitle?: string }) {
   );
 }
 
-function Feature({ icon, title, desc, index }: { icon: React.ReactNode; title: string; desc: string; index: number }) {
+interface StackData {
+  id: string;
+  icon: React.ReactNode;
+  title: string;
+  tagline: string;
+  description: string;
+  technologies: string[];
+  expertiseLevel: 'Expert' | 'Advanced' | 'Intermediate';
+  color: string;
+  bgColor: string;
+  position: string;
+}
+
+const stacksData: StackData[] = [
+  {
+    id: 'business',
+    icon: <Building className="h-8 w-8" />,
+    title: 'Business & Technology Bridge',
+    tagline: 'Visão 360° de advogado + contador + programador aplicada em DORA metrics e Team Topologies',
+    description: 'O hub central que une mundos: background multidisciplinar (advogado + contador + programador) aplicando DORA metrics, Team Topologies e estratégia de negócio. Engineering Excellence como ferramenta para gerar valor real.',
+    technologies: ['Business Analysis', 'DORA Metrics', 'Team Topologies', 'Financial Engineering', 'Technical Leadership'],
+    expertiseLevel: 'Expert',
+    color: '#f5f1ea',
+    bgColor: 'from-orange-500/20 to-yellow-500/20',
+    position: 'business'
+  },
+  {
+    id: 'dotnet',
+    icon: <Code className="h-8 w-8" />,
+    title: '.NET & Software Architecture',
+    tagline: 'Arquitetura que escala negócios, não apenas requisições, permitindo inovação rápida e segura',
+    description: 'Especialização vertical profunda: C#, ASP.NET Core, Clean Architecture, Modular Monoliths. Caminho para Microsoft MVP através de contribuições técnicas reais e impacto na comunidade.',
+    technologies: ['C#', 'ASP.NET Core', 'Clean Architecture', 'Entity Framework', 'Performance'],
+    expertiseLevel: 'Expert',
+    color: '#f5f1ea',
+    bgColor: 'from-blue-500/20 to-blue-600/20',
+    position: 'dotnet'
+  },
+  {
+    id: 'ddd',
+    icon: <Brain className="h-8 w-8" />,
+    title: 'Domain-Driven Design',
+    tagline: 'Código que reflete perfeitamente o negócio através de Event Storming e bounded contexts reais',
+    description: 'DDD prático em contextos empresariais reais. Event Storming, bounded contexts que fazem sentido, e patterns que conectam modelo de domínio com implementação .NET elegante.',
+    technologies: ['Strategic DDD', 'Tactical DDD', 'Event Storming', 'Bounded Contexts', 'Domain Events'],
+    expertiseLevel: 'Expert',
+    color: '#f5f1ea',
+    bgColor: 'from-purple-500/20 to-indigo-500/20',
+    position: 'ddd'
+  },
+  {
+    id: 'platform',
+    icon: <Cloud className="h-8 w-8" />,
+    title: 'Platform & DevOps Engineering',
+    tagline: 'Developer experience que aumenta DORA metrics através de plataformas que devs amam usar',
+    description: 'AWS-first com Platform as Product mindset. Team Topologies platform patterns, DORA metrics implementation, IaC com Terraform. Infraestrutura que gera produtividade e business value.',
+    technologies: ['AWS', 'Terraform', 'Kubernetes', 'OpenTelemetry', 'Platform Patterns'],
+    expertiseLevel: 'Advanced',
+    color: '#f5f1ea',
+    bgColor: 'from-orange-600/20 to-red-500/20',
+    position: 'platform'
+  },
+  {
+    id: 'innovation',
+    icon: <Bot className="h-8 w-8" />,
+    title: 'Inovação & IA',
+    tagline: 'Metodologia Prototype First: validação de protótipos funcionais com IA & low-code, permitindo investimento seguro em tecnologia',
+    description: 'Metodologia "Prototype First": validação rápida com n8n + IA, MVP focado em resolver problema de negócio real. Tecnologia escalamos depois que entendemos o valor. Filosofia de hackathons aplicada.',
+    technologies: ['Prototype First', 'n8n', 'LLMs & RAG', 'MVP Validation', 'Lean Startup'],
+    expertiseLevel: 'Advanced',
+    color: '#f5f1ea',
+    bgColor: 'from-cyan-500/20 to-blue-400/20',
+    position: 'innovation'
+  }
+];
+
+function StackCard({ stack, index, isCircle = false }: { stack: StackData; index: number; isCircle?: boolean }) {
+  const [isHovered, setIsHovered] = React.useState(false);
+
+  const getExpertiseBadgeColor = (level: string) => {
+    switch (level) {
+      case 'Expert': return 'bg-green-500/20 text-green-400 border-green-400/30';
+      case 'Advanced': return 'bg-blue-500/20 text-blue-400 border-blue-400/30';
+      default: return 'bg-yellow-500/20 text-yellow-400 border-yellow-400/30';
+    }
+  };
+
   return (
     <motion.div
-      initial={{ opacity: 0, x: -50 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.6, delay: index * 0.2 }}
+      initial={{ opacity: 0, y: 30, scale: 0.95 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 0.7, delay: index * 0.15 }}
       viewport={{ once: true }}
-      whileHover={{
-        scale: 1.02,
-        boxShadow: "0 25px 50px rgba(0, 0, 0, 0.4)"
-      }}
-      className="rounded-2xl border border-[#4a7ba7]/20 bg-[#1e3a5f]/10 p-8 lg:p-10 backdrop-blur-sm shadow-xl shadow-black/20"
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      className={`stack-card-${stack.position} relative group`}
     >
-      <div className="flex items-center gap-4">
-        <div className="h-14 w-14 rounded-xl bg-[#d4863a]/20 flex items-center justify-center text-[#f4a661]">{icon}</div>
-        <h3 className="font-semibold text-lg lg:text-xl text-[#f4a661]">{title}</h3>
-      </div>
-      <p className="mt-4 text-white/90 text-base lg:text-lg leading-relaxed">{desc}</p>
+      <motion.div
+        whileHover={isCircle ? {} : {
+          scale: 1.03,
+          rotateY: 5,
+          boxShadow: "0 25px 50px rgba(0, 0, 0, 0.4)"
+        }}
+        transition={{ duration: 0.3 }}
+        className={`
+          ${isCircle ? 'rounded-full w-80 h-80 overflow-hidden' : 'rounded-3xl h-full'} border border-[#4a7ba7]/50 backdrop-blur-md shadow-2xl shadow-black/30
+          bg-gradient-to-br ${stack.bgColor} ${isCircle ? 'p-6' : 'p-6'} cursor-pointer
+          hover:border-[${stack.color}]/70 transition-all duration-300
+          ${isCircle ? 'flex flex-col items-center justify-center text-center' : ''}
+        `}
+        style={{
+          background: isCircle
+            ? `linear-gradient(135deg, ${stack.color}20, ${stack.color}35)`
+            : `linear-gradient(135deg, ${stack.color}08, ${stack.color}15)`
+        }}
+      >
+        {isCircle ? (
+          /* Circular Layout */
+          <>
+            {/* Icon */}
+            <div
+              className="p-4 rounded-full flex items-center justify-center mb-4"
+              style={{
+                backgroundColor: `${stack.color}50`,
+                color: stack.color
+              }}
+            >
+              <div className="h-16 w-16 flex items-center justify-center">
+                {stack.icon}
+              </div>
+            </div>
+
+            {/* Content that changes on hover */}
+            <div className="text-center transition-all duration-300 ease-in-out max-w-full">
+              {!isHovered ? (
+                /* Default Content */
+                <>
+                  {/* Title */}
+                  <h3 className="font-bold text-lg text-white mb-3 leading-tight">
+                    {stack.title}
+                  </h3>
+
+                  {/* Enhanced Tagline */}
+                  <p className="text-sm text-white/90 font-medium leading-relaxed px-2">
+                    {stack.tagline}
+                  </p>
+                </>
+              ) : (
+                /* Hover Content - All Technologies */
+                <div className="flex flex-wrap justify-center gap-1 px-4 max-w-full">
+                  {stack.technologies.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-2 py-1 rounded-full text-xs font-medium border border-white/30 bg-white/20 text-white backdrop-blur-sm"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </>
+        ) : (
+          /* Rectangular Layout */
+          <>
+            {/* Header com ícone e título */}
+            <div className="flex items-start justify-between mb-4">
+              <div className="flex items-center gap-4">
+                <div
+                  className="p-3 rounded-2xl flex items-center justify-center"
+                  style={{
+                    backgroundColor: `${stack.color}20`,
+                    color: stack.color
+                  }}
+                >
+                  {stack.icon}
+                </div>
+                <div>
+                  <h3 className="font-bold text-xl text-[#f5f1ea] group-hover:text-[#f4a661] transition-colors">
+                    {stack.title}
+                  </h3>
+                  <p className="text-sm text-white/70 mt-1">{stack.tagline}</p>
+                </div>
+              </div>
+
+              {/* Expertise Badge */}
+              <span className={`
+                px-3 py-1 rounded-full text-xs font-medium border
+                ${getExpertiseBadgeColor(stack.expertiseLevel)}
+              `}>
+                {stack.expertiseLevel}
+              </span>
+            </div>
+
+            {/* Descrição */}
+            <p className="text-white/80 text-base leading-relaxed mb-6">
+              {stack.description}
+            </p>
+
+            {/* Tecnologias */}
+            <div className="flex flex-wrap gap-2">
+              {stack.technologies.map((tech) => (
+                <span
+                  key={tech}
+                  className="px-3 py-1.5 rounded-full text-xs font-medium border border-[#4a7ba7]/25 bg-[#2d5a87]/15 text-[#f5f1ea]/90 hover:bg-[#2d5a87]/25 transition-colors"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </>
+        )}
+
+        {/* Connection indicator para Business Hub */}
+        {stack.id === 'business' && isHovered && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className={`absolute -inset-1 ${isCircle ? 'rounded-full' : 'rounded-3xl'}`}
+            style={{
+              background: `linear-gradient(45deg, ${stack.color}30, transparent, ${stack.color}30)`,
+              filter: 'blur(2px)',
+              zIndex: -1
+            }}
+          />
+        )}
+      </motion.div>
     </motion.div>
   );
 }
