@@ -12,7 +12,7 @@ import { createRoot } from "react-dom/client";
  * • Minimal sections you can expand: Hero, Highlights, Projects, Blog, Footer
  */
 
-const BACKGROUND_URL = "./wallpaper.jpg"; // e.g. "/images/gus-wallpaper.jpg"
+const BACKGROUND_URL = "./images/wallpaper.jpg"; // e.g. "/images/gus-wallpaper.jpg"
 
 // Import insights data
 import insightsData from './insights-data.json';
