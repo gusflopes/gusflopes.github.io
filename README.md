@@ -1,6 +1,6 @@
 # gusflopes.dev — Website
 
-SPA em Vite + React 18 + Radix UI + Tailwind + framer-motion. Roteamento client-side com `react-router-dom`. Deploy via Cloudflare Workers (Static Assets).
+Site em **Astro 6** servindo um SPA React 18 (Radix UI + Tailwind 4 + framer-motion) como island. Roteamento client-side com `react-router-dom` (temporário — ver [`NEXT_STEPS.md`](./NEXT_STEPS.md)). Deploy via Cloudflare Workers (Static Assets).
 
 ## Desenvolvimento
 
@@ -48,7 +48,7 @@ pnpm deploy            # build + wrangler deploy (vai direto para produção)
 
 O projeto é um **Worker** com Static Assets, configurado por [`wrangler.jsonc`](./wrangler.jsonc):
 
-- `assets.directory: "./dist"` — Vite build output.
+- `assets.directory: "./dist"` — Astro build output.
 - `assets.not_found_handling: "single-page-application"` — paths não encontrados servem `index.html` com 200, fazendo o `BrowserRouter` resolver `/radar`, `/insights` etc. no client.
 - `observability.logs.enabled: true` — logs ativos (sem traces). Como o Worker não tem `main`/fetch handler, hoje captura pouca coisa; só fica útil se um dia adicionar lógica de Worker.
 

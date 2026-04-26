@@ -1,17 +1,23 @@
 # Instruções para o Projeto gusflopes.dev
 
-SPA em Vite + React 18 + Radix UI + Tailwind + framer-motion. Roteamento client-side com `react-router-dom` (`BrowserRouter`).
+Site em **Astro 6** servindo um SPA React 18 (Radix UI + Tailwind 4 + framer-motion). Roteamento client-side com `react-router-dom`. Deploy via Cloudflare Workers (Static Assets).
+
+## Estado atual da arquitetura
+
+A migração para Astro foi **fase 1 (shell)**: Astro substituiu o Vite como build tool, mas o site continua sendo um SPA React montado como island `client:only="react"` numa única página (`src/pages/index.astro`). React Router cuida de todas as rotas no client; o `not_found_handling: "single-page-application"` no Worker faz qualquer URL cair no `index.html` para o roteador resolver.
+
+Próximas fases (per-route Astro pages, Content Collections, Tailwind 4 source-based, SSR opcional) estão mapeadas em [`NEXT_STEPS.md`](./NEXT_STEPS.md).
 
 ## Stack
 
-- **Build**: Vite 6 + `@vitejs/plugin-react-swc` (porta dev `3001`).
-- **UI**: Radix UI primitives + Tailwind (utility classes em `index.css`) + `lucide-react` para ícones + `framer-motion` para animações.
-- **Roteamento**: `react-router-dom` v7 (`BrowserRouter`).
+- **Build**: Astro 6.1.x + `@astrojs/react` 5 (porta dev `3001`).
+- **UI**: Radix UI primitives + Tailwind 4 (CSS pré-compilado em `src/index.css`) + `lucide-react` para ícones + `framer-motion` para animações.
+- **Roteamento**: `react-router-dom` v7 (`BrowserRouter`) — temporário, sairá na fase 2.
 - **Deploy**: Cloudflare Workers Static Assets (sem código de Worker, só assets em `./dist`).
 
 ## Rotas
 
-Definidas em `src/App.tsx`:
+Definidas em `src/App.tsx` (consumidas pelo island único em `src/pages/index.astro`):
 
 | Path | Componente |
 |---|---|
@@ -27,31 +33,29 @@ Definidas em `src/App.tsx`:
 
 ## Comandos úteis
 
-- `pnpm dev` — dev server em `http://localhost:3001`
-- `pnpm build` — build de produção em `./dist`
+- `pnpm dev` — Astro dev server em `http://localhost:3001`
+- `pnpm build` — `astro build` em `./dist`
 - `pnpm preview` — serve o build local
 - `pnpm deploy` — build + `wrangler deploy` (promove direto para produção, precisa `pnpm wrangler login` antes)
 
 ## Deploy & Preview URLs
 
-A Cloudflare está em modo *Connect to Git*. O fluxo de deploy:
+Cloudflare em modo *Connect to Git*. Fluxo:
 
-- **Push em `main`** → `npx wrangler deploy` → promove para produção (`gusflopes.dev` + `gusflopes-website.gusflopes86.workers.dev`).
-- **Push em qualquer outra branch** → `npx wrangler versions upload` → cria versão de preview com URL `<hash>-gusflopes-website.gusflopes86.workers.dev`.
+- **Push em `main`** → `npx wrangler deploy` → produção (`gusflopes.dev` + `gusflopes-website.gusflopes86.workers.dev`).
+- **Push em outra branch** → `npx wrangler versions upload` → preview em `<hash>-gusflopes-website.gusflopes86.workers.dev`.
 
-Cada commit em branch não-produção gera versão nova; PRs recebem comentário automático com a URL via integração GitHub. Para promover uma versão sem merge: dashboard do Worker → *Deployments* → versão → *Deploy*.
-
-Detalhes completos no `README.md`.
+Cada commit em branch não-produção gera versão nova. Para promover sem merge: dashboard do Worker → *Deployments* → versão → *Deploy*. Detalhes no `README.md`.
 
 ## Arquivos importantes
 
-- `src/main.tsx` — entrypoint React (`createRoot(...).render(<App />)`)
+- `src/pages/index.astro` — Astro entry; mounta `<App />` como island
 - `src/App.tsx` — `BrowserRouter` + rotas
 - `src/components/` — Header, Footer, páginas em `pages/`, primitives Radix em `ui/`
-- `src/index.css` — Tailwind + variáveis de tema
-- `vite.config.ts` — porta 3001, aliases versionados (`vaul@1.1.2 → vaul`, etc — herança do Figma export)
-- `wrangler.jsonc` — config do Worker Static Assets (`assets.directory`, `not_found_handling: single-page-application`, observability)
-- `public/wallpaper.jpg` — imagem de fundo do hero
+- `src/index.css` — Tailwind 4 pré-compilado (~39KB) + variáveis de tema
+- `astro.config.mjs` — Astro config; bloco `vite` mantém aliases versionados (`vaul@1.1.2 → vaul`, etc — herança do export Figma) e aliases de assets `figma:asset/*`
+- `wrangler.jsonc` — config do Worker Static Assets
+- `NEXT_STEPS.md` — plano das fases 2–6 da migração
 
 ## MCP Server Playwright
 
