@@ -1,11 +1,17 @@
 ---
+import { getCollection } from 'astro:content';
 import Default from '../layouts/Default.astro';
-import { RadarPage } from '../components/pages/RadarPage';
+import { RadarPage, type RadarItem } from '../components/pages/RadarPage';
+
+const entries = await getCollection('radar');
+const items: RadarItem[] = entries
+  .map((entry) => ({ id: entry.id, ...entry.data }))
+  .sort((a, b) => Number(a.id) - Number(b.id));
 ---
 
 <Default
   title="Radar Técnico — gusflopes.dev"
   description="Curadoria de artigos, vídeos e recursos sobre .NET, Arquitetura e IA."
 >
-  <RadarPage client:load />
+  <RadarPage items={items} client:load />
 </Default>

@@ -1,11 +1,17 @@
 ---
+import { getCollection } from 'astro:content';
 import Default from '../layouts/Default.astro';
-import { InsightsPage } from '../components/pages/InsightsPage';
+import { InsightsPage, type InsightArticle } from '../components/pages/InsightsPage';
+
+const entries = await getCollection('insights');
+const articles: InsightArticle[] = entries
+  .map((entry) => ({ id: entry.id, ...entry.data }))
+  .sort((a, b) => Number(a.id) - Number(b.id));
 ---
 
 <Default
   title="Insights Técnicos — gusflopes.dev"
   description="Arquitetura profunda, filosofia de código e engenharia."
 >
-  <InsightsPage client:load />
+  <InsightsPage articles={articles} client:load />
 </Default>

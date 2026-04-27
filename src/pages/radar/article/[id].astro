@@ -1,15 +1,13 @@
 ---
+import { getCollection } from 'astro:content';
 import Default from '../../../layouts/Default.astro';
 import { RadarArticlePage } from '../../../components/pages/RadarArticlePage';
 
-// Static paths — TODO (fase 3): derivar das Content Collections.
-// Hoje os IDs locais (1, 5, 6) estão hardcoded em RadarPage.tsx; refletimos aqui.
-export function getStaticPaths() {
-  return [
-    { params: { id: '1' } },
-    { params: { id: '5' } },
-    { params: { id: '6' } },
-  ];
+export async function getStaticPaths() {
+  const entries = await getCollection('radar');
+  return entries
+    .filter((entry) => !entry.data.isExternal)
+    .map((entry) => ({ params: { id: entry.id } }));
 }
 
 const { id } = Astro.params;

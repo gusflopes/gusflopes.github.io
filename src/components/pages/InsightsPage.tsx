@@ -1,64 +1,26 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ArrowRight, Search, Sparkles } from 'lucide-react';
 import { motion } from 'motion/react';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 
-export function InsightsPage() {
+export interface InsightArticle {
+  id: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  date: string;
+  image: string;
+}
+
+interface InsightsPageProps {
+  articles: InsightArticle[];
+}
+
+export function InsightsPage({ articles }: InsightsPageProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('Todos');
 
   const categories = ["Todos", "Arquitetura", ".NET", "DevOps", "Carreira", "IA"];
-
-  const articles = [
-    {
-      id: 1,
-      title: "Desacoplando Monólitos com DDD",
-      excerpt: "Uma abordagem estratégica para decompor complexidade sem paralisar o negócio.",
-      category: "Arquitetura",
-      date: "25 Out, 2023",
-      image: "https://images.unsplash.com/photo-1664526937033-fe2c11f1be25?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzb2Z0d2FyZSUyMGFyY2hpdGVjdHVyZSUyMGRpYWdyYW0lMjBhcnRpZmljaWFsJTIwaW50ZWxsaWdlbmNlJTIwYnJhaW4lMjBjb2RlJTIwbW9uaXRvcnxlbnwxfHx8fDE3NjQ1NDUxODZ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-    },
-    {
-      id: 2,
-      title: "Engenharia de Plataforma & IA",
-      excerpt: "Quando a automação encontra a cognição: o novo paradigma de operações.",
-      category: "DevOps",
-      date: "12 Nov, 2023",
-      image: "https://images.unsplash.com/photo-1506399558188-acca6f8cbf41?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwbGF0Zm9ybSUyMGVuZ2luZWVyaW5nJTIwc2VydmVyJTIwZGF0YSUyMGNlbnRlcnxlbnwxfHx8fDE3NjQ1NDUxOTF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-    },
-    {
-      id: 3,
-      title: "Vertical Slice Architecture",
-      excerpt: "Velocidade e coesão: abandonando camadas horizontais por fatias de valor.",
-      category: ".NET",
-      date: "05 Dez, 2023",
-      image: "https://images.unsplash.com/photo-1607799275518-d6c36367d919?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2RpbmclMjBzY3JlZW4lMjBuZXR8ZW58MXx8fHwxNzY0NTQ1MjEwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-    },
-    {
-      id: 4,
-      title: "Soft Skills para Tech Leads",
-      excerpt: "A arte da negociação e mentoria em ambientes de alta pressão.",
-      category: "Carreira",
-      date: "15 Jan, 2024",
-      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZWV0aW5nJTIwdGVhbSUyMGxlYWRlcnNoaXB8ZW58MXx8fHwxNzY0NTQ1MjI1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-    },
-    {
-      id: 5,
-      title: "Performance com Span<T>",
-      excerpt: "Micro-otimizações que escalam: gerenciamento de memória no .NET.",
-      category: ".NET",
-      date: "28 Jan, 2024",
-      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2RpbmclMjBzY3JlZW4lMjBuZXR8ZW58MXx8fHwxNzY0NTQ1MjIzNHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-    },
-    {
-      id: 6,
-      title: "RAG: Inteligência Contextual",
-      excerpt: "Expandindo a memória dos LLMs com seus próprios dados corporativos.",
-      category: "IA",
-      date: "10 Fev, 2024",
-      image: "https://images.unsplash.com/photo-1677442136019-21f48ed6d916?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcnRpZmljaWFsJTIwaW50ZWxsaWdlbmNlJTIwY2hpcCUyMG5ldXJvbnxlbnwxfHx8fDE3NjQ1NDUyNDV8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-    }
-  ];
 
   const filteredArticles = articles.filter(article => {
     const matchesSearch = article.title.toLowerCase().includes(searchTerm.toLowerCase()) || article.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
