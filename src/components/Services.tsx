@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from './ui/card';
 import { Button } from './ui/button';
-import { Mic, MonitorPlay, Users, ArrowRight, BookOpen } from 'lucide-react';
+import { MonitorPlay, Users, ArrowRight, BookOpen } from 'lucide-react';
 
 export function Services() {
   const services = [

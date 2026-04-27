@@ -3,7 +3,7 @@ import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { Twitter, Linkedin, Github, Youtube } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-import logoLight from 'figma:asset/cfa6876664fcc921be5a7c0a58c353ea12577968.png';
+import logoLight from '../assets/cfa6876664fcc921be5a7c0a58c353ea12577968.png';
 
 export function Footer() {
   return (

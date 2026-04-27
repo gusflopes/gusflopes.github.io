@@ -1,6 +1,6 @@
 import React from 'react';
 import { Code2, Bot, BrainCircuit, Building2, Cloud } from 'lucide-react';
-import bgImage from 'figma:asset/326189a758fea0fe0e2da42349b6da943b29ba51.png';
+import bgImage from '../assets/326189a758fea0fe0e2da42349b6da943b29ba51.png';
 
 export function Themes() {
   const themes = [
