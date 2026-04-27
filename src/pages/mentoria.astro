@@ -1,0 +1,12 @@
+---
+export const prerender = true;
+import Default from '../layouts/Default.astro';
+import { MentoriaPage } from '../components/pages/MentoriaPage';
+---
+
+<Default
+  title="Mentoria"
+  description="Acompanhamento técnico 1-on-1 para devs em transição pra senior/staff. 8 sessões, plano individual, lista de espera para a próxima turma."
+>
+  <MentoriaPage client:load />
+</Default>

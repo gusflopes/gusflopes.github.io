@@ -1,0 +1,12 @@
+---
+export const prerender = true;
+import Default from '../layouts/Default.astro';
+import { CursosPage } from '../components/pages/CursosPage';
+---
+
+<Default
+  title="Cursos"
+  description="Cursos densos sobre arquitetura, DDD, .NET escalável e AI Engineering — pensados para devs sêniores. Lista de espera para a primeira turma online."
+>
+  <CursosPage client:load />
+</Default>
