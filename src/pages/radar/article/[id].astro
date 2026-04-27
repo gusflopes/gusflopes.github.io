@@ -1,18 +1,43 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import Default from '../../../layouts/Default.astro';
-import { RadarArticlePage } from '../../../components/pages/RadarArticlePage';
+import RadarArticleShell from '../../../components/article/RadarArticleShell.astro';
+import { buildArticleJsonLd, SITE } from '../../../lib/seo';
 
 export async function getStaticPaths() {
   const entries = await getCollection('radar');
   return entries
     .filter((entry) => !entry.data.isExternal)
-    .map((entry) => ({ params: { id: entry.id } }));
+    .map((entry) => ({ params: { id: entry.id }, props: { entry } }));
 }
 
-const { id } = Astro.params;
+const { entry } = Astro.props;
+const { data } = entry;
+const { Content } = await render(entry);
+
+const articleJsonLd = buildArticleJsonLd({
+  title: data.title,
+  description: data.excerpt,
+  url: `${SITE.url}/radar/article/${entry.id}`,
+  image: data.image,
+  datePublished: data.date,
+  section: data.category,
+});
 ---
 
-<Default title={`Radar — Artigo ${id}`}>
-  <RadarArticlePage id={id} client:load />
+<Default
+  title={data.title}
+  description={data.excerpt}
+  image={data.image}
+  type="article"
+  article={{
+    publishedTime: data.date,
+    author: SITE.author.name,
+    section: data.category,
+  }}
+  jsonLd={articleJsonLd}
+>
+  <RadarArticleShell data={data}>
+    <Content />
+  </RadarArticleShell>
 </Default>
