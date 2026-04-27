@@ -154,28 +154,6 @@ export function InsightsPage({ articles }: InsightsPageProps) {
           ))}
         </div>
 
-        {/* Pagination - Technical Editorial Style */}
-        {filteredArticles.length > 0 && (
-          <div className="mt-32 flex justify-center items-center gap-12 font-mono text-xs tracking-[0.2em] uppercase font-medium">
-             <button className="group flex items-center gap-2 text-slate-300 cursor-not-allowed" disabled>
-               <span className="group-hover:-translate-x-1 transition-transform duration-300">&larr;</span>
-               Prev
-             </button>
-             
-             <div className="flex items-center gap-6 text-slate-400">
-               <span className="text-slate-900 border-b border-orange-500 pb-1">01</span>
-               <span className="hover:text-slate-900 cursor-pointer transition-colors">02</span>
-               <span className="hover:text-slate-900 cursor-pointer transition-colors">03</span>
-               <span className="text-slate-200 font-light">|</span>
-               <span className="hover:text-slate-900 cursor-pointer transition-colors">08</span>
-             </div>
-
-             <button className="group flex items-center gap-2 text-slate-900 hover:text-orange-600 transition-colors">
-               Next
-               <span className="group-hover:translate-x-1 transition-transform duration-300">&rarr;</span>
-             </button>
-          </div>
-        )}
 
         {/* Empty State */}
         {filteredArticles.length === 0 && (

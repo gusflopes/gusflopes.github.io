@@ -1,0 +1,77 @@
+---
+// Componente client-only que adiciona um botão "Copy" em cima de cada
+// <pre> dentro do conteúdo de artigo. Usa navigator.clipboard real.
+// Carregar uma única vez por página de artigo.
+---
+
+<script>
+  function ensureCopyButtons() {
+    const containers = document.querySelectorAll('article .prose pre');
+    containers.forEach((pre) => {
+      if (pre.dataset.copyEnhanced === 'true') return;
+      pre.dataset.copyEnhanced = 'true';
+
+      const wrapper = document.createElement('div');
+      wrapper.style.position = 'relative';
+      pre.parentNode?.insertBefore(wrapper, pre);
+      wrapper.appendChild(pre);
+
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = 'Copy';
+      button.setAttribute('aria-label', 'Copiar código');
+      button.style.cssText = [
+        'position: absolute',
+        'top: 0.5rem',
+        'right: 0.5rem',
+        'padding: 0.25rem 0.75rem',
+        'font-size: 0.75rem',
+        'font-weight: 700',
+        'text-transform: uppercase',
+        'letter-spacing: 0.1em',
+        'border: 1px solid rgba(249, 115, 22, 0.4)',
+        'background: rgba(249, 115, 22, 0.1)',
+        'color: rgb(249, 115, 22)',
+        'border-radius: 0.375rem',
+        'cursor: pointer',
+        'transition: all 150ms ease',
+      ].join(';');
+
+      button.addEventListener('mouseenter', () => {
+        button.style.background = 'rgb(249, 115, 22)';
+        button.style.color = 'white';
+      });
+      button.addEventListener('mouseleave', () => {
+        button.style.background = 'rgba(249, 115, 22, 0.1)';
+        button.style.color = 'rgb(249, 115, 22)';
+      });
+
+      button.addEventListener('click', async () => {
+        const code = pre.querySelector('code')?.innerText ?? pre.innerText;
+        try {
+          await navigator.clipboard.writeText(code);
+          button.textContent = 'Copied!';
+          setTimeout(() => {
+            button.textContent = 'Copy';
+          }, 2000);
+        } catch (err) {
+          console.error('[copy] falhou', err);
+          button.textContent = 'Erro';
+          setTimeout(() => {
+            button.textContent = 'Copy';
+          }, 2000);
+        }
+      });
+
+      wrapper.appendChild(button);
+    });
+  }
+
+  // Run at DOMContentLoaded e em hot reloads do Astro
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', ensureCopyButtons);
+  } else {
+    ensureCopyButtons();
+  }
+  document.addEventListener('astro:page-load', ensureCopyButtons);
+</script>

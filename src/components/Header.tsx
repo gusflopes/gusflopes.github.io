@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import { Button } from './ui/button';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import logo from '../assets/cfa6876664fcc921be5a7c0a58c353ea12577968.png?url';
 
@@ -70,12 +69,12 @@ export function Header({ pathname }: HeaderProps) {
               {item.label}
             </a>
           ))}
-          <Button
-            variant="outline"
-            className="font-sans border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white bg-transparent rounded-full px-6"
+          <a
+            href="mailto:gustavo@gusflopes.dev"
+            className="font-sans border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white bg-transparent rounded-full px-6 py-2 text-sm font-medium uppercase tracking-wide transition-colors"
           >
             Contato
-          </Button>
+          </a>
         </nav>
 
         <button
@@ -103,9 +102,12 @@ export function Header({ pathname }: HeaderProps) {
                 {item.label}
               </a>
             ))}
-            <Button className="font-sans bg-orange-500 text-white hover:bg-orange-600 w-full">
+            <a
+              href="mailto:gustavo@gusflopes.dev"
+              className="font-sans bg-orange-500 text-white hover:bg-orange-600 w-full text-center rounded-md px-4 py-2 font-medium uppercase tracking-wide transition-colors"
+            >
               Contato
-            </Button>
+            </a>
           </nav>
         </div>
       )}

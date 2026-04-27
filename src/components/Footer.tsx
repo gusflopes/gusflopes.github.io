@@ -41,10 +41,10 @@ export function Footer() {
               <li className="text-slate-400">Brasil | Global</li>
             </ul>
             <div className="flex gap-4 mt-4">
-              <a href="#" className="text-slate-400 hover:text-white transition-colors"><Linkedin size={20} /></a>
-              <a href="#" className="text-slate-400 hover:text-white transition-colors"><Github size={20} /></a>
-              <a href="#" className="text-slate-400 hover:text-white transition-colors"><Youtube size={20} /></a>
-              <a href="#" className="text-slate-400 hover:text-white transition-colors"><Twitter size={20} /></a>
+              <a href="https://www.linkedin.com/in/gusflopes/" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors" aria-label="LinkedIn"><Linkedin size={20} /></a>
+              <a href="https://github.com/gusflopes" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors" aria-label="GitHub"><Github size={20} /></a>
+              <a href="https://www.youtube.com/@hubdev-tech" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors" aria-label="YouTube"><Youtube size={20} /></a>
+              <a href="https://x.com/gusflopes" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors" aria-label="X (Twitter)"><Twitter size={20} /></a>
             </div>
           </div>
 
