@@ -1,7 +1,7 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import Default from '../../../layouts/Default.astro';
-import { RadarArticlePage } from '../../../components/pages/RadarArticlePage';
+import RadarArticleShell from '../../../components/article/RadarArticleShell.astro';
 import { buildArticleJsonLd, SITE } from '../../../lib/seo';
 
 export async function getStaticPaths() {
@@ -13,6 +13,7 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { data } = entry;
+const { Content } = await render(entry);
 
 const articleJsonLd = buildArticleJsonLd({
   title: data.title,
@@ -36,5 +37,7 @@ const articleJsonLd = buildArticleJsonLd({
   }}
   jsonLd={articleJsonLd}
 >
-  <RadarArticlePage id={entry.id} client:load />
+  <RadarArticleShell data={data}>
+    <Content />
+  </RadarArticleShell>
 </Default>
