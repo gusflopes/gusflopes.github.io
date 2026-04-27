@@ -2,10 +2,27 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "gusflopes-website",
   "compatibility_date": "2026-04-26",
+  "main": "./dist/server/entry.mjs",
   "assets": {
-    "directory": "./dist",
+    "directory": "./dist/client",
+    "binding": "ASSETS",
     "not_found_handling": "single-page-application"
   },
+  "d1_databases": [
+    {
+      "binding": "LEADS_DB",
+      "database_name": "gusflopes-leads",
+      "database_id": "TODO_owner_run_wrangler_d1_create",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "RATE_LIMIT_KV",
+      "id": "TODO_owner_run_wrangler_kv_namespace_create"
+    }
+  ],
+  "vars": {},
   "observability": {
     "enabled": false,
     "head_sampling_rate": 1,
