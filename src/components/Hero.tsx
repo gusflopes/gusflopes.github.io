@@ -1,6 +1,5 @@
 import React from 'react';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
+import { SubscribeForm } from './SubscribeForm';
 import bgImage from '../assets/326189a758fea0fe0e2da42349b6da943b29ba51.png?url';
 
 export function Hero() {
@@ -37,15 +36,15 @@ export function Hero() {
             Alinhando objetivos de negócio e excelência técnica para entregar software que gera valor contínuo.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-3 pt-4 w-full max-w-lg">
-            <Input 
-              type="email" 
-              placeholder="Digite seu e-mail..." 
-              className="font-sans bg-slate-950/50 border-slate-600 text-white placeholder:text-slate-400 h-14 text-lg focus-visible:ring-orange-500"
+          <div className="pt-4 w-full max-w-lg">
+            <SubscribeForm
+              tag="newsletter"
+              source="hero"
+              placeholder="Digite seu e-mail..."
+              cta="Assinar Newsletter"
+              inputClassName="font-sans bg-slate-950/50 border border-slate-600 text-white placeholder:text-slate-400 h-14 text-lg focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-none rounded-md px-4 flex-1"
+              buttonClassName="font-sans bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 h-14 rounded-lg text-lg shadow-lg shadow-orange-900/20 transition-all hover:scale-105 shrink-0 disabled:opacity-50 disabled:hover:scale-100"
             />
-            <Button className="font-sans bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 h-14 rounded-lg text-lg shadow-lg shadow-orange-900/20 transition-all hover:scale-105 shrink-0">
-              Assinar Newsletter
-            </Button>
           </div>
         </div>
       </div>
