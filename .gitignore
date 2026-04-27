@@ -4,3 +4,4 @@ docs/private/
 .astro/
 dist/
 .worktrees/
+.dev.vars
