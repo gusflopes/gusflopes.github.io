@@ -408,7 +408,21 @@ Owner lista temas brutos (Obsidian/Notion). Dado o foco do produto (mentoria par
 - Conversam com a dor da audiência alvo (ex: "como liderar tecnicamente sem virar gerente", "quando refatorar vs reescrever")
 - Têm CTA natural para mentoria/curso ("se isso ressoou, entre na lista de espera de [produto]")
 
-Pelo audit, frontmatter dos arquivos atuais (`1.md` a `6.md` em ambas coleções) sugere temas: Architecture, .NET, DevOps, Carreira, IA. **Owner valida ou ajusta** antes da Onda 4.
+**Categorias atuais no schema** (`src/content.config.ts`): `Arquitetura`, `.NET`, `DevOps`, `Carreira`, `IA`.
+
+**Categorias propostas pelo owner** (a revisar em detalhe na Onda 4):
+
+- Arquitetura de Software *(rename de "Arquitetura")*
+- DevOps *(mantém)*
+- AI Engineering *(rename de "IA", posicionamento mais técnico)*
+- Product Engineering *(novo)*
+- Domain Driven Design *(novo)*
+- .NET *(mantém)*
+- Engenharia de Dados *(novo, candidato — owner ainda em dúvida)*
+
+`Carreira` sai da lista (ou vira tag/cross-cutting em vez de categoria principal). Mudança de schema requer migração dos 12 arquivos existentes (`category:` no frontmatter) ou aceite de que aqueles eram placeholders e podem ser deletados/reescritos junto com a entrega de conteúdo real.
+
+Decisão final na **Onda 4**, antes do owner exportar os primeiros rascunhos.
 
 ### 7.4 Anatomia do artigo padrão
 
