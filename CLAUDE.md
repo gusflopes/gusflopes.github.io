@@ -1,61 +1,81 @@
 # Instruções para o Projeto gusflopes.dev
 
-Site em **Astro 6** servindo um SPA React 18 (Radix UI + Tailwind 4 + framer-motion). Roteamento client-side com `react-router-dom`. Deploy via Cloudflare Workers (Static Assets).
-
-## Estado atual da arquitetura
-
-A migração para Astro foi **fase 1 (shell)**: Astro substituiu o Vite como build tool, mas o site continua sendo um SPA React montado como island `client:only="react"` numa única página (`src/pages/index.astro`). React Router cuida de todas as rotas no client; o `not_found_handling: "single-page-application"` no Worker faz qualquer URL cair no `index.html` para o roteador resolver.
-
-Próximas fases (per-route Astro pages, Content Collections, Tailwind 4 source-based, SSR opcional) estão mapeadas em [`NEXT_STEPS.md`](./NEXT_STEPS.md).
+Site em **Astro 6** com React 18 islands (Radix UI + Tailwind 4 + framer-motion). Roteamento file-based via `src/pages/*.astro`. Conteúdo em `src/content/*.md` validado por schemas Zod (Content Collections). Deploy via Cloudflare Workers (Static Assets).
 
 ## Stack
 
-- **Build**: Astro 6.1.x + `@astrojs/react` 5 (porta dev `3001`).
-- **UI**: Radix UI primitives + Tailwind 4 (CSS pré-compilado em `src/index.css`) + `lucide-react` para ícones + `framer-motion` para animações.
-- **Roteamento**: `react-router-dom` v7 (`BrowserRouter`) — temporário, sairá na fase 2.
-- **Deploy**: Cloudflare Workers Static Assets (sem código de Worker, só assets em `./dist`).
+- **Build**: Astro 6.1.x + `@astrojs/react` 5 + `@tailwindcss/vite` 4 (porta dev `3001`)
+- **UI**: Radix UI primitives + Tailwind 4 (source-based, `src/index.css`) + `lucide-react` + `framer-motion`
+- **Roteamento**: Astro file-based (`src/pages/*.astro`); cada componente React entra como `client:load` island
+- **Conteúdo**: Astro Content Collections (radar e insights) com schemas Zod em `src/content.config.ts`
+- **Deploy**: Cloudflare Workers Static Assets (sem código de Worker, só assets em `./dist`)
 
 ## Rotas
 
-Definidas em `src/App.tsx` (consumidas pelo island único em `src/pages/index.astro`):
+| Path | Página Astro | Componente React (island) |
+|---|---|---|
+| `/` | `src/pages/index.astro` | `HomePage` |
+| `/radar` | `src/pages/radar.astro` | `RadarPage` (recebe `items` da coleção) |
+| `/radar/article/[id]` | `src/pages/radar/article/[id].astro` | `RadarArticlePage` (recebe `id`) |
+| `/insights` | `src/pages/insights.astro` | `InsightsPage` (recebe `articles` da coleção) |
+| `/insights/article` | `src/pages/insights/article.astro` | `ArticlePage2` |
+| `/privacy` | `src/pages/privacy.astro` | `PrivacyPolicyPage` |
+| `/terms` | `src/pages/terms.astro` | `TermsOfUsePage` |
 
-| Path | Componente |
-|---|---|
-| `/` | `HomePage` |
-| `/radar` | `RadarPage` |
-| `/radar/article/:id` | `RadarArticlePage` |
-| `/insights` | `InsightsPage` |
-| `/insights/article` | `ArticlePage2` |
-| `/privacy` | `PrivacyPolicyPage` |
-| `/terms` | `TermsOfUsePage` |
+`Header` (recebe `pathname` via prop) e `Footer` ficam no layout `src/layouts/Default.astro`. Header se auto-esconde em páginas de artigo (`/radar/article/*`, `/insights/article`).
 
-`Header` e `Footer` ficam fora das `Routes`. `ScrollToTop` reseta o scroll a cada navegação.
+`/radar/article/[id]` é dinâmica: `getStaticPaths()` deriva os IDs da coleção `radar`, filtrando `isExternal: false`. Hoje gera 3 páginas (1, 5, 6).
 
 ## Comandos úteis
 
 - `pnpm dev` — Astro dev server em `http://localhost:3001`
 - `pnpm build` — `astro build` em `./dist`
 - `pnpm preview` — serve o build local
-- `pnpm deploy` — build + `wrangler deploy` (promove direto para produção, precisa `pnpm wrangler login` antes)
+- `pnpm deploy` — build + `wrangler deploy` (precisa `pnpm wrangler login`)
+
+## Conteúdo
+
+Para adicionar um item ao Radar:
+
+```bash
+echo '---
+title: "..."
+excerpt: "..."
+date: "..."
+duration: "..."
+category: "Arquitetura" | ".NET" | "DevOps" | "Carreira" | "IA"
+type: "article" | "video"
+isExternal: false
+link: "/radar/article/<id>"
+source: "Local"
+image: "https://..."
+---' > src/content/radar/<id>.md
+```
+
+Build valida frontmatter contra o schema Zod em `src/content.config.ts`. Se `isExternal: false`, o build gera automaticamente uma página estática em `/radar/article/<id>`.
+
+Para insights, mesmo padrão em `src/content/insights/`.
 
 ## Deploy & Preview URLs
 
-Cloudflare em modo *Connect to Git*. Fluxo:
+Cloudflare em modo *Connect to Git*:
 
-- **Push em `main`** → `npx wrangler deploy` → produção (`gusflopes.dev` + `gusflopes-website.gusflopes86.workers.dev`).
-- **Push em outra branch** → `npx wrangler versions upload` → preview em `<hash>-gusflopes-website.gusflopes86.workers.dev`.
+- **Push em `main`** → `npx wrangler deploy` → produção (`gusflopes.dev` + `gusflopes-website.gusflopes86.workers.dev`)
+- **Push em outra branch** → `npx wrangler versions upload` → preview em `<hash>-gusflopes-website.gusflopes86.workers.dev`
 
 Cada commit em branch não-produção gera versão nova. Para promover sem merge: dashboard do Worker → *Deployments* → versão → *Deploy*. Detalhes no `README.md`.
 
 ## Arquivos importantes
 
-- `src/pages/index.astro` — Astro entry; mounta `<App />` como island
-- `src/App.tsx` — `BrowserRouter` + rotas
-- `src/components/` — Header, Footer, páginas em `pages/`, primitives Radix em `ui/`
-- `src/index.css` — Tailwind 4 pré-compilado (~39KB) + variáveis de tema
-- `astro.config.mjs` — Astro config; bloco `vite` mantém aliases versionados (`vaul@1.1.2 → vaul`, etc — herança do export Figma) e aliases de assets `figma:asset/*`
+- `src/pages/` — uma `.astro` por rota; importa o componente React e passa props
+- `src/layouts/Default.astro` — layout compartilhado (`<head>`, Header, slot, Footer)
+- `src/content/` — markdown com frontmatter; schema em `src/content.config.ts`
+- `src/components/` — Hero, Themes, Services, LatestContent, primitives Radix em `ui/`
+- `src/components/pages/` — componentes-página React; recebem dados via props
+- `src/index.css` — Tailwind 4 source (`@import "tailwindcss"` + `@theme` com font-sans/serif/mono)
+- `astro.config.mjs` — Astro config; `@tailwindcss/vite` plugado; aliases versionados (`vaul@1.1.2 → vaul` etc — herança Figma) ainda existem
 - `wrangler.jsonc` — config do Worker Static Assets
-- `NEXT_STEPS.md` — plano das fases 2–6 da migração
+- `NEXT_STEPS.md` — iterações futuras (MDX renderizado, cleanup de aliases, imagens otimizadas)
 
 ## MCP Server Playwright
 
@@ -72,4 +92,4 @@ Configurado via Docker:
 }
 ```
 
-Para automação Playwright: usar o Task tool com `subagent_type: "general-purpose"`. O agente tem acesso às ferramentas do MCP Playwright via Docker. URL local: `http://localhost:3001`.
+Para automação Playwright: usar o Task tool com `subagent_type: "general-purpose"`. URL local: `http://localhost:3001`.

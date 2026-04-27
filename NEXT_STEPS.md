@@ -1,101 +1,62 @@
 # Próximos passos pós-migração para Astro
 
-Esta migração foi a **fase 1 (shell)**: Astro substituiu o Vite como orquestrador de build, mas o site segue sendo um SPA React mountado como `client:only="react"` numa única página (`src/pages/index.astro`). Roteamento continua via `react-router-dom`; o SPA fallback do Worker (`not_found_handling: "single-page-application"`) faz qualquer URL cair no `index.html` para o React Router resolver.
+Status atual:
 
-Os componentes e estilos não mudaram. O que mudou:
+- [x] **Fase 1** — Astro shell (Astro substituiu Vite como build tool, app entrava como single client island)
+- [x] **Fase 2** — Per-route Astro pages com islands; `react-router-dom` removido
+- [x] **Fase 3** — Content Collections (Zod) para radar e insights
+- [x] **Fase 4** — Tailwind 4 source-based via `@tailwindcss/vite`
+- [x] **Fase 5** — Cleanup de artefatos legados; `dist/` no `.gitignore`
+- [ ] **Fase 6** — SSR / Edge functions: **não executada por design** (ver abaixo)
 
-- `vite.config.ts` → `astro.config.mjs` (com os mesmos aliases preservados no bloco `vite`)
-- `index.html` (raiz) → `src/pages/index.astro`
-- `src/main.tsx` deletado (Astro hidrata o island sozinho)
-- `tsconfig.json` agora estende `astro/tsconfigs/strict`
-- `tsconfig.node.json` deletado
-- Dev/build/preview agora rodam via `astro` CLI
+## Iterações restantes
 
-## Fase 2 — Astro per-route pages (a melhor parte)
+### Conteúdo dos artigos individuais → MDX renderizado
 
-Hoje o build produz **uma única página** (`/`) com todo o React empacotado num único bundle. Pra colher os benefícios reais do Astro, cada rota vira uma `.astro` própria, com a árvore React entrando como island só onde faz sentido.
+Os componentes [`RadarArticlePage`](./src/components/pages/RadarArticlePage.tsx) e [`ArticlePage2`](./src/components/pages/ArticlePage2.tsx) ainda têm o conteúdo do artigo (`<p>`, `<blockquote>`, `<pre><code>`, etc) **hardcoded** no JSX — eles renderizam o mesmo placeholder "Domain-Driven Design" para qualquer ID.
 
-### Mapeamento
+Próximo passo:
 
-| Rota atual (React Router) | Arquivo Astro |
-|---|---|
-| `/` | `src/pages/index.astro` |
-| `/radar` | `src/pages/radar.astro` |
-| `/radar/article/:id` | `src/pages/radar/article/[id].astro` |
-| `/insights` | `src/pages/insights.astro` |
-| `/insights/article` | `src/pages/insights/article.astro` |
-| `/privacy` | `src/pages/privacy.astro` |
-| `/terms` | `src/pages/terms.astro` |
+1. Adicionar `@astrojs/mdx` integration.
+2. Trocar `*.md` por `*.mdx` em `src/content/radar/` e `src/content/insights/` e mover o conteúdo do artigo para o body do MDX.
+3. Em `src/pages/radar/article/[id].astro`, usar `entry.render()` para renderizar o body como `<Content />`.
+4. Os componentes React ficam só com a "moldura" (header sticky, autor footer, share buttons) e recebem um `<slot>` ou children. Ou viram puro Astro layout, com a interatividade (botão Copy) extraída para um island menor.
+5. Redirecionar `/insights/article` (sem ID) para uma rota dinâmica `/insights/article/[id]` ao invés da rota fixa atual.
 
-### Mudanças necessárias
+### Limpeza dos aliases versionados (Figma export)
 
-**Componentes que importam `react-router-dom`** (precisam virar `<a href="...">` ou Astro layouts):
+`astro.config.mjs` ainda mantém ~30 aliases tipo `'vaul@1.1.2': 'vaul'`. São herança do export do Figma e afetam **~45 arquivos** em `src/components/ui/*` (acordion.tsx, alert-dialog.tsx, etc). Caminho:
 
-- `src/App.tsx` → some (cada `.astro` vira sua própria entry)
-- `src/components/Header.tsx` — `Link`, `useLocation`, `useNavigate` (esse é o mais complicado: tem lógica de scroll para seções via `location.state`)
-- `src/components/Footer.tsx` — 5 `<Link>` simples
-- `src/components/Services.tsx` — 1 `<Link>`
-- `src/components/utils/ScrollToTop.tsx` — fica obsoleto (navegação full-page já reseta scroll)
-- `src/components/pages/RadarPage.tsx` — `<Link>` para artigos
-- `src/components/pages/InsightsPage.tsx` — `<Link>` para artigo
-- `src/components/pages/ArticlePage2.tsx` — `<Link>` de volta
-- `src/components/pages/RadarArticlePage.tsx` — `<Link>` + `useParams` (`:id`)
+1. Para cada arquivo: trocar `from 'vaul@1.1.2'` → `from 'vaul'`, `from '@radix-ui/react-dialog@1.1.6'` → `from '@radix-ui/react-dialog'`, etc.
+2. Apagar o bloco de aliases versionados do `astro.config.mjs`.
+3. Manter só `'@': './src'` (o atalho geral).
 
-**Estratégia:**
+Codemod com `sed` resolve em uma rodada — o padrão é regular: `'<pkg>@<version>'` vira `'<pkg>'`. A grep do bloco anterior mostra os arquivos afetados.
 
-1. **Layout compartilhado**: `src/layouts/Default.astro` com `<head>`, fontes, e os componentes `Header` + `Footer` como islands `client:load`.
-2. **Cada page** importa o componente de página existente (`HomePage`, `RadarPage`, etc.) como island. Páginas estáticas podem usar `client:visible` ou nem precisar de hydration se forem 100% estáticas.
-3. **Header**: extrair a lógica de "navegação para seção a partir de outra página" para query params ou hash. Em vez de `navigate('/', { state: { scrollTo: 'consulting' }})`, usar `<a href="/#consulting">` + listener de hash.
-4. **Dynamic params**: na rota `/radar/article/[id].astro`, ler `Astro.params.id` no frontmatter e passar como prop para o componente React.
-5. **Deletar** `react-router-dom`, `App.tsx`, `ScrollToTop.tsx`.
+### Content Collections para o body dos insights
 
-### Ganhos esperados
+Mesmo movimento da seção anterior, mas para `/insights/article` (hoje rota fixa, sem ID).
 
-- HTML servido por rota (SEO real, social cards corretos por página)
-- Code splitting natural por rota
-- Cada página pode ter `<head>` próprio (title, meta, og:image)
-- Possibilidade de pre-renderizar conteúdo estático (artigos do radar, políticas) sem JavaScript
-- Bundle inicial menor — componentes só hidratam onde precisam
+### Imagens otimizadas (`<Image />` do Astro)
 
-## Fase 3 — Conteúdo via Content Collections
+Hoje todas as `<img>` (Hero background, cards, autor avatars) usam URLs externas do Unsplash (parâmetros `?w=1080&q=80`). Migrar para o componente `<Image />` do Astro daria:
 
-As páginas `/radar` e `/insights` exibem listas de artigos. Hoje os dados estão hardcoded nos componentes ou (legado) num `insights-data.json` na raiz.
+- Otimização automática (formato AVIF/WebP, srcset responsivo)
+- Lazy loading nativo
+- Layout shift (CLS) controlado
 
-Migrar para [Astro Content Collections](https://docs.astro.build/en/guides/content-collections/):
+Mas como os componentes são React islands e `<Image />` é Astro-only, o caminho seria mover essas imagens para os layouts/`*.astro` ou usar `astro:assets` via getImage() retornando URLs otimizadas para os componentes React.
 
-- `src/content/radar/*.mdx` — cada artigo do radar como MDX
-- `src/content/insights/*.mdx` — cada insight como MDX
-- Schema Zod para validar frontmatter (title, date, tags, cover)
-- Listagens (`/radar`, `/insights`) iteram a coleção em build time
-- Páginas de artigo (`/radar/article/[slug]`) renderizam o MDX direto
+Skip if not blocking — Unsplash já entrega imagens otimizadas no CDN.
 
-Cancela o `insights-data.json` e os componentes `ArticlePage2` / `RadarArticlePage` viram só layouts para o MDX.
+## Por que a fase 6 (SSR) não foi feita
 
-## Fase 4 — Tailwind 4 source-based
+A fase 6 original estava marcada como **opcional** e dependia de existir um caso de uso real para código de Worker server-side: forms com submit, A/B testing por região, caching dinâmico, webhooks.
 
-O `src/index.css` hoje é Tailwind 4.1.3 **pré-compilado** (39KB de output gerado e commitado). Não há fonte Tailwind no projeto. Trazer o pipeline:
+Hoje o site é 100% conteúdo estático. Adicionar `@astrojs/cloudflare` + `output: "server"` + um `src/worker.ts` introduz:
 
-1. `pnpm add -D tailwindcss @tailwindcss/vite`
-2. Plugar `tailwindcss()` no `vite.plugins` do `astro.config.mjs` (igual o shelfye)
-3. Substituir o `index.css` atual por uma fonte enxuta com `@import "tailwindcss"` + variáveis de tema customizadas
-4. Tailwind 4 detecta as classes usadas no JSX e gera o CSS no build
+- Adaptador SSR no bundle
+- Cold start no Worker (versus assets servidos do edge cache)
+- Manutenção de uma camada de runtime sem benefício
 
-Ganhos: não precisa mais commitar CSS gerado, alterar tema fica no source, dev mode com HMR.
-
-## Fase 5 — Limpeza
-
-- `dist/` no `.gitignore` (hoje está tracked — gera churn enorme com hashes do Astro a cada build). Comando: `git rm -r --cached dist && echo dist >> .gitignore`.
-- Remover artefatos legados do projeto antigo na raiz: `build/`, `images/`, `posts/`, `wallpaper.jpg` (já tem em `public/`?), `insights-data.json`. Auditar antes de deletar.
-- Limpar os aliases versionados no `astro.config.mjs` (`vaul@1.1.2 → vaul`, etc) — herança do export do Figma. Encontrar e ajustar os imports nos componentes pra usar o nome canônico.
-- Remover diretórios não-fonte da raiz: `_archive/` (já existe?), `docs/private/`.
-
-## Fase 6 — SSR / Edge functions (opcional)
-
-Hoje o site é 100% estático (Workers Static Assets). Se um dia precisar de:
-
-- Forms com submit server-side (newsletter, contato)
-- A/B testing por região/país
-- Caching dinâmico
-- Webhooks
-
-→ adicionar `main: "src/worker.ts"` no `wrangler.jsonc`, escrever um Worker fetch handler, e usar [`@astrojs/cloudflare`](https://docs.astro.build/en/guides/integrations-guide/cloudflare/) para mudar `output` de `"static"` para `"server"` ou `"hybrid"`.
+Quando aparecer uma feature que precise (ex: form de contato com server-side submit, edge logging, geo-personalização), o caminho está pronto — basta adicionar a integration e mudar o output. O `wrangler.jsonc` já tem `observability.logs.enabled: true` esperando.

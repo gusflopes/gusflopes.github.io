@@ -1,6 +1,6 @@
 # gusflopes.dev — Website
 
-Site em **Astro 6** servindo um SPA React 18 (Radix UI + Tailwind 4 + framer-motion) como island. Roteamento client-side com `react-router-dom` (temporário — ver [`NEXT_STEPS.md`](./NEXT_STEPS.md)). Deploy via Cloudflare Workers (Static Assets).
+Site em **Astro 6** com React 18 islands (Radix UI + Tailwind 4 + framer-motion). Roteamento file-based; conteúdo em Content Collections com schema Zod. Deploy via Cloudflare Workers (Static Assets).
 
 ## Desenvolvimento
 
