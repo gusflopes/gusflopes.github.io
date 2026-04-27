@@ -1,0 +1,42 @@
+---
+export const prerender = true;
+import { getCollection, render } from 'astro:content';
+import Default from '../../../layouts/Default.astro';
+import InsightsArticleShell from '../../../components/article/InsightsArticleShell.astro';
+import { buildArticleJsonLd, SITE } from '../../../lib/seo';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('insights');
+  return entries.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+const { Content } = await render(entry);
+
+const articleJsonLd = buildArticleJsonLd({
+  title: data.title,
+  description: data.excerpt,
+  url: `${SITE.url}/insights/article/${entry.id}`,
+  image: data.image,
+  datePublished: data.date,
+  section: data.category,
+});
+---
+
+<Default
+  title={data.title}
+  description={data.excerpt}
+  image={data.image}
+  type="article"
+  article={{
+    publishedTime: data.date,
+    author: SITE.author.name,
+    section: data.category,
+  }}
+  jsonLd={articleJsonLd}
+>
+  <InsightsArticleShell data={data}>
+    <Content />
+  </InsightsArticleShell>
+</Default>

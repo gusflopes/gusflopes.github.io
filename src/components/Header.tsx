@@ -12,8 +12,8 @@ export function Header({ pathname }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const isHome = pathname === '/';
-  const isArticlePage2 = pathname === '/insights/article';
-  const isRadarArticlePage = pathname.includes('/radar/article/');
+  const isInsightsArticlePage = pathname.startsWith('/insights/article/');
+  const isRadarArticlePage = pathname.startsWith('/radar/article/');
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -21,7 +21,7 @@ export function Header({ pathname }: HeaderProps) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  if (isArticlePage2 || isRadarArticlePage) return null;
+  if (isInsightsArticlePage || isRadarArticlePage) return null;
 
   const navItems = [
     { label: 'Home', href: '/' },
