@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
-import bgImage from '../assets/326189a758fea0fe0e2da42349b6da943b29ba51.png';
+import bgImage from '../assets/326189a758fea0fe0e2da42349b6da943b29ba51.png?url';
 
 export function Hero() {
   return (

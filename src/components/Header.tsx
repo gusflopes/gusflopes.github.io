@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from './ui/button';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-import logo from '../assets/cfa6876664fcc921be5a7c0a58c353ea12577968.png';
+import logo from '../assets/cfa6876664fcc921be5a7c0a58c353ea12577968.png?url';
 
 interface HeaderProps {
   pathname: string;
