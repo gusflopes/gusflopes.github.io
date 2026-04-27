@@ -3,6 +3,10 @@ import Default from '../layouts/Default.astro';
 import { TermsOfUsePage } from '../components/pages/TermsOfUsePage';
 ---
 
-<Default title="Termos de Uso — gusflopes.dev">
+<Default
+  title="Termos de Uso"
+  description="Termos de uso de gusflopes.dev."
+  noindex={true}
+>
   <TermsOfUsePage client:load />
 </Default>
