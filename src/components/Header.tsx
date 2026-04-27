@@ -27,7 +27,8 @@ export function Header({ pathname }: HeaderProps) {
     { label: 'Home', href: '/' },
     { label: 'Radar', href: '/radar' },
     { label: 'Insights', href: '/insights' },
-    { label: 'Trabalhe Comigo', href: '/#consulting' },
+    { label: 'Mentoria', href: '/mentoria' },
+    { label: 'Cursos', href: '/cursos' },
     { label: 'Sobre', href: '/#about' },
   ];
 
