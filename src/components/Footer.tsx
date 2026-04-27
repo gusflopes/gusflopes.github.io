@@ -1,8 +1,7 @@
 import React from 'react';
-import { Input } from './ui/input';
-import { Button } from './ui/button';
 import { Twitter, Linkedin, Github, Youtube } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { SubscribeForm } from './SubscribeForm';
 import logoLight from '../assets/cfa6876664fcc921be5a7c0a58c353ea12577968.png?url';
 
 export function Footer() {
@@ -53,15 +52,14 @@ export function Footer() {
           <div>
             <h4 className="text-white font-bold mb-4">Newsletter</h4>
             <p className="text-slate-400 text-sm mb-4">Curadoria estratégica sobre o futuro da Engenharia de Software</p>
-            <div className="flex gap-2">
-              <Input 
-                placeholder="Seu email" 
-                className="bg-slate-900 border-slate-700 text-white focus:ring-orange-500"
-              />
-              <Button className="bg-orange-500 hover:bg-orange-600 text-white">
-                Assinar
-              </Button>
-            </div>
+            <SubscribeForm
+              tag="newsletter"
+              source="footer"
+              placeholder="Seu email"
+              cta="Assinar"
+              inputClassName="bg-slate-900 border border-slate-700 text-white rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500 flex-1"
+              buttonClassName="bg-orange-500 hover:bg-orange-600 text-white rounded-md px-4 py-2 disabled:opacity-50"
+            />
           </div>
         </div>
 

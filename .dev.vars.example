@@ -1,0 +1,5 @@
+# Resend API key — criar conta em resend.com, gerar key e:
+#   pnpm wrangler secret put RESEND_API_KEY      (produção)
+# Para dev local com `pnpm wrangler dev`, copia este arquivo para `.dev.vars`
+# e preenche o valor abaixo.
+RESEND_API_KEY=re_xxxxxxxx

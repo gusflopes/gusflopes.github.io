@@ -1,6 +1,38 @@
 # gusflopes.dev — Website
 
-Site em **Astro 6** com React 18 islands (Radix UI + Tailwind 4 + framer-motion). Roteamento file-based; conteúdo em Content Collections com schema Zod. Deploy via Cloudflare Workers (Static Assets).
+Site em **Astro 6** com React 18 islands (Radix UI + Tailwind 4 + framer-motion). Roteamento file-based; conteúdo em Content Collections com schema Zod. Deploy via Cloudflare Workers (`output: 'server'` + Static Assets).
+
+## Setup Cloudflare bindings (Onda 2)
+
+Antes do primeiro deploy com captura de leads ativa, owner precisa criar os recursos Cloudflare e plugar IDs/secrets:
+
+```bash
+# 1. Login no Cloudflare
+pnpm wrangler login
+
+# 2. D1 — banco de leads
+pnpm wrangler d1 create gusflopes-leads
+# (copiar database_id do output e colar em wrangler.jsonc → d1_databases[0].database_id)
+
+pnpm wrangler d1 migrations apply gusflopes-leads --local    # dev
+pnpm wrangler d1 migrations apply gusflopes-leads --remote   # prod
+
+# 3. KV — rate limit
+pnpm wrangler kv namespace create gusflopes-rate-limit
+# (copiar id e colar em wrangler.jsonc → kv_namespaces[0].id)
+
+# 4. Resend — criar conta em resend.com, verificar domínio, gerar key
+pnpm wrangler secret put RESEND_API_KEY      # produção
+cp .dev.vars.example .dev.vars                # dev local
+# (editar .dev.vars com a key real)
+
+# 5. Dev local com bindings
+pnpm wrangler dev
+```
+
+Endpoint público: `POST /api/subscribe` com `{email, source, tag, hp_field}`.
+
+
 
 ## Desenvolvimento
 
