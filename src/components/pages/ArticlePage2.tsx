@@ -1,6 +1,5 @@
 import { ArrowLeft, Bookmark, Calendar, Check, Clock, Copy, Share2 } from 'lucide-react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 
 export function ArticlePage2() {
@@ -22,10 +21,10 @@ export function ArticlePage2() {
       {/* Header / Navigation */}
       <div className="sticky top-0 z-40 w-full bg-[#F5F5F0]/80 backdrop-blur-md border-b border-slate-200/60">
         <div className="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
-           <Link to="/insights" className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-orange-600 transition-colors">
+           <a href="/insights" className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-orange-600 transition-colors">
              <ArrowLeft size={14} />
              Voltar
-           </Link>
+           </a>
            <div className="flex gap-4">
              <button className="p-2 hover:bg-slate-200 rounded-full text-slate-500 transition-colors">
                <Share2 size={16} />

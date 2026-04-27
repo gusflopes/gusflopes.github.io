@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Button } from '../ui/button';
 import { ArrowLeft, Calendar, Clock, Share2, Bookmark, Copy, Check, Linkedin, Github, Twitter } from 'lucide-react';
-import { Link, useParams } from 'react-router-dom';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 
-export function RadarArticlePage() {
+interface RadarArticlePageProps {
+  id?: string;
+}
+
+export function RadarArticlePage({ id: _id }: RadarArticlePageProps = {}) {
   const [copied, setCopied] = useState(false);
-  const { id } = useParams();
 
   const handleCopy = () => {
     setCopied(true);
@@ -25,10 +27,10 @@ export function RadarArticlePage() {
       {/* Header / Navigation */}
       <div className="sticky top-0 z-40 w-full bg-slate-950/80 backdrop-blur-md border-b border-slate-800">
         <div className="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
-           <Link to="/radar" className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-orange-500 transition-colors">
+           <a href="/radar" className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-orange-500 transition-colors">
              <ArrowLeft size={14} />
              Voltar para o Radar
-           </Link>
+           </a>
            <div className="flex gap-4">
              <button className="p-2 hover:bg-slate-900 rounded-full text-slate-400 transition-colors">
                <Share2 size={16} />

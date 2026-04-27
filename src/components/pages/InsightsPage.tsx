@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { ArrowRight, Search, Sparkles } from 'lucide-react';
 import { motion } from 'motion/react';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
-import { Link } from 'react-router-dom';
 
 export function InsightsPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -133,9 +132,9 @@ export function InsightsPage() {
         {/* Masonry-ish Artistic Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-24">
           {filteredArticles.map((article, idx) => (
-            <Link 
+            <a
               key={article.id}
-              to="/insights/article"
+              href="/insights/article"
               className={`group block ${idx % 2 !== 0 ? 'md:mt-24' : ''}`}
             >
             <motion.article 
@@ -180,7 +179,7 @@ export function InsightsPage() {
                 </div>
               </div>
             </motion.article>
-            </Link>
+            </a>
           ))}
         </div>
 

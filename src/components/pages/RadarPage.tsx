@@ -5,7 +5,6 @@ import { Input } from '../ui/input';
 import { Badge } from '../ui/badge';
 import { Search, Calendar, Clock, ArrowRight, PlayCircle, ExternalLink, Youtube, FileText } from 'lucide-react';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
-import { Link } from 'react-router-dom';
 
 export function RadarPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -208,10 +207,10 @@ export function RadarPage() {
                       </Button>
                   ) : (
                       <Button asChild variant="link" className="p-0 text-orange-500 hover:text-orange-300 font-bold uppercase text-xs tracking-widest flex items-center gap-2 group-hover:gap-3 transition-all">
-                        <Link to={item.link}>
-                            {item.type === 'video' ? 'Assistir Vídeo' : 'Ler Artigo'} 
+                        <a href={item.link}>
+                            {item.type === 'video' ? 'Assistir Vídeo' : 'Ler Artigo'}
                             <ArrowRight size={14} />
-                        </Link>
+                        </a>
                       </Button>
                   )}
                 </CardFooter>

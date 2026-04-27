@@ -1,16 +1,8 @@
 ---
-import App from '../App';
-import '../index.css';
+import Default from '../layouts/Default.astro';
+import { HomePage } from '../components/pages/HomePage';
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>gusflopes.dev - Website</title>
-  </head>
-  <body>
-    <App client:only="react" />
-  </body>
-</html>
+<Default title="gusflopes.dev — Engenharia, Arquitetura e IA">
+  <HomePage client:load />
+</Default>
