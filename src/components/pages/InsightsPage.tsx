@@ -20,7 +20,16 @@ export function InsightsPage({ articles }: InsightsPageProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('Todos');
 
-  const categories = ["Todos", "Arquitetura", ".NET", "DevOps", "Carreira", "IA"];
+  const categories = [
+    "Todos",
+    "Arquitetura de Software",
+    "AI Engineering",
+    "Domain Driven Design",
+    "Product Engineering",
+    ".NET",
+    "DevOps",
+    "Engenharia de Dados",
+  ];
 
   const filteredArticles = articles.filter(article => {
     const matchesSearch = article.title.toLowerCase().includes(searchTerm.toLowerCase()) || article.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
@@ -96,7 +105,7 @@ export function InsightsPage({ articles }: InsightsPageProps) {
           {filteredArticles.map((article, idx) => (
             <a
               key={article.id}
-              href="/insights/article"
+              href={`/insights/article/${article.id}`}
               className={`group block ${idx % 2 !== 0 ? 'md:mt-24' : ''}`}
             >
             <motion.article 

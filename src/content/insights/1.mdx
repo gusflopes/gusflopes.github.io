@@ -1,0 +1,37 @@
+---
+title: "Desacoplando Monólitos com DDD"
+excerpt: "Uma abordagem estratégica para decompor complexidade sem paralisar o negócio."
+date: "25 Out, 2023"
+duration: "8 min"
+category: "Domain Driven Design"
+image: "https://images.unsplash.com/photo-1664526937033-fe2c11f1be25?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzb2Z0d2FyZSUyMGFyY2hpdGVjdHVyZSUyMGRpYWdyYW0lMjBhcnRpZmljaWFsJTIwaW50ZWxsaWdlbmNlJTIwYnJhaW4lMjBjb2RlJTIwbW9uaXRvcnxlbnwxfHx8fDE3NjQ1NDUxODZ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+---
+
+A complexidade no desenvolvimento de software não é acidental; é uma consequência direta da complexidade do domínio que estamos tentando modelar. Quando tratamos essa complexidade apenas com ferramentas técnicas, falhamos.
+
+## Por que DDD não é só sobre padrões
+
+Domain-Driven Design não é só Repository, Entity e Value Object. É uma postura: fazer o modelo de software refletir o modelo do negócio, com linguagem onipresente e contextos delimitados.
+
+> "O coração do software é sua capacidade de resolver problemas relacionados ao domínio para seu usuário."
+
+Frequentemente nos perdemos em detalhes de implementação (Kubernetes, Kafka, Redis) antes mesmo de entender o fluxo de valor. Isso gera Arquitetura Acidental.
+
+## Estrangulando o monólito
+
+Para migrar de um monólito para um sistema modular, Big Bang raramente funciona. O padrão Strangler Fig é essencial:
+
+```ts
+const handleRequest = (req) => {
+  if (shouldRouteToNewService(req)) {
+    return NewService.process(req);
+  }
+  return LegacyMonolith.process(req);
+};
+```
+
+A simplicidade no código esconde a complexidade orquestrada. Ao alinhar a estrutura organizacional (Lei de Conway) com o modelo do código, criamos um caminho de evolução sustentável.
+
+---
+
+*Smoke test do pipeline MDX dos `insights`. Owner substitui por conteúdo autoral na próxima iteração.*

@@ -1,0 +1,113 @@
+---
+import { ArrowLeft, Calendar, Clock, Share2, Bookmark, Linkedin, Github, Twitter } from 'lucide-react';
+import AuthorAvatar from './AuthorAvatar.astro';
+import { ImageWithFallback } from '../figma/ImageWithFallback';
+import { SITE } from '../../lib/seo';
+
+interface Props {
+  data: {
+    title: string;
+    excerpt: string;
+    date: string;
+    duration?: string;
+    category: string;
+    image: string;
+  };
+}
+
+const { data } = Astro.props;
+---
+
+<div class="min-h-screen bg-[#F5F5F0] text-slate-900 relative overflow-hidden selection:bg-orange-200 selection:text-orange-900">
+
+  <!-- Artistic Noise Overlay -->
+  <div
+    class="fixed inset-0 pointer-events-none z-50 opacity-[0.03] mix-blend-overlay"
+    style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%270 0 200 200%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27noiseFilter%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.65%27 numOctaves=%273%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23noiseFilter)%27 opacity=%271%27/%3E%3C/svg%3E');"
+  ></div>
+
+  <!-- Sticky article header -->
+  <div class="sticky top-0 z-40 w-full bg-[#F5F5F0]/80 backdrop-blur-md border-b border-slate-200/60">
+    <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a
+        href="/insights"
+        class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-orange-600 transition-colors"
+      >
+        <ArrowLeft size={14} />
+        Voltar para Insights
+      </a>
+      <div class="flex gap-4">
+        <button class="p-2 hover:bg-slate-200 rounded-full text-slate-500 transition-colors" aria-label="Compartilhar">
+          <Share2 size={16} />
+        </button>
+        <button class="p-2 hover:bg-slate-200 rounded-full text-slate-500 transition-colors" aria-label="Salvar">
+          <Bookmark size={16} />
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <article class="max-w-4xl mx-auto px-6 pt-12 pb-32 relative z-10">
+
+    <header class="mb-12 text-center md:text-left">
+      <div class="flex flex-wrap items-center gap-4 text-xs font-bold uppercase tracking-widest text-orange-600 mb-6 justify-center md:justify-start">
+        <span>{data.category}</span>
+        <span class="w-1 h-1 bg-slate-300 rounded-full"></span>
+        <span class="text-slate-400 flex items-center gap-1">
+          <Calendar size={12} /> {data.date}
+        </span>
+        {data.duration && (
+          <>
+            <span class="w-1 h-1 bg-slate-300 rounded-full"></span>
+            <span class="text-slate-400 flex items-center gap-1">
+              <Clock size={12} /> {data.duration}
+            </span>
+          </>
+        )}
+      </div>
+
+      <h1 class="font-serif text-4xl md:text-6xl text-slate-900 leading-tight mb-8">
+        {data.title}
+      </h1>
+
+      <p class="font-sans text-xl text-slate-600 font-light leading-relaxed max-w-2xl">
+        {data.excerpt}
+      </p>
+    </header>
+
+    <div class="mb-16 rounded-xl overflow-hidden shadow-2xl border border-slate-200/60 aspect-[21/9] relative group">
+      <ImageWithFallback
+        src={data.image}
+        alt={data.title}
+        className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
+      />
+    </div>
+
+    <div class="prose prose-lg md:prose-xl max-w-none font-sans text-slate-700 leading-loose prose-headings:font-serif prose-headings:font-medium prose-headings:text-slate-900 prose-a:text-orange-600 hover:prose-a:text-orange-700 prose-strong:text-slate-900 prose-blockquote:border-orange-500 prose-blockquote:bg-white/60">
+      <slot />
+    </div>
+
+    <div class="mt-24 pt-12 border-t border-slate-300 flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
+      <AuthorAvatar size={96} />
+      <div>
+        <h4 class="font-sans font-bold text-orange-600 uppercase tracking-widest text-xs mb-2">Sobre o Autor</h4>
+        <p class="font-serif text-3xl md:text-4xl text-slate-900 mb-2">{SITE.author.name}</p>
+        <p class="text-sm text-slate-600 font-mono max-w-lg leading-relaxed mb-4">
+          Tech Lead e arquiteto de software. Notas sobre engenharia, arquitetura e IA aplicada.
+        </p>
+        <div class="flex items-center gap-4 justify-center md:justify-start">
+          <a href="#" class="text-slate-500 hover:text-slate-900 transition-colors" aria-label="LinkedIn (placeholder)">
+            <Linkedin size={20} />
+          </a>
+          <a href="#" class="text-slate-500 hover:text-slate-900 transition-colors" aria-label="GitHub (placeholder)">
+            <Github size={20} />
+          </a>
+          <a href="#" class="text-slate-500 hover:text-slate-900 transition-colors" aria-label="Twitter (placeholder)">
+            <Twitter size={20} />
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </article>
+</div>
