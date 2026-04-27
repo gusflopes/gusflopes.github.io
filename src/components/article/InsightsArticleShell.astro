@@ -1,6 +1,8 @@
 ---
-import { ArrowLeft, Calendar, Clock, Share2, Bookmark, Linkedin, Github, Twitter } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, Linkedin, Github, Twitter, Youtube } from 'lucide-react';
 import AuthorAvatar from './AuthorAvatar.astro';
+import CopyCodeEnhancer from './CopyCodeEnhancer.astro';
+import { ShareButton } from './ShareButton';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { SITE } from '../../lib/seo';
 
@@ -37,12 +39,11 @@ const { data } = Astro.props;
         Voltar para Insights
       </a>
       <div class="flex gap-4">
-        <button class="p-2 hover:bg-slate-200 rounded-full text-slate-500 transition-colors" aria-label="Compartilhar">
-          <Share2 size={16} />
-        </button>
-        <button class="p-2 hover:bg-slate-200 rounded-full text-slate-500 transition-colors" aria-label="Salvar">
-          <Bookmark size={16} />
-        </button>
+        <ShareButton
+          client:load
+          className="p-2 hover:bg-slate-200 rounded-full text-slate-500 transition-colors"
+          size={16}
+        />
       </div>
     </div>
   </div>
@@ -96,13 +97,16 @@ const { data } = Astro.props;
           Tech Lead e arquiteto de software. Notas sobre engenharia, arquitetura e IA aplicada.
         </p>
         <div class="flex items-center gap-4 justify-center md:justify-start">
-          <a href="#" class="text-slate-500 hover:text-slate-900 transition-colors" aria-label="LinkedIn (placeholder)">
+          <a href="https://www.linkedin.com/in/gusflopes/" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-slate-900 transition-colors" aria-label="LinkedIn">
             <Linkedin size={20} />
           </a>
-          <a href="#" class="text-slate-500 hover:text-slate-900 transition-colors" aria-label="GitHub (placeholder)">
+          <a href="https://github.com/gusflopes" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-slate-900 transition-colors" aria-label="GitHub">
             <Github size={20} />
           </a>
-          <a href="#" class="text-slate-500 hover:text-slate-900 transition-colors" aria-label="Twitter (placeholder)">
+          <a href="https://www.youtube.com/@hubdev-tech" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-slate-900 transition-colors" aria-label="YouTube">
+            <Youtube size={20} />
+          </a>
+          <a href="https://x.com/gusflopes" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-slate-900 transition-colors" aria-label="X (Twitter)">
             <Twitter size={20} />
           </a>
         </div>
@@ -110,4 +114,6 @@ const { data } = Astro.props;
     </div>
 
   </article>
+
+  <CopyCodeEnhancer />
 </div>
