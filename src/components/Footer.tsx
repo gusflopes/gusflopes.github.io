@@ -3,8 +3,7 @@ import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { Twitter, Linkedin, Github, Youtube } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-import logoLight from 'figma:asset/cfa6876664fcc921be5a7c0a58c353ea12577968.png';
-import { Link } from 'react-router-dom';
+import logoLight from '../assets/cfa6876664fcc921be5a7c0a58c353ea12577968.png?url';
 
 export function Footer() {
   return (
@@ -29,9 +28,9 @@ export function Footer() {
           <div>
             <h4 className="text-white font-bold mb-4">Links Rápidos</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link to="/#about" className="text-slate-400 hover:text-orange-400 transition-colors">Home</Link></li>
-              <li><Link to="/radar" className="text-slate-400 hover:text-orange-400 transition-colors">Radar</Link></li>
-              <li><Link to="/insights" className="text-slate-400 hover:text-orange-400 transition-colors">Insights</Link></li>
+              <li><a href="/#about" className="text-slate-400 hover:text-orange-400 transition-colors">Home</a></li>
+              <li><a href="/radar" className="text-slate-400 hover:text-orange-400 transition-colors">Radar</a></li>
+              <li><a href="/insights" className="text-slate-400 hover:text-orange-400 transition-colors">Insights</a></li>
             </ul>
           </div>
 
@@ -71,8 +70,8 @@ export function Footer() {
             © 2025 Gusflopes.dev. Todos os direitos reservados.
           </p>
           <div className="flex gap-6 text-xs text-slate-500">
-            <Link to="/privacy" className="hover:text-slate-300">Política de Privacidade</Link>
-            <Link to="/terms" className="hover:text-slate-300">Termos de Uso</Link>
+            <a href="/privacy" className="hover:text-slate-300">Política de Privacidade</a>
+            <a href="/terms" className="hover:text-slate-300">Termos de Uso</a>
           </div>
         </div>
       </div>

@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content';
+import Default from '../../../layouts/Default.astro';
+import { RadarArticlePage } from '../../../components/pages/RadarArticlePage';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('radar');
+  return entries
+    .filter((entry) => !entry.data.isExternal)
+    .map((entry) => ({ params: { id: entry.id } }));
+}
+
+const { id } = Astro.params;
+---
+
+<Default title={`Radar — Artigo ${id}`}>
+  <RadarArticlePage id={id} client:load />
+</Default>

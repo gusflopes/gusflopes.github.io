@@ -1,8 +1,7 @@
 import React from 'react';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from './ui/card';
 import { Button } from './ui/button';
-import { Mic, MonitorPlay, Users, ArrowRight, BookOpen } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { MonitorPlay, Users, ArrowRight, BookOpen } from 'lucide-react';
 
 export function Services() {
   const services = [
@@ -70,9 +69,9 @@ export function Services() {
               </CardContent>
               <CardFooter className="mt-auto">
                 <Button asChild variant="link" className="text-orange-400 hover:text-orange-300 p-0 flex items-center gap-2 group-hover:gap-3 transition-all font-bold uppercase tracking-wide text-sm">
-                  <Link to={service.link || "#"}>
+                  <a href={service.link || "#"}>
                     {service.action} <ArrowRight size={16} />
-                  </Link>
+                  </a>
                 </Button>
               </CardFooter>
             </Card>

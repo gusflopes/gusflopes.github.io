@@ -1,3 +1,5 @@
 node_modules
 docs/private/
 .wrangler/
+.astro/
+dist/
