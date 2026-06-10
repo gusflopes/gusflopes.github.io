@@ -18,13 +18,14 @@ Site em **Astro 6** com React 18 islands (Radix UI + Tailwind 4 + framer-motion)
 | `/radar` | `src/pages/radar.astro` | `RadarPage` (recebe `items` da coleção) |
 | `/radar/article/[id]` | `src/pages/radar/article/[id].astro` | `RadarArticlePage` (recebe `id`) |
 | `/insights` | `src/pages/insights.astro` | `InsightsPage` (recebe `articles` da coleção) |
-| `/insights/article` | `src/pages/insights/article.astro` | `ArticlePage2` |
+| `/insights/article/[id]` | `src/pages/insights/article/[id].astro` | `InsightArticlePage` (shell; corpo via slot) |
 | `/privacy` | `src/pages/privacy.astro` | `PrivacyPolicyPage` |
 | `/terms` | `src/pages/terms.astro` | `TermsOfUsePage` |
+| `/rss.xml` | `src/pages/rss.xml.ts` | — (feed das duas coleções) |
 
-`Header` (recebe `pathname` via prop) e `Footer` ficam no layout `src/layouts/Default.astro`. Header se auto-esconde em páginas de artigo (`/radar/article/*`, `/insights/article`).
+`Header` (recebe `pathname` via prop) e `Footer` ficam no layout `src/layouts/Default.astro`. Header se auto-esconde em páginas de artigo (`/radar/article/*`, `/insights/article/*`).
 
-`/radar/article/[id]` é dinâmica: `getStaticPaths()` deriva os IDs da coleção `radar`, filtrando `isExternal: false`. Hoje gera 3 páginas (1, 5, 6).
+As rotas de artigo são dinâmicas: `getStaticPaths()` deriva os IDs (slugs dos arquivos `.md`) das coleções — no radar, filtrando `isExternal: false`. O corpo markdown é renderizado via `render(entry)` (`astro:content`) e injetado no shell React (`RadarArticlePage`/`InsightArticlePage`) por slot; o frontmatter chega via props. O layout aceita props de SEO (`title`, `description`, `image`, `type`, `publishedDate`) e monta OG/Twitter/canonical; sitemap via `@astrojs/sitemap`.
 
 ## Comandos úteis
 
@@ -41,20 +42,22 @@ Para adicionar um item ao Radar:
 echo '---
 title: "..."
 excerpt: "..."
-date: "..."
-duration: "..."
+date: "YYYY-MM-DD"
+duration: "N min"
 category: "Arquitetura" | ".NET" | "DevOps" | "Carreira" | "IA"
 type: "article" | "video"
 isExternal: false
-link: "/radar/article/<id>"
+link: "/radar/article/<slug>"
 source: "Local"
 image: "https://..."
----' > src/content/radar/<id>.md
+---
+
+Corpo do artigo em markdown.' > src/content/radar/<slug>.md
 ```
 
-Build valida frontmatter contra o schema Zod em `src/content.config.ts`. Se `isExternal: false`, o build gera automaticamente uma página estática em `/radar/article/<id>`.
+Arquivos nomeados pelo slug kebab-case. Datas em ISO no frontmatter; a exibição pt-BR ("10 Jun, 2026") é feita por `src/lib/format.ts`. Build valida frontmatter contra o schema Zod em `src/content.config.ts`. Se `isExternal: false`, o build gera automaticamente uma página estática em `/radar/article/<slug>` com o corpo renderizado; se `true`, o card aponta para o `link` externo.
 
-Para insights, mesmo padrão em `src/content/insights/`.
+Para insights, mesmo padrão em `src/content/insights/` (sem `type`/`isExternal`/`link`/`source`; tem `duration`).
 
 ## Deploy & Preview URLs
 
@@ -70,16 +73,18 @@ Cada commit em branch não-produção gera versão nova. Para promover sem merge
 - `src/pages/` — uma `.astro` por rota; importa o componente React e passa props
 - `src/layouts/Default.astro` — layout compartilhado (`<head>`, Header, slot, Footer)
 - `src/content/` — markdown com frontmatter; schema em `src/content.config.ts`
-- `src/components/` — Hero, Themes, Services, LatestContent, primitives Radix em `ui/`
+- `src/components/` — Hero, Themes, Services, LatestContent, NewsletterForm, primitives Radix em `ui/`
 - `src/components/pages/` — componentes-página React; recebem dados via props
-- `src/index.css` — Tailwind 4 source (`@import "tailwindcss"` + `@theme` com font-sans/serif/mono)
+- `src/config/site.ts` — fonte única de nome, e-mail, socials e newsletter (action do provedor; TODOs pendentes do dono)
+- `src/lib/format.ts` — formatação/ordenação de datas ISO em pt-BR
+- `src/index.css` — Tailwind 4 source (`@import "tailwindcss"` + `@theme` com font-sans/serif/mono + `@plugin "@tailwindcss/typography"`)
 - `astro.config.mjs` — Astro config; `@tailwindcss/vite` plugado; aliases versionados (`vaul@1.1.2 → vaul` etc — herança Figma) ainda existem
 - `wrangler.jsonc` — config do Worker Static Assets
 - `NEXT_STEPS.md` — iterações futuras (MDX renderizado, cleanup de aliases, imagens otimizadas)
 
 ## MCP Server Playwright
 
-Configurado via Docker:
+Configurado via Docker, no arquivo `.mcp.json` na raiz do repositório (MCP servers escopados ao projeto):
 
 ```json
 {
