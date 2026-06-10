@@ -61,4 +61,4 @@ Com essa estrutura, trocar o modelo de classificação é editar uma linha de re
 
 Meu take: pare de tentar acertar a aposta e construa o sistema que torna a aposta barata. Camada de abstração, suíte de avaliação própria com os seus dados, e revisão de modelo por caso de uso a cada trimestre. A liderança do ranking vai mudar de novo em fevereiro — e o seu sistema não deveria nem perceber.
 
-É sobre esse tipo de decisão que escrevo na **Em Produção**, minha newsletter — se você vai ter essa conversa com a sua liderança em breve, ela foi feita para você.
+É sobre esse tipo de decisão que escrevo na minha newsletter — se você vai ter essa conversa com a sua liderança em breve, ela foi feita para você.

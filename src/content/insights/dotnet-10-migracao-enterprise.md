@@ -108,4 +108,4 @@ Se algum item falhar, o trabalho do trimestre é esse item — não a migração
 
 Meu take: migre para o .NET 10, e migre em 2026 — pelo LTS até 2028, pelos ganhos de runtime que você vai medir, e principalmente porque a fundação de IA da plataforma agora é nativa e agnóstica de fornecedor. Mas migre como engenheiro sênior: serviço a serviço, contrato testado, canário medido, rollback barato. Big bang de runtime é dívida com data de cobrança marcada.
 
-Eu escrevo sobre engenharia, .NET e adoção de IA em sistemas que não podem parar na **Em Produção** — se este artigo te poupou uma reunião, a newsletter vai te poupar várias.
+Escrevo na minha newsletter sobre engenharia, .NET e adoção de IA em sistemas que não podem parar — se este artigo te poupou uma reunião, ela vai te poupar várias.

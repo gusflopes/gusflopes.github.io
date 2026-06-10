@@ -66,4 +66,4 @@ O efeito Bruxelas já apareceu nos questionários: clientes enterprise fora da E
 
 Meu take: pare de tratar o AI Act como custo jurídico e trate como especificação de observabilidade. Metade do checklist é engenharia que você já deveria estar fazendo; a outra metade é a engenharia virando evidência.
 
-*Esse tipo de checklist prático sai primeiro na **Em Produção**, minha newsletter — assine na home.*
+*Esse tipo de checklist prático sai primeiro na minha newsletter — assine na home.*

@@ -102,4 +102,4 @@ Esses pontos viram passos de inferência *dentro* de um processo que continua mo
 
 Se você passou os últimos dez anos delimitando contextos, definindo contratos e protegendo invariantes, você não chegou atrasado à era dos agentes — chegou na frente. A diferença entre uma demo impressionante e um sistema de IA que sobrevive em produção é, na maioria dos casos que acompanho, modelagem de domínio: fronteiras claras de contexto, vocabulário consistente e uma camada anticorrupção entre a inferência e o que realmente importa. O modelo é a parte commodity; o desenho da fronteira é onde mora o valor.
 
-Escrevo a cada duas semanas sobre engenharia de software e adoção de IA em ambientes enterprise na **Em Produção** — se essa conversa te interessa, a newsletter é a continuação dela.
+Escrevo a cada duas semanas sobre engenharia de software e adoção de IA em ambientes enterprise na minha newsletter — se essa conversa te interessa, ela continua por lá.

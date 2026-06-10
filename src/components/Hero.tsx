@@ -22,18 +22,18 @@ export function Hero() {
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
         <div className="max-w-3xl space-y-6">
           <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight tracking-tight drop-shadow-lg">
-            IA em produção não é demo. <br />
+            A Ponte entre <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-600">
-              É engenharia.
+              Negócios e Engenharia Avançada
             </span>
           </h1>
 
           <p className="font-sans text-xl md:text-2xl text-orange-100 font-medium max-w-2xl drop-shadow-md">
-            Adoção de IA enterprise sobre fundações de <span className="text-orange-400">.NET</span>, <span className="text-orange-400">arquitetura distribuída</span> e <span className="text-orange-400">governança</span> que resiste a auditoria.
+            <span className="text-orange-400">DDD</span>, <span className="text-orange-400">Cloud Native</span> e <span className="text-orange-400">Estratégia de IA</span> para resultados reais.
           </p>
 
           <p className="font-sans text-lg text-gray-300 max-w-xl leading-relaxed">
-            A cada duas semanas escrevo sobre o que funciona — e o que quebra — quando copilotos, agentes e RAG encontram sistemas legados, dados proprietários e compliance. Sem hype, com código: assine a <span className="text-orange-400 font-semibold">Em Produção</span>.
+            Alinhando objetivos de negócio e excelência técnica para entregar software que gera valor contínuo.
           </p>
 
           <div className="pt-4 w-full max-w-lg">

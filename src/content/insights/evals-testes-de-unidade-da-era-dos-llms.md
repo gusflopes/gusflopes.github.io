@@ -109,4 +109,4 @@ Há um efeito colateral que vale mais do que parece em ambiente enterprise: a tr
 
 O take, sem rodeio: trate prompt e escolha de modelo como código. Toda mudança passa por um golden set versionado, no CI, com limiar que bloqueia merge — sem isso, cada "melhoria" é uma aposta sem registro, e você só descobre que perdeu quando o cliente avisa.
 
-Quinzenalmente eu destrincho esse tipo de prática — IA com disciplina de engenharia — na **Em Produção**, minha newsletter. Se o tema te interessa, vale assinar.
+Quinzenalmente eu destrincho esse tipo de prática — IA com disciplina de engenharia — na minha newsletter. Se o tema te interessa, vale assinar.

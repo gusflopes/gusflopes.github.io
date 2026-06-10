@@ -47,7 +47,7 @@ export function RadarPage({ items }: RadarPageProps) {
             Radar Técnico
           </h1>
           <p className="font-sans text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
-            Curadoria de artigos, vídeos e recursos sobre IA aplicada, .NET e arquitetura — o que vale a sua atenção, sem hype.
+            Curadoria de artigos, vídeos e recursos sobre .NET, Arquitetura e IA.
           </p>
           <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] bg-orange-500/10 blur-[100px] rounded-full pointer-events-none"></div>
         </div>

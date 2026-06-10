@@ -95,4 +95,4 @@ E o anti-padrão que mais encontro em campo não é agente demais: é prompt esp
 
 O take, então, é direto: trate o LLM como você trata um gateway de pagamento. Uma porta de entrada controlada, interfaces de domínio na frente, processamento assíncrono onde der, autonomia só com auditoria — e código determinístico para tudo que não precisa de um modelo. O resto é monólito de prompts esperando para acontecer.
 
-Se você está levando LLMs para produção em sistemas que não podem parar, é exatamente sobre isso que escrevo na newsletter **Em Produção** — assine e acompanhe.
+Se você está levando LLMs para produção em sistemas que não podem parar, é exatamente sobre isso que escrevo na minha newsletter — assine e acompanhe.

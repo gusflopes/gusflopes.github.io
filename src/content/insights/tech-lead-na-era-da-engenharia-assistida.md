@@ -85,4 +85,4 @@ Formar gente continua sendo trabalho do líder. A IA não assumiu essa parte —
 
 O que mudou: o gargalo saiu da produção e foi para a revisão e a decisão. O que continua igual: alguém precisa responder pelo que vai para produção, e esse alguém não é o agente. O tech lead que prosperar nessa fase será o que transformar julgamento em sistema — especificações rigorosas, heurísticas de review explícitas e ensinadas, métricas de estabilidade com o mesmo status que velocidade, e uma escada nova para quem está começando. Revisar máquinas é o novo trabalho. Fazer isso em escala, sem virar o gargalo humano do time, é a nova senioridade.
 
-*Escrevo sobre engenharia de software e adoção de IA em ambientes enterprise na newsletter **Em Produção** — se o tema te interessa, é por lá que a conversa continua.*
+*Escrevo sobre engenharia de software e adoção de IA em ambientes enterprise na minha newsletter — se o tema te interessa, é por lá que a conversa continua.*

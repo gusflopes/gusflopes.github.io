@@ -9,7 +9,7 @@ interface NewsletterFormProps {
 }
 
 /**
- * Formulário de assinatura da newsletter Em Produção.
+ * Formulário de assinatura da newsletter.
  * POST de formulário padrão (sem fetch) para o endpoint embed-subscribe
  * configurado em src/config/site.ts — compatível com o embed do Buttondown.
  */
@@ -60,7 +60,7 @@ export function NewsletterForm({ variant = 'hero' }: NewsletterFormProps) {
         name="email"
         required
         placeholder="Seu melhor e-mail"
-        aria-label={`E-mail para assinar a newsletter ${newsletter.name}`}
+        aria-label="E-mail para assinar a newsletter"
         className={
           isHero
             ? 'font-sans bg-slate-950/50 border-slate-600 text-white placeholder:text-slate-400 h-14 text-lg focus-visible:ring-orange-500'

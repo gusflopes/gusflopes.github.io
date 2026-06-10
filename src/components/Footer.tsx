@@ -20,7 +20,7 @@ export function Footer() {
               />
             </div>
             <p className="text-slate-400 text-sm leading-relaxed">
-              IA de piloto a produção em ambientes enterprise — sobre fundações de .NET, sistemas distribuídos e governança.
+              Conectando estratégia de negócio e engenharia avançada para construir o futuro do software
             </p>
           </div>
 

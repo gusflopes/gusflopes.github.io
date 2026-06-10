@@ -81,4 +81,4 @@ Nada disso toca rede, nada exige API key no CI, nada flakeia. Nos projetos em qu
 
 Acople-se à abstração, não ao fornecedor. `Microsoft.Extensions.AI` é para LLMs o que `ILogger` foi para logging: o contrato neutro que transforma uma dependência volátil em detalhe de composição. O mercado de modelos vai continuar trocando de líder a cada seis meses; seu domínio não precisa participar dessa dança. Quem fizer esse desacoplamento agora vai trocar de modelo por configuração enquanto o vizinho ainda estima a reescrita.
 
-Escrevo quinzenalmente sobre engenharia de software e adoção de IA em ambientes enterprise na **Em Produção** — se esse tipo de discussão te interessa, assine.
+Escrevo quinzenalmente sobre engenharia de software e adoção de IA em ambientes enterprise na minha newsletter — se esse tipo de discussão te interessa, assine.

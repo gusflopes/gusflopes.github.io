@@ -26,9 +26,9 @@ export async function GET(context: APIContext) {
   ].sort((a, b) => (b.pubDate as Date).getTime() - (a.pubDate as Date).getTime());
 
   return rss({
-    title: 'Em Produção — gusflopes.dev',
+    title: 'gusflopes.dev — Insights & Radar',
     description:
-      'Análise quinzenal sobre IA aplicada, .NET e arquitetura — o que sobrevive ao contato com sistemas reais, dados proprietários e compliance. Sem hype, com código. Por Gustavo Lopes, Tech Lead e Arquiteto de Software.',
+      'Engenharia de software, arquitetura, IA e DevOps por Gustavo Lopes. Artigos próprios e curadoria estratégica sobre o futuro da Engenharia de Software.',
     site: context.site ?? 'https://gusflopes.dev',
     items,
     customData: '<language>pt-BR</language>',

@@ -34,7 +34,7 @@ Estado das grandes fases:
 
 ### Newsletter, contato e socials
 
-- `src/config/site.ts` é a fonte única de verdade (site, autor, socials, newsletter "Em Produção").
+- `src/config/site.ts` é a fonte única de verdade (site, autor, socials, newsletter).
 - `NewsletterForm.tsx` (variantes hero/footer): POST padrão para endpoint embed-subscribe do Buttondown, com honeypot e reset de estado via `pageshow`. Usado no `Hero` e no `Footer`.
 - Header "Contato" → `mailto:gustavo@gusflopes.dev`. Footer e author footer dos artigos com GitHub/LinkedIn reais (sem mais `href="#"`); ícones de redes inexistentes (YouTube, Twitter) removidos.
 - Share nos artigos: Web Share API com fallback `navigator.clipboard` + feedback "Link copiado". Botão Bookmark e Copy-code fake removidos.
@@ -108,7 +108,7 @@ Reavaliar quando o volume crescer: hoje "radar" (curadoria, maioria externa) e "
 ## Evolução editorial / audiência (próximo ciclo)
 
 - **Página de confirmação/obrigado da newsletter** — hoje o POST cai na página de confirmação do Buttondown; configurar redirect para uma `/obrigado` própria mantém o leitor no site.
-- **Arquivo de edições da newsletter** — quando "Em Produção" tiver edições enviadas, considerar espelhá-las numa rota `/newsletter` (coleção própria ou link para o arquivo do Buttondown).
+- **Arquivo de edições da newsletter** — quando a newsletter tiver edições enviadas, considerar espelhá-las numa rota `/newsletter` (coleção própria ou link para o arquivo do Buttondown).
 - **Analytics** — não há nenhum analytics no site. Cloudflare Web Analytics é o caminho de menor atrito (sem cookie banner) para medir o funil conteúdo → assinatura.
 - **Cadência de conteúdo** — o pitch promete análise quinzenal; o conteúdo retroativo sustenta isso até Jun/2026. Manter a cadência a partir de agora.
 

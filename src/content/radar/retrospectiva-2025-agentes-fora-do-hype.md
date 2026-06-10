@@ -66,4 +66,4 @@ Minhas apostas para o ano que entra: **autonomia progressiva** como padrão de p
 
 2025 consolidou os protocolos e as ferramentas. 2026 vai separar quem opera agentes — com guardrails, auditoria e evals — de quem só demonstra agentes em ambiente controlado. Pretendo estar do lado de quem opera.
 
-É esse acompanhamento que faço mês a mês na newsletter **Em Produção** — se este balanço te interessou, 2026 vai dar muito assunto.
+É esse acompanhamento que faço mês a mês na minha newsletter — se este balanço te interessou, 2026 vai dar muito assunto.

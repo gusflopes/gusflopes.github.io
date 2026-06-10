@@ -104,4 +104,4 @@ A tradução de mão dupla é o que destrava: em vez de pedir permissão ao jur�
 
 É isso que separa governança de teatro: se a sua política de IA não pode ser expressa como código, testes e thresholds que bloqueiam deploy, ela não existe na prática — existe só na apresentação. Comece pelo inventário, classifique por risco, automatize os controles do tier mais alto primeiro. O comitê mensal agradece por finalmente ter pauta de verdade.
 
-Escrevo sobre esse tipo de decisão — a que fica entre o slide e o deploy — na **Em Produção**, minha newsletter. Assine se esse for o seu dia a dia também.
+Escrevo sobre esse tipo de decisão — a que fica entre o slide e o deploy — na minha newsletter. Assine se esse for o seu dia a dia também.

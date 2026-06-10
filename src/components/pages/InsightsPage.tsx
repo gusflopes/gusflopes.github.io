@@ -61,7 +61,7 @@ export function InsightsPage({ articles }: InsightsPageProps) {
                </span>
              </h1>
              <p className="font-sans text-base text-slate-500 font-light">
-               IA aplicada ao enterprise, engenharia de software e .NET — o que funciona, e o que quebra, em produção.
+               Arquitetura profunda, filosofia de código e engenharia.
              </p>
            </motion.div>
         </div>

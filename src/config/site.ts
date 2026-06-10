@@ -10,13 +10,13 @@ export const site = {
   url: "https://gusflopes.dev",
   email: "gustavo@gusflopes.dev",
   description:
-    "Adoção de IA enterprise sobre fundações de .NET, arquitetura distribuída e governança que resiste a auditoria.",
+    "Engenharia de software, arquitetura, IA e DevOps por Gustavo Lopes.",
 } as const;
 
 export const author = {
   name: "Gustavo Lopes",
   role: "Tech Lead & Arquiteto de Software",
-  bio: "Gustavo Lopes é Tech Lead e Arquiteto de Software, especializado em levar IA de piloto a produção em ambientes enterprise. Trabalha com .NET e sistemas distribuídos e ajuda empresas a adotar copilotos, agentes e RAG com a mesma disciplina de engenharia exigida de qualquer sistema crítico. Escreve quinzenalmente sobre engenharia de software, IA aplicada e .NET na newsletter Em Produção.",
+  bio: "Tech Lead & Arquiteto de Software. Especialista em traduzir complexidade de negócio em sistemas escaláveis através de DDD, Cloud e Estratégia.",
 } as const;
 
 export const socials = {
@@ -28,10 +28,10 @@ export const socials = {
 } as const;
 
 export const newsletter = {
-  name: "Em Produção",
+  name: "Newsletter",
   pitch:
-    "Análise quinzenal sobre IA aplicada, .NET e arquitetura — o que sobrevive ao contato com sistemas reais, dados proprietários e compliance. Sem hype, com código.",
-  ctaLabel: "Assinar Em Produção",
+    "Curadoria estratégica sobre o futuro da Engenharia de Software.",
+  ctaLabel: "Assinar Newsletter",
   // TODO(gusflopes): criar a conta no Buttondown (https://buttondown.com) com o
   // username "gusflopes" — ou trocar esta action pelo endpoint do provedor
   // escolhido (o formulário faz POST padrão com o campo "email").

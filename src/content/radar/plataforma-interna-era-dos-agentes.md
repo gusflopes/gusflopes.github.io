@@ -68,4 +68,4 @@ Consumo de tokens em escala de organização é o novo custo de cloud: cresce em
 
 O take: agentes não pedem uma plataforma nova, pedem a plataforma que você sempre deveria ter tido — contratos explícitos, automação de ponta a ponta, custo observável. Quem expõe o golden path via MCP transforma cada dev com agente em multiplicador; quem não expõe transforma cada agente em gerador de desvio de padrão.
 
-É sobre esse tipo de decisão — plataforma, agentes e o que sobrevive ao contato com enterprise — que escrevo na newsletter **Em Produção**.
+É sobre esse tipo de decisão — plataforma, agentes e o que sobrevive ao contato com enterprise — que escrevo na minha newsletter.

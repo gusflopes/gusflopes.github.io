@@ -99,4 +99,4 @@ Copiloto interno sem gestão de custo morre no terceiro mês, quando a fatura su
 
 Se eu pudesse deixar uma única ideia: pare de avaliar copiloto interno pela demo e comece a avaliar pelas perguntas chatas — quem pode ver o quê, com a permissão de quem o sistema responde, quanto custa por área e quem desliga quando algo dá errado. O modelo é a parte trocável da arquitetura; identidade, retrieval com permissão e governança são o produto.
 
-É esse tipo de bastidor que eu compartilho na **Em Produção**, minha newsletter — se o assunto te interessa, vale assinar.
+É esse tipo de bastidor que eu compartilho na minha newsletter — se o assunto te interessa, vale assinar.

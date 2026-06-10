@@ -13,7 +13,7 @@ interface Props {
 
 const {
   title,
-  description = 'Adoção de IA enterprise sobre fundações de .NET, arquitetura distribuída e governança que resiste a auditoria. Por Gustavo Lopes, Tech Lead e Arquiteto de Software.',
+  description = 'Engenharia de software, arquitetura, IA e DevOps por Gustavo Lopes.',
   image = '/og-default.png',
   type = 'website',
   publishedDate,
@@ -23,7 +23,7 @@ const pathname = Astro.url.pathname;
 const isHome = pathname === '/';
 
 const pageTitle = isHome
-  ? 'gusflopes.dev — IA em produção não é demo. É engenharia.'
+  ? 'gusflopes.dev — A Ponte entre Negócios e Engenharia Avançada'
   : `${title ?? 'gusflopes.dev'} — gusflopes.dev`;
 
 const canonicalUrl = new URL(pathname, Astro.site);
@@ -45,7 +45,7 @@ const ogImage = new URL(image, Astro.site);
     <link
       rel="alternate"
       type="application/rss+xml"
-      title="Em Produção — gusflopes.dev"
+      title="gusflopes.dev — Insights & Radar"
       href="/rss.xml"
     />
 
