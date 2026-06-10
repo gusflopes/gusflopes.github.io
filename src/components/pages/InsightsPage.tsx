@@ -8,7 +8,9 @@ export interface InsightArticle {
   title: string;
   excerpt: string;
   category: string;
+  /** Data já formatada para exibição pt-BR (ex: "10 Jun, 2026"). */
   date: string;
+  duration: string;
   image: string;
 }
 
@@ -59,7 +61,7 @@ export function InsightsPage({ articles }: InsightsPageProps) {
                </span>
              </h1>
              <p className="font-sans text-base text-slate-500 font-light">
-               Arquitetura profunda, filosofia de código e engenharia.
+               IA aplicada ao enterprise, engenharia de software e .NET — o que funciona, e o que quebra, em produção.
              </p>
            </motion.div>
         </div>
@@ -78,7 +80,7 @@ export function InsightsPage({ articles }: InsightsPageProps) {
               />
               <div className="h-6 w-px bg-slate-200 mx-2"></div>
               <div className="flex gap-1 overflow-x-auto max-w-[200px] md:max-w-none no-scrollbar">
-                {categories.slice(0, 5).map(cat => (
+                {categories.map(cat => (
                   <button
                     key={cat}
                     onClick={() => setSelectedCategory(cat)}
@@ -96,7 +98,7 @@ export function InsightsPage({ articles }: InsightsPageProps) {
           {filteredArticles.map((article, idx) => (
             <a
               key={article.id}
-              href="/insights/article"
+              href={`/insights/article/${article.id}`}
               className={`group block ${idx % 2 !== 0 ? 'md:mt-24' : ''}`}
             >
             <motion.article 
@@ -123,9 +125,9 @@ export function InsightsPage({ articles }: InsightsPageProps) {
 
               {/* Content */}
               <div className="relative">
-                {/* Date - Added as requested */}
+                {/* Date + reading time */}
                 <div className="mb-3 font-mono text-xs text-slate-400 uppercase tracking-wider">
-                    {article.date}
+                    {article.date} · {article.duration}
                 </div>
 
                 <h2 className="font-serif text-3xl md:text-4xl text-slate-900 leading-tight mb-4 group-hover:text-orange-600 transition-colors duration-300">
@@ -144,29 +146,6 @@ export function InsightsPage({ articles }: InsightsPageProps) {
             </a>
           ))}
         </div>
-
-        {/* Pagination - Technical Editorial Style */}
-        {filteredArticles.length > 0 && (
-          <div className="mt-32 flex justify-center items-center gap-12 font-mono text-xs tracking-[0.2em] uppercase font-medium">
-             <button className="group flex items-center gap-2 text-slate-300 cursor-not-allowed" disabled>
-               <span className="group-hover:-translate-x-1 transition-transform duration-300">&larr;</span>
-               Prev
-             </button>
-             
-             <div className="flex items-center gap-6 text-slate-400">
-               <span className="text-slate-900 border-b border-orange-500 pb-1">01</span>
-               <span className="hover:text-slate-900 cursor-pointer transition-colors">02</span>
-               <span className="hover:text-slate-900 cursor-pointer transition-colors">03</span>
-               <span className="text-slate-200 font-light">|</span>
-               <span className="hover:text-slate-900 cursor-pointer transition-colors">08</span>
-             </div>
-
-             <button className="group flex items-center gap-2 text-slate-900 hover:text-orange-600 transition-colors">
-               Next
-               <span className="group-hover:translate-x-1 transition-transform duration-300">&rarr;</span>
-             </button>
-          </div>
-        )}
 
         {/* Empty State */}
         {filteredArticles.length === 0 && (

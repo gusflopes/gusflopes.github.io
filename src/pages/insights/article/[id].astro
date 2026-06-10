@@ -2,18 +2,16 @@
 import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import Default from '../../../layouts/Default.astro';
-import { RadarArticlePage } from '../../../components/pages/RadarArticlePage';
+import { InsightArticlePage } from '../../../components/pages/InsightArticlePage';
 import { formatDatePtBR } from '../../../lib/format';
 
 export async function getStaticPaths() {
-  const entries = await getCollection('radar');
-  return entries
-    .filter((entry) => !entry.data.isExternal)
-    .map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+  const entries = await getCollection('insights');
+  return entries.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
 }
 
 interface Props {
-  entry: CollectionEntry<'radar'>;
+  entry: CollectionEntry<'insights'>;
 }
 
 const { entry } = Astro.props;
@@ -28,7 +26,7 @@ const { title, excerpt, category, date, duration, image } = entry.data;
   type="article"
   publishedDate={date}
 >
-  <RadarArticlePage
+  <InsightArticlePage
     title={title}
     excerpt={excerpt}
     category={category}
@@ -38,5 +36,5 @@ const { title, excerpt, category, date, duration, image } = entry.data;
     client:load
   >
     <Content />
-  </RadarArticlePage>
+  </InsightArticlePage>
 </Default>

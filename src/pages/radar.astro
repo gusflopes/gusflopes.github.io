@@ -2,16 +2,22 @@
 import { getCollection } from 'astro:content';
 import Default from '../layouts/Default.astro';
 import { RadarPage, type RadarItem } from '../components/pages/RadarPage';
+import { compareIsoDateDesc, formatDatePtBR } from '../lib/format';
 
 const entries = await getCollection('radar');
 const items: RadarItem[] = entries
-  .map((entry) => ({ id: entry.id, ...entry.data }))
-  .sort((a, b) => Number(a.id) - Number(b.id));
+  .sort((a, b) => compareIsoDateDesc(a.data.date, b.data.date))
+  .map((entry) => ({
+    id: entry.id,
+    ...entry.data,
+    date: formatDatePtBR(entry.data.date),
+    link: entry.data.isExternal ? entry.data.link : `/radar/article/${entry.id}`,
+  }));
 ---
 
 <Default
-  title="Radar Técnico — gusflopes.dev"
-  description="Curadoria de artigos, vídeos e recursos sobre .NET, Arquitetura e IA."
+  title="Radar Técnico"
+  description="Curadoria de artigos, vídeos e recursos sobre IA aplicada, .NET, arquitetura e engenharia de software — o que vale a sua atenção, sem hype."
 >
   <RadarPage items={items} client:load />
 </Default>

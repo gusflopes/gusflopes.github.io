@@ -1,8 +1,42 @@
 ---
+import { getCollection } from 'astro:content';
 import Default from '../layouts/Default.astro';
 import { HomePage } from '../components/pages/HomePage';
+import type { LatestArticle, FeaturedVideo } from '../components/LatestContent';
+import { compareIsoDateDesc } from '../lib/format';
+
+const insights = (await getCollection('insights')).sort((a, b) =>
+  compareIsoDateDesc(a.data.date, b.data.date)
+);
+const radar = (await getCollection('radar')).sort((a, b) =>
+  compareIsoDateDesc(a.data.date, b.data.date)
+);
+
+const articles: LatestArticle[] = insights.slice(0, 2).map((entry) => ({
+  id: entry.id,
+  title: entry.data.title,
+  category: entry.data.category,
+  image: entry.data.image,
+  link: `/insights/article/${entry.id}`,
+}));
+
+const latestVideo = radar.find((entry) => entry.data.type === 'video');
+const video: FeaturedVideo | undefined = latestVideo
+  ? {
+      title: latestVideo.data.title,
+      excerpt: latestVideo.data.excerpt,
+      image: latestVideo.data.image,
+      link: latestVideo.data.isExternal
+        ? latestVideo.data.link
+        : `/radar/article/${latestVideo.id}`,
+      isExternal: latestVideo.data.isExternal,
+    }
+  : undefined;
 ---
 
-<Default title="gusflopes.dev — Engenharia, Arquitetura e IA">
-  <HomePage client:load />
+{/* O layout monta o title da home ("gusflopes.dev — IA em produção não é demo. É engenharia.") */}
+<Default
+  description="Adoção de IA enterprise sobre fundações de .NET, arquitetura distribuída e governança que resiste a auditoria. Newsletter quinzenal Em Produção: sem hype, com código."
+>
+  <HomePage articles={articles} video={video} client:load />
 </Default>

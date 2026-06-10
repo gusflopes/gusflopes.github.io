@@ -1,16 +1,20 @@
-import React from 'react';
 import { Hero } from '../Hero';
 import { Themes } from '../Themes';
 import { Services } from '../Services';
-import { LatestContent } from '../LatestContent';
+import { LatestContent, type LatestArticle, type FeaturedVideo } from '../LatestContent';
 
-export function HomePage() {
+interface HomePageProps {
+  articles: LatestArticle[];
+  video?: FeaturedVideo;
+}
+
+export function HomePage({ articles, video }: HomePageProps) {
   return (
     <main>
       <Hero />
       <Themes />
       <Services />
-      <LatestContent />
+      <LatestContent articles={articles} video={video} />
     </main>
   );
 }

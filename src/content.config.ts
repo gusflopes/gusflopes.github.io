@@ -1,14 +1,21 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
+/** Data ISO no frontmatter; a formatação pt-BR acontece no código de renderização. */
+const isoDate = z
+  .string()
+  .regex(/^\d{4}-\d{2}-\d{2}$/, 'date deve estar no formato ISO YYYY-MM-DD');
+
+const category = z.enum(['Arquitetura', '.NET', 'DevOps', 'Carreira', 'IA']);
+
 const radar = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/radar' }),
   schema: z.object({
     title: z.string(),
     excerpt: z.string(),
-    date: z.string(),
+    date: isoDate,
     duration: z.string(),
-    category: z.enum(['Arquitetura', '.NET', 'DevOps', 'Carreira', 'IA']),
+    category,
     type: z.enum(['article', 'video']),
     isExternal: z.boolean(),
     link: z.string(),
@@ -22,8 +29,9 @@ const insights = defineCollection({
   schema: z.object({
     title: z.string(),
     excerpt: z.string(),
-    date: z.string(),
-    category: z.enum(['Arquitetura', '.NET', 'DevOps', 'Carreira', 'IA']),
+    date: isoDate,
+    duration: z.string(),
+    category,
     image: z.string().url(),
   }),
 });

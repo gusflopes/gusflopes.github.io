@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
+import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -9,7 +10,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   site: 'https://gusflopes.dev',
   output: 'static',
-  integrations: [react()],
+  integrations: [react(), sitemap()],
   server: { port: 3001 },
   vite: {
     plugins: [tailwindcss()],

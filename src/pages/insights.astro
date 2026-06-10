@@ -2,16 +2,21 @@
 import { getCollection } from 'astro:content';
 import Default from '../layouts/Default.astro';
 import { InsightsPage, type InsightArticle } from '../components/pages/InsightsPage';
+import { compareIsoDateDesc, formatDatePtBR } from '../lib/format';
 
 const entries = await getCollection('insights');
 const articles: InsightArticle[] = entries
-  .map((entry) => ({ id: entry.id, ...entry.data }))
-  .sort((a, b) => Number(a.id) - Number(b.id));
+  .sort((a, b) => compareIsoDateDesc(a.data.date, b.data.date))
+  .map((entry) => ({
+    id: entry.id,
+    ...entry.data,
+    date: formatDatePtBR(entry.data.date),
+  }));
 ---
 
 <Default
-  title="Insights Técnicos — gusflopes.dev"
-  description="Arquitetura profunda, filosofia de código e engenharia."
+  title="Insights"
+  description="Artigos técnicos profundos sobre IA aplicada ao enterprise, engenharia de software e .NET — o que funciona, e o que quebra, em produção."
 >
   <InsightsPage articles={articles} client:load />
 </Default>

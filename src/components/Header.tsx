@@ -2,18 +2,25 @@ import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from './ui/button';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { site } from '../config/site';
 import logo from '../assets/cfa6876664fcc921be5a7c0a58c353ea12577968.png?url';
 
 interface HeaderProps {
   pathname: string;
 }
 
-export function Header({ pathname }: HeaderProps) {
+/** Normaliza paths para comparação: remove barras finais ('/radar/' → '/radar'). */
+const normalizePath = (p: string) => p.replace(/\/+$/, '') || '/';
+
+export function Header({ pathname: rawPathname }: HeaderProps) {
+  const pathname = normalizePath(rawPathname);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const isHome = pathname === '/';
-  const isArticlePage2 = pathname === '/insights/article';
-  const isRadarArticlePage = pathname.includes('/radar/article/');
+  // Páginas de artigo escondem o Header — match por prefixo para cobrir
+  // tanto /insights/article (legado) quanto /insights/article/<id> e /radar/article/<id>.
+  const isArticlePage =
+    pathname.startsWith('/insights/article') || pathname.startsWith('/radar/article/');
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -21,7 +28,7 @@ export function Header({ pathname }: HeaderProps) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  if (isArticlePage2 || isRadarArticlePage) return null;
+  if (isArticlePage) return null;
 
   const navItems = [
     { label: 'Home', href: '/' },
@@ -70,16 +77,19 @@ export function Header({ pathname }: HeaderProps) {
             </a>
           ))}
           <Button
+            asChild
             variant="outline"
             className="font-sans border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white bg-transparent rounded-full px-6"
           >
-            Contato
+            <a href={`mailto:${site.email}`}>Contato</a>
           </Button>
         </nav>
 
         <button
           className="md:hidden text-white"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label={isMenuOpen ? 'Fechar menu' : 'Abrir menu'}
+          aria-expanded={isMenuOpen}
         >
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -102,8 +112,8 @@ export function Header({ pathname }: HeaderProps) {
                 {item.label}
               </a>
             ))}
-            <Button className="font-sans bg-orange-500 text-white hover:bg-orange-600 w-full">
-              Contato
+            <Button asChild className="font-sans bg-orange-500 text-white hover:bg-orange-600 w-full">
+              <a href={`mailto:${site.email}`}>Contato</a>
             </Button>
           </nav>
         </div>

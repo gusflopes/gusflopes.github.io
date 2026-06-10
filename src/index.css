@@ -2,6 +2,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@plugin "@tailwindcss/typography";
+
 @theme {
   --font-sans: "Plus Jakarta Sans", sans-serif;
   --font-serif: "Cormorant Garamond", serif;
@@ -24,5 +26,52 @@
 
   body {
     font-family: var(--font-sans);
+  }
+}
+
+@layer components {
+  /*
+   * Code blocks gerados pelo Shiki (markdown das Content Collections).
+   * O tema default do Astro (github-dark) define cores via inline style;
+   * aqui ajustamos apenas moldura, espaçamento e tipografia para o tema do site.
+   */
+  .prose pre.astro-code {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgb(30 41 59); /* slate-800 */
+    box-shadow: 0 0 30px -10px rgb(0 0 0 / 0.5);
+    font-size: 0.875rem;
+    line-height: 1.75;
+  }
+
+  .prose pre.astro-code code {
+    background: transparent;
+    padding: 0;
+    font-family: var(--font-mono);
+    font-weight: 400;
+  }
+
+  /* Remove as crases que o plugin typography injeta ao redor do code inline */
+  .prose :where(code)::before,
+  .prose :where(code)::after {
+    content: none;
+  }
+
+  /* Code inline legível em cada tema de artigo */
+  .prose-invert :where(:not(pre) > code) {
+    background-color: rgb(30 41 59 / 0.7); /* slate-800 */
+    color: rgb(253 186 116); /* orange-300 */
+    border-radius: 0.25rem;
+    padding: 0.125rem 0.375rem;
+    font-weight: 500;
+  }
+
+  .prose-slate :where(:not(pre) > code) {
+    background-color: rgb(226 232 240 / 0.8); /* slate-200 */
+    border-radius: 0.25rem;
+    padding: 0.125rem 0.375rem;
+    font-weight: 500;
   }
 }
