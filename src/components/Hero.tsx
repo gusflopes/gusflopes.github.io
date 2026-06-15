@@ -21,22 +21,29 @@ export function Hero() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
         <div className="max-w-3xl space-y-6">
+          <p className="font-sans text-sm md:text-base font-bold uppercase tracking-[0.2em] text-orange-400 drop-shadow-md">
+            Estratégia · Arquitetura · Fluxo · IA aplicada
+          </p>
+
           <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight tracking-tight drop-shadow-lg">
-            A Ponte entre <br />
+            Engenharia e negócio, <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-600">
-              Negócios e Engenharia Avançada
+              partes do mesmo sistema
             </span>
           </h1>
 
           <p className="font-sans text-xl md:text-2xl text-orange-100 font-medium max-w-2xl drop-shadow-md">
-            <span className="text-orange-400">DDD</span>, <span className="text-orange-400">Cloud Native</span> e <span className="text-orange-400">Estratégia de IA</span> para resultados reais.
+            Arquitetura, plataformas e IA aplicada para transformar complexidade em sistemas que evoluem.
           </p>
 
           <p className="font-sans text-lg text-gray-300 max-w-xl leading-relaxed">
-            Alinhando objetivos de negócio e excelência técnica para entregar software que gera valor contínuo.
+            Conecto decisões técnicas aos objetivos da organização para ampliar autonomia, melhorar o fluxo de entrega e gerar valor continuamente.
           </p>
 
           <div className="pt-4 w-full max-w-lg">
+            <p className="font-sans text-sm text-slate-300 mb-3">
+              Análises sobre engenharia de software, estratégia e o impacto real da IA.
+            </p>
             <NewsletterForm variant="hero" />
           </div>
         </div>

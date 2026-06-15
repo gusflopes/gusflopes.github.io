@@ -9,14 +9,14 @@ export function Services() {
     {
       icon: <Users className="w-10 h-10 text-orange-400 mb-4" />,
       title: "Consultoria Estratégica",
-      description: "Diagnóstico arquitetural e design organizacional para empresas que precisam escalar. Alinhamento estratégico entre objetivos de negócio e modernização tecnológica (Cloud, IA e DDD).",
+      description: "Diagnóstico de arquitetura, fluxo de entrega e desenho organizacional para transformar desafios de negócio em decisões técnicas claras e executáveis.",
       action: "AGENDAR DIAGNÓSTICO",
       link: `mailto:${site.email}?subject=${encodeURIComponent('Consultoria Estratégica — Agendar diagnóstico')}`
     },
     {
       icon: <MonitorPlay className="w-10 h-10 text-orange-400 mb-4" />,
-      title: "Mentoria & Cursos",
-      description: "Aceleração de carreira para engenheiros de software. Programas práticos e mentorias focadas em DDD, Engenharia de Plataforma e Liderança Técnica para quem busca o próximo nível.",
+      title: "Mentoria & Formação",
+      description: "Desenvolvimento de engenheiros e lideranças técnicas por meio de discussões práticas sobre arquitetura, DDD, plataformas e tomada de decisão.",
       action: "VER PROGRAMAS",
       link: `mailto:${site.email}?subject=${encodeURIComponent('Mentoria & Cursos')}`
     },
@@ -39,7 +39,7 @@ export function Services() {
     {
       icon: <BookOpen className="w-10 h-10 text-orange-400 mb-4" />, // Import BookOpen
       title: "Conteúdo & Insights",
-      description: "Artigos aprofundados sobre arquitetura, reviews de livros e análises de tendências. Uma base de conhecimento para quem busca profundidade técnica além do hype.",
+      description: "Artigos e análises sobre arquitetura, engenharia de software e IA aplicada para quem busca profundidade, contexto e ideias úteis além do hype.",
       action: "ACESSAR O RADAR",
       link: "/radar"
     }
@@ -50,7 +50,7 @@ export function Services() {
       <div id="courses" className="absolute top-0"></div>
       <div className="max-w-7xl mx-auto">
         <div className="mb-12 text-center">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-white mb-4">Trabalhe Comigo</h2>
+          <h2 className="font-serif text-3xl md:text-4xl font-bold text-white mb-4">Como posso ajudar</h2>
           <div className="h-1 w-24 bg-orange-500 mx-auto rounded-full"></div>
         </div>
 

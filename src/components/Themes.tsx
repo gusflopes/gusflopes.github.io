@@ -6,28 +6,28 @@ export function Themes() {
   const themes = [
     {
       icon: <Code2 size={32} />,
-      title: ".NET & Software Architecture",
-      description: "Arquitetura que escala o negócio, não apenas requisições. Sistemas distribuídos robustos, preparados para alta disponibilidade e evolução constante."
+      title: "Domínio & Arquitetura",
+      description: "DDD, arquitetura de software e .NET para traduzir regras de negócio complexas em sistemas claros, resilientes e preparados para evoluir."
     },
     {
       icon: <Bot size={32} />,
-      title: "Inovação & IA",
-      description: "Metodologia 'Prototype First'. Acelerando a validação de hipóteses e MVPs utilizando Agentes de IA e automação inteligente para reduzir o time-to-market."
+      title: "Dados & IA Aplicada",
+      description: "Data Mesh, agentes e IA aplicada com contexto, governança e propósito. Tecnologia emergente tratada como capacidade de negócio, não como demonstração."
     },
     {
       icon: <BrainCircuit size={32} />,
-      title: "Domain-Driven Design",
-      description: "Modelagem estratégica onde o código fala a língua do negócio. Uso de Event Storming para descomplicar domínios complexos e definir Bounded Contexts precisos."
+      title: "Fluxo & Entrega",
+      description: "DevOps e DORA Metrics para tornar o trabalho visível, reduzir atritos e melhorar continuamente a capacidade de entregar software com qualidade."
     },
     {
       icon: <Building2 size={32} />,
-      title: "Governance & Strategic Alignment",
-      description: "Visão analítica única: background jurídico e contábil aplicado à mitigação de riscos, Compliance e alinhamento real entre custos de nuvem (FinOps) e valor entregue."
+      title: "Estratégia & Governança",
+      description: "Decisões tecnológicas conectadas a valor, risco e sustentabilidade. Uma perspectiva formada também por Direito, Contabilidade e Gestão Financeira."
     },
     {
       icon: <Cloud size={32} />,
-      title: "Platform & DevOps Engineering",
-      description: "Developer Experience (DX) que impulsiona a cultura de entrega. Foco em DORA metrics de elite através de plataformas self-service que os desenvolvedores amam usar."
+      title: "Times & Plataformas",
+      description: "Team Topologies e Platform Engineering para criar limites claros, reduzir carga cognitiva e dar mais autonomia aos times de produto."
     }
   ];
 
@@ -50,11 +50,14 @@ export function Themes() {
       <div className="max-w-7xl mx-auto relative z-10 w-full">
         <div className="text-center mb-16 max-w-3xl mx-auto">
           <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-6 drop-shadow-lg">
-            Visão Holística e Execução Técnica
+            Engenharia é mais do que código
           </h2>
           <p className="font-sans text-lg text-slate-200 font-medium leading-relaxed drop-shadow-md">
-            A intersecção rara entre <span className="text-orange-400 font-bold">excelência em código</span> e <span className="text-orange-400 font-bold">estratégia de negócio</span>. 
-            Especialização vertical em .NET com a amplitude horizontal necessária para conectar tecnologia a resultados.
+            Minha trajetória entre <span className="text-orange-400 font-bold">Direito, Contabilidade, gestão e tecnologia</span> moldou uma visão sistêmica da engenharia de software.
+            Analiso domínio, arquitetura, times e fluxo de entrega como partes do mesmo problema: criar capacidade para o negócio evoluir.
+          </p>
+          <p className="font-sans text-base text-slate-300 leading-relaxed mt-5 drop-shadow-md">
+            Hoje, aplico essa perspectiva como líder técnico no sistema de precificação de locação veicular de uma plataforma de mobilidade do Grupo Volkswagen.
           </p>
         </div>
 
@@ -73,9 +76,6 @@ export function Themes() {
                   <p className="font-sans text-base text-slate-300 leading-relaxed mb-6">
                     {theme.description}
                   </p>
-                  <div className="mt-auto text-orange-500 font-bold text-sm uppercase tracking-wider group-hover:text-orange-400 transition-colors">
-                    Saiba mais
-                  </div>
                 </div>
               </div>
             ))}
@@ -95,9 +95,6 @@ export function Themes() {
                   <p className="font-sans text-base text-slate-300 leading-relaxed mb-6">
                     {theme.description}
                   </p>
-                  <div className="mt-auto text-orange-500 font-bold text-sm uppercase tracking-wider group-hover:text-orange-400 transition-colors">
-                    Saiba mais
-                  </div>
                 </div>
               </div>
             ))}

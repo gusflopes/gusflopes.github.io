@@ -10,13 +10,13 @@ export const site = {
   url: "https://gusflopes.dev",
   email: "gustavo@gusflopes.dev",
   description:
-    "Engenharia de software, arquitetura, IA e DevOps por Gustavo Lopes.",
+    "Engenharia e negócio, partes do mesmo sistema: arquitetura, plataformas e IA aplicada por Gustavo Lopes.",
 } as const;
 
 export const author = {
   name: "Gustavo Lopes",
   role: "Tech Lead & Arquiteto de Software",
-  bio: "Tech Lead & Arquiteto de Software. Especialista em traduzir complexidade de negócio em sistemas escaláveis através de DDD, Cloud e Estratégia.",
+  bio: "Tech Lead e Arquiteto de Software. Conecto estratégia, arquitetura e fluxo de entrega para transformar complexidade de negócio em sistemas que evoluem.",
 } as const;
 
 export const socials = {
@@ -30,7 +30,7 @@ export const socials = {
 export const newsletter = {
   name: "Newsletter",
   pitch:
-    "Curadoria estratégica sobre o futuro da Engenharia de Software.",
+    "Análises sobre engenharia de software, estratégia e o impacto real da IA.",
   ctaLabel: "Assinar Newsletter",
   // TODO(gusflopes): criar a conta no Buttondown (https://buttondown.com) com o
   // username "gusflopes" — ou trocar esta action pelo endpoint do provedor

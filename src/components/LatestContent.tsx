@@ -38,7 +38,7 @@ export function LatestContent({ articles, video }: LatestContentProps) {
           {articles.length > 0 && (
             <div>
               <h3 className="font-serif text-2xl font-bold text-white mb-8 border-l-4 border-orange-500 pl-4 drop-shadow-lg">
-                Últimos Insights & Conteúdos
+                Ideias recentes
               </h3>
               <div className="space-y-6">
                 {articles.map((article) => (

@@ -20,7 +20,7 @@ export function Footer() {
               />
             </div>
             <p className="text-slate-400 text-sm leading-relaxed">
-              Conectando estratégia de negócio e engenharia avançada para construir o futuro do software
+              Engenharia e negócio, partes do mesmo sistema. Arquitetura, plataformas e IA aplicada para sistemas que evoluem.
             </p>
           </div>
 
