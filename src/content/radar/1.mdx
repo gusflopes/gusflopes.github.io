@@ -1,0 +1,39 @@
+---
+title: "Desacoplando Monólitos com DDD: Guia Prático"
+excerpt: "Como identificar Bounded Contexts e migrar sistemas legados sem parar a operação. Um guia passo a passo para arquitetos."
+date: "25 Out, 2023"
+duration: "8 min"
+category: "Arquitetura"
+type: "article"
+isExternal: false
+link: "/radar/article/1"
+source: "Local"
+image: "https://images.unsplash.com/photo-1664526937033-fe2c11f1be25?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzb2Z0d2FyZSUyMGFyY2hpdGVjdHVyZSUyMGRpYWdyYW0lMjBhcnRpZmljaWFsJTIwaW50ZWxsaWdlbmNlJTIwYnJhaW4lMjBjb2RlJTIwbW9uaXRvcnxlbnwxfHx8fDE3NjQ1NDUxODZ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+---
+
+A complexidade no desenvolvimento de software não é acidental; é uma consequência direta da complexidade do domínio que estamos tentando modelar. Quando tratamos essa complexidade apenas com ferramentas técnicas, falhamos. O verdadeiro desafio é linguístico e estrutural.
+
+## Os Princípios Core do DDD
+
+Domain-Driven Design não é apenas um conjunto de padrões (Repository, Entity, Value Object); é uma filosofia centrada na complexidade do núcleo do negócio. Ao focar em uma linguagem onipresente e contextos delimitados (*Bounded Contexts*), podemos criar modelos que são um reflexo verdadeiro do negócio.
+
+> "O coração do software é sua capacidade de resolver problemas relacionados ao domínio para seu usuário. Todas as outras funcionalidades, vitais como possam ser, suportam este propósito primário."
+
+Frequentemente, nos perdemos em detalhes de implementação (Kubernetes, Kafka, Redis) antes mesmo de entendermos o fluxo de valor. Isso gera o que chamamos de "Arquitetura Acidental".
+
+## Estratégias de Estrangulamento
+
+Para migrar de um monólito para microsserviços (ou melhor, para um sistema distribuído modular), a abordagem Big Bang raramente funciona. O padrão Strangler Fig é essencial.
+
+A ideia é criar novas funcionalidades nas bordas do sistema, interceptando chamadas e redirecionando para novos serviços, "estrangulando" lentamente o legado até que ele possa ser desligado.
+
+```ts
+const handleRequest = (req) => {
+  if (shouldRouteToNewService(req)) {
+    return NewService.process(req);
+  }
+  return LegacyMonolith.process(req);
+};
+```
+
+Esta simplicidade no código esconde uma complexidade orquestrada. Ao retornar a plataforma de dados junto com os times, garantimos que a estrutura organizacional (Lei de Conway) seja respeitada pelo código.

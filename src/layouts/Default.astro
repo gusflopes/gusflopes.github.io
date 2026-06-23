@@ -1,19 +1,15 @@
 ---
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
+import { resolveSeo, buildPersonJsonLd, type SeoProps } from '../lib/seo';
 import '../index.css';
 
-interface Props {
-  title?: string;
-  description?: string;
-}
+interface Props extends SeoProps {}
 
-const {
-  title = 'gusflopes.dev',
-  description = 'Engenharia de software, arquitetura, IA e DevOps por Gustavo Lopes.',
-} = Astro.props;
-
+const props = Astro.props as Props;
 const pathname = Astro.url.pathname;
+const seo = resolveSeo(props, pathname);
+const personJsonLd = buildPersonJsonLd();
 ---
 
 <!doctype html>
@@ -21,12 +17,61 @@ const pathname = Astro.url.pathname;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
-    <title>{title}</title>
+    <meta name="description" content={seo.description} />
+    <title>{seo.title}</title>
+
+    <link rel="canonical" href={seo.canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    {props.noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <meta property="og:type" content={seo.type} />
+    <meta property="og:title" content={seo.title} />
+    <meta property="og:description" content={seo.description} />
+    <meta property="og:image" content={seo.image} />
+    <meta property="og:url" content={seo.canonical} />
+    <meta property="og:site_name" content="gusflopes.dev" />
+    <meta property="og:locale" content="pt_BR" />
+
+    {props.type === 'article' && props.article?.publishedTime && (
+      <meta property="article:published_time" content={props.article.publishedTime} />
+    )}
+    {props.type === 'article' && props.article?.modifiedTime && (
+      <meta property="article:modified_time" content={props.article.modifiedTime} />
+    )}
+    {props.type === 'article' && props.article?.author && (
+      <meta property="article:author" content={props.article.author} />
+    )}
+    {props.type === 'article' && props.article?.section && (
+      <meta property="article:section" content={props.article.section} />
+    )}
+    {props.type === 'article' && props.article?.tags?.map((tag) => (
+      <meta property="article:tag" content={tag} />
+    ))}
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={seo.title} />
+    <meta name="twitter:description" content={seo.description} />
+    <meta name="twitter:image" content={seo.image} />
+    <meta name="twitter:site" content="@gusflopes" />
+    <meta name="twitter:creator" content="@gusflopes" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
+    {props.jsonLd && (
+      <script type="application/ld+json" set:html={JSON.stringify(props.jsonLd)} />
+    )}
   </head>
   <body class="bg-slate-950 min-h-screen text-slate-200 overflow-x-hidden font-sans selection:bg-orange-500/30">
     <Header pathname={pathname} client:load />
     <slot />
     <Footer client:load />
+
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token": "YOUR_CWA_TOKEN"}'
+    ></script>
   </body>
 </html>

@@ -3,6 +3,10 @@ import Default from '../layouts/Default.astro';
 import { PrivacyPolicyPage } from '../components/pages/PrivacyPolicyPage';
 ---
 
-<Default title="Política de Privacidade — gusflopes.dev">
+<Default
+  title="Política de Privacidade"
+  description="Como coletamos, usamos e protegemos dados em gusflopes.dev."
+  noindex={true}
+>
   <PrivacyPolicyPage client:load />
 </Default>

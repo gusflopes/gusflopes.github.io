@@ -15,6 +15,23 @@ A próxima seção lista o que **identifiquei navegando o site real**, ordenado 
 
 ---
 
+## Concluído na Onda 1 (foundation técnico)
+
+Branch `feat/onda-1-foundation`. Plan: `docs/superpowers/plans/2026-04-26-onda-1-foundation.md`. Spec: `docs/superpowers/specs/2026-04-26-launch-readiness-design.md`.
+
+- ✅ SEO/meta tags completas (OG, Twitter Card, canonical, JSON-LD Person/Article) — `src/layouts/Default.astro` + `src/lib/seo.ts`
+- ✅ Favicon SVG/ICO + apple-touch-icon (placeholder com monograma "GF"; PNG/ICO definitivos pendentes)
+- ✅ `sitemap.xml` via `@astrojs/sitemap` + `robots.txt`
+- ✅ MDX pipeline (`@astrojs/mdx`) + `@tailwindcss/typography`
+- ✅ `RadarArticleShell.astro` + `AuthorAvatar.astro` substituem o componente React `RadarArticlePage.tsx` (deletado); render de artigo agora vem da coleção via `render(entry)` + slot
+- ✅ Cleanup de ~35 aliases versionados (legado Figma export) em `astro.config.mjs` + ~67 imports limpos em `src/components/ui/*.tsx`
+- ✅ Cloudflare Web Analytics beacon no layout (token placeholder até owner criar a propriedade)
+- ✅ Smoke test do pipeline: `src/content/radar/1.mdx` com body real; restante das coleções vai migrar na Onda 4 com conteúdo de fato
+
+Itens dos blocos abaixo que NÃO foram tocados pela Onda 1 continuam pendentes para Ondas 2-6.
+
+---
+
 ## Crítico — funcionalidade quebrada ou incompleta
 
 ### 1. Conteúdo dos artigos é hardcoded placeholder

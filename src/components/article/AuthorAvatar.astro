@@ -1,0 +1,16 @@
+---
+interface Props {
+  size?: number;
+  className?: string;
+}
+const { size = 96, className = '' } = Astro.props;
+---
+
+<div
+  class:list={[
+    'rounded-full overflow-hidden shrink-0 border-4 border-slate-700 shadow-lg bg-gradient-to-tr from-orange-500 to-purple-900',
+    className,
+  ]}
+  style={`width: ${size}px; height: ${size}px;`}
+  aria-label="Foto do autor (placeholder)"
+></div>
