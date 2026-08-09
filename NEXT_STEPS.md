@@ -61,12 +61,12 @@ Hoje só existe `src/pages/insights/article.astro` — uma rota única que rende
 
 Identificados navegando:
 
-- **Header → "Contato"** (botão laranja): sem `onClick` em `Header.tsx:60-65`. Decidir: leva para `mailto:gustavo@gusflopes.dev`? Para `/#consulting`? Para Calendly?
-- **Footer → Newsletter** (input + "Assinar"): sem `onSubmit` em `Footer.tsx:54-65`. Decidir provedor (Buttondown, ConvertKit, Mailchimp) ou remover.
-- **Hero → Newsletter** (input + "Assinar Newsletter"): mesmo problema, em `Hero.tsx`.
-- **Footer → social icons** (`Linkedin`, `Github`, `Youtube`, `Twitter`): todos com `href="#"`. Substituir pelos perfis reais ou remover ícones que não tem perfil.
+- ~~**Header → "Contato"**~~ — resolvido: abre `mailto:gustavo@gusflopes.dev`, desktop e mobile.
+- ~~**Hero → Newsletter**~~ — resolvido por remoção: o formulário saiu junto com a reescrita do hero, porque não capturava nada.
+- ~~**Footer → social icons**~~ e ~~**Article author footer → social icons**~~ — resolvidos: perfis reais, com `target="_blank"` e `aria-label`.
+- **Footer → Newsletter** (input + "Assinar"): ainda sem `onSubmit`. É o único formulário falso que sobrou no site. Pluga em `/api/subscribe` na Onda 2 do plano de launch readiness — ou sai, se a Onda 2 demorar.
 - **Article pages → Share / Bookmark**: botões `<button>` sem handler. Implementar Web Share API ou remover.
-- **Article author footer → social icons** em `RadarArticlePage.tsx:159-167`: também `href="#"`.
+- **Article pages → Copy** (`RadarArticlePage`, `ArticlePage2`): `handleCopy` mostra "Copied" sem ter copiado — falta `navigator.clipboard.writeText`.
 
 ### 5. `/insights` paginação é fake
 
@@ -118,8 +118,8 @@ Em ambas as article pages, `<div className="bg-gradient-to-tr from-orange-500 to
 
 Dependendo da estratégia editorial:
 
-- `/sobre` — hoje é uma seção scrollada na home (`#about`). Considerar página própria com bio expandida, currículo, fotos.
-- `/consulting` ou `/trabalhe-comigo` — também só seção (`#consulting`). Página própria permite landing page focada em conversão (cases, depoimentos, formulário de briefing).
+- `/sobre` — hoje é a seção `Trajetoria` na home (`#trajetoria`). Considerar página própria com bio expandida (`docs/bio.md`), currículo e foto.
+- ~~`/consulting` ou `/trabalhe-comigo`~~ — **descartado.** Consultoria, diagnóstico, caso de cliente e depoimento pertencem a outra entidade e a outro site; ver "Posicionamento" no `CLAUDE.md`. As páginas de produto deste site são `/cursos`, `/workshops` e `/mentoria`, e vendem para indivíduos.
 - `/posts` ou unificar com `/insights` — decidir taxonomia: "radar" e "insights" são distintos? Considerar consolidar em uma única coleção `posts` com `type: article|video|external`.
 - `/uses`, `/now`, `/colofon` — páginas de "vibe" comuns em sites pessoais. Opcional.
 

@@ -1,4 +1,14 @@
 # Headlines + Subtítulos
+
+> **SUPERADO — documento histórico.** A Opção 4 abaixo ("A Ponte entre Negócios e
+> Engenharia Avançada") esteve em produção e foi substituída na v2 de conteúdo por um hero
+> declarativo. As quatro opções são slogan de venda: prometem serviço em vez de afirmar
+> identidade, e se apoiam em adjetivo sem lastro ("resultados reais", "excelência técnica",
+> "valor contínuo") — exatamente o que o posicionamento atual proíbe.
+>
+> O hero em vigor está em `src/components/Hero.tsx`; as regras que ele obedece estão em
+> "Posicionamento" no `CLAUDE.md`. Não reaproveite nada daqui sem passar por elas.
+
 Sugestões de **Conjuntos (Headline + Subtítulo)**, mantendo suas palavras-chave fortes (DDD, Team Topologies, Plataforma, IA).
 
 ---

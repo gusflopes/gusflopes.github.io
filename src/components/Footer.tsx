@@ -20,7 +20,8 @@ export function Footer() {
               />
             </div>
             <p className="text-slate-400 text-sm leading-relaxed">
-              Conectando estratégia de negócio e engenharia avançada para construir o futuro do software
+              Engenharia de agentes de IA dentro de empresa que já existe — legado, rede fechada e
+              operação que precisa decidir hoje.
             </p>
           </div>
 
@@ -45,17 +46,17 @@ export function Footer() {
               <li className="text-slate-400">Brasil | Global</li>
             </ul>
             <div className="flex gap-4 mt-4">
-              <a href="#" className="text-slate-400 hover:text-white transition-colors"><Linkedin size={20} /></a>
-              <a href="#" className="text-slate-400 hover:text-white transition-colors"><Github size={20} /></a>
-              <a href="#" className="text-slate-400 hover:text-white transition-colors"><Youtube size={20} /></a>
-              <a href="#" className="text-slate-400 hover:text-white transition-colors"><Twitter size={20} /></a>
+              <a href="https://www.linkedin.com/in/gusflopes/" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="text-slate-400 hover:text-white transition-colors"><Linkedin size={20} /></a>
+              <a href="https://github.com/gusflopes" target="_blank" rel="noreferrer" aria-label="GitHub" className="text-slate-400 hover:text-white transition-colors"><Github size={20} /></a>
+              <a href="https://www.youtube.com/@hubdev-tech" target="_blank" rel="noreferrer" aria-label="YouTube" className="text-slate-400 hover:text-white transition-colors"><Youtube size={20} /></a>
+              <a href="https://x.com/gusflopes" target="_blank" rel="noreferrer" aria-label="X" className="text-slate-400 hover:text-white transition-colors"><Twitter size={20} /></a>
             </div>
           </div>
 
           {/* Newsletter */}
           <div>
             <h4 className="text-white font-bold mb-4">Newsletter</h4>
-            <p className="text-slate-400 text-sm mb-4">Curadoria estratégica sobre o futuro da Engenharia de Software</p>
+            <p className="text-slate-400 text-sm mb-4">Engenharia de agentes em ambiente corporativo, escrita para quem constrói.</p>
             <div className="flex gap-2">
               <Input 
                 placeholder="Seu email" 

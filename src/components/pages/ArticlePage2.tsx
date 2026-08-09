@@ -144,7 +144,7 @@ export function ArticlePage2() {
            <div>
              <h4 className="font-sans font-bold text-orange-600 uppercase tracking-widest text-xs mb-2">Sobre o Autor</h4>
              <p className="font-serif text-3xl md:text-4xl text-slate-900 mb-2">Gustavo Lopes</p>
-             <p className="text-sm text-slate-600 font-mono max-w-md">Engenheiro de Software & Arquiteto de Soluções focado em sistemas distribuídos.</p>
+             <p className="text-sm text-slate-600 font-mono max-w-md">Tech Lead e Staff Engineer em financial services. Advogado tributarista por dez anos antes da transição para engenharia em 2018. Escreve sobre engenharia de agentes em ambiente corporativo.</p>
            </div>
         </div>
 
