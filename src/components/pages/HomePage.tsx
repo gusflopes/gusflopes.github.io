@@ -1,13 +1,13 @@
 import React from 'react';
 import { Hero } from '../Hero';
-import { Themes } from '../Themes';
+import { Provas } from '../Provas';
 import { LatestContent } from '../LatestContent';
 
 export function HomePage() {
   return (
     <main>
       <Hero />
-      <Themes />
+      <Provas />
       <LatestContent />
     </main>
   );
