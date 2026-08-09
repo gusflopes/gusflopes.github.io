@@ -50,8 +50,11 @@ export function ProdutoLanding({
     ? 'font-serif text-4xl md:text-6xl text-white leading-tight mb-6'
     : 'font-serif text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight mb-6';
   const h2Class = isAberto
-    ? 'font-serif text-3xl md:text-4xl text-white leading-tight mb-6'
-    : 'font-serif text-3xl md:text-4xl font-bold text-white leading-tight mb-6';
+    ? 'font-serif text-3xl md:text-4xl text-white leading-tight'
+    : 'font-serif text-3xl md:text-4xl font-bold text-white leading-tight';
+  const dtClass = isAberto
+    ? 'font-serif text-xl font-medium text-white leading-snug mb-2'
+    : 'font-serif text-xl font-bold text-white leading-snug mb-2';
 
   const href = `mailto:${MAILTO}?subject=${encodeURIComponent(cta.mailtoSubject)}`;
 
@@ -62,7 +65,7 @@ export function ProdutoLanding({
       <div className="relative z-10 max-w-4xl mx-auto px-6 py-24">
         <a
           href="/#formacao"
-          className="inline-flex items-center gap-2 mb-12 font-sans text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-orange-400 transition-colors"
+          className="inline-flex items-center gap-2 mb-12 font-sans text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-orange-400 transition-colors"
         >
           <ArrowLeft size={14} /> Formação
         </a>
@@ -73,14 +76,14 @@ export function ProdutoLanding({
           {lead}
         </p>
 
-        <div className="mb-16 rounded-r-lg border-l-4 border-orange-500 bg-slate-900/50 p-8 font-sans text-base md:text-lg text-slate-200 leading-relaxed">
+        <div className="mb-16 rounded-xl border-l-4 border-orange-500 bg-slate-900/80 backdrop-blur-md p-8 font-sans text-base md:text-lg text-slate-200 leading-relaxed">
           {prerequisite}
         </div>
 
         <div className="space-y-16">
           {sections.map((section) => (
             <section key={section.heading}>
-              <h2 className={h2Class}>{section.heading}</h2>
+              <h2 className={`${h2Class} mb-6`}>{section.heading}</h2>
 
               {section.kind === 'prose' && (
                 <div className="space-y-6">
@@ -130,9 +133,7 @@ export function ProdutoLanding({
                     const [question, ...rest] = pair.split(' :: ');
                     return (
                       <div key={i}>
-                        <dt className="font-serif text-xl text-white leading-snug mb-2">
-                          {question}
-                        </dt>
+                        <dt className={dtClass}>{question}</dt>
                         <dd className="font-sans text-base md:text-lg text-slate-300 leading-relaxed">
                           {rest.join(' :: ')}
                         </dd>
@@ -146,7 +147,7 @@ export function ProdutoLanding({
         </div>
 
         <div className="mt-16 flex flex-col items-start gap-6 rounded-xl bg-slate-900/80 backdrop-blur-md border-2 border-orange-500/80 shadow-[0_0_15px_-3px_rgba(249,115,22,0.3)] p-8 md:p-12">
-          <h2 className={h2Class + ' mb-0'}>{cta.heading}</h2>
+          <h2 className={h2Class}>{cta.heading}</h2>
           <p className="font-sans text-lg text-slate-300 leading-relaxed">{cta.body}</p>
           <a
             href={href}
@@ -154,7 +155,7 @@ export function ProdutoLanding({
           >
             {cta.label} <ArrowRight size={18} />
           </a>
-          <p className="font-mono text-xs text-slate-500">{MAILTO}</p>
+          <p className="font-mono text-xs text-slate-400">{MAILTO}</p>
         </div>
       </div>
     </main>

@@ -52,7 +52,7 @@ export function Formacao() {
             Três formatos, três públicos que não se misturam.
           </h2>
           <p className="font-sans text-lg text-slate-300 leading-relaxed">
-            O pré-requisito está no card de propósito: você não deveria precisar clicar para
+            O pré-requisito está no card, de propósito: você não deveria precisar clicar para
             descobrir que a página não é para você.
           </p>
         </div>

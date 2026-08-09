@@ -24,7 +24,7 @@ export function Hero() {
             Engenharia de agentes · Sistemas legados
           </span>
 
-          <h1 className="font-serif text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight drop-shadow-lg">
+          <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight tracking-tight drop-shadow-lg">
             Agentes de IA em sistema legado, rede fechada e{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-600">
               empresa de verdade

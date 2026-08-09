@@ -17,6 +17,7 @@ const {
 } = Astro.props;
 
 const pathname = Astro.url.pathname;
+const year = new Date().getFullYear();
 ---
 
 <!doctype html>
@@ -31,6 +32,6 @@ const pathname = Astro.url.pathname;
   <body class="bg-slate-950 min-h-screen text-slate-200 overflow-x-hidden font-sans selection:bg-orange-500/30">
     <Header pathname={pathname} client:load />
     <slot />
-    <Footer client:load />
+    <Footer year={year} client:load />
   </body>
 </html>

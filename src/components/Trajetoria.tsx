@@ -42,8 +42,8 @@ export function Trajetoria() {
             </p>
           </div>
 
-          <div className="mt-12 pt-6 border-t border-slate-800 font-mono text-xs text-slate-500 leading-relaxed">
-            <span className="text-slate-400 uppercase tracking-[0.2em]">Formação</span>
+          <div className="mt-12 pt-6 border-t border-slate-800 font-mono text-xs text-slate-400 leading-relaxed">
+            <span className="uppercase tracking-[0.2em] text-slate-300">Formação acadêmica</span>
             <p className="mt-3">
               Direito · Contabilidade · Pós em Direito Tributário (IBET) · MBA em Finanças (FGV) ·
               Pós em Engenharia de Software · MBA em Liderança e Tecnologia (Ibmec)

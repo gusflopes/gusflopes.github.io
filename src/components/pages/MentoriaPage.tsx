@@ -59,7 +59,7 @@ export function MentoriaPage() {
       eyebrow="Mentoria individual"
       title="Uma conversa recorrente sobre a decisão que você está adiando."
       lead="Mentoria um a um para engenheiro em transição — de outra área para tecnologia, de pleno para sênior, de quem entrega para quem responde pela decisão. Não é aula e não tem currículo pronto: a pauta é o que está travado na sua semana."
-      prerequisite='Individual, e não serve para todo mundo. O corte é este: você já escreve código no trabalho, mesmo que há pouco tempo, mesmo vindo de outra carreira. Quem ainda está estudando para conseguir a primeira vaga é mais bem servido por um curso estruturado — inclusive não o meu, que assume que você já programa — do que por uma conversa periódica comigo. E eu digo isso já na primeira resposta.'
+      prerequisite='Individual, e não serve para todo mundo. O corte é este: você já escreve código no trabalho, mesmo que há pouco tempo, mesmo vindo de outra carreira. Quem ainda está estudando para conseguir a primeira vaga é mais bem servido por um curso estruturado do que por uma conversa periódica comigo — e nem pelo meu curso, que também assume que você já programa. Eu digo isso já na primeira resposta.'
       sections={sections}
       cta={{
         heading: 'Escrever antes de decidir',

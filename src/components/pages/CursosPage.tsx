@@ -29,7 +29,7 @@ const sections: LandingSection[] = [
     body: [
       'Escolher entre busca semântica, ferramenta determinística e consulta direta sabendo defender a escolha para quem não aceita "porque é o padrão".',
       'Desenhar o contrato de uma ferramenta e medir o efeito da mudança na suíte de eval — a mesma pergunta, dois contratos, a diferença em número.',
-      'Escrever a suíte de evals antes de escrever o agente, e usar ela para segurar um deploy.',
+      'Escrever a suíte de evals antes de escrever o agente, e usá-la para segurar um deploy.',
       'Instrumentar o agente de forma que "está caro" vire um número por interação em vez de uma sensação na reunião de custo.',
       'Sustentar a conversa com segurança e compliance com resposta técnica, não com adjetivo.',
     ],
@@ -66,7 +66,7 @@ export function CursosPage() {
       sections={sections}
       cta={{
         heading: 'Entrar na lista da primeira turma',
-        body: 'Ainda não há data nem preço. O que existe é o programa acima e a decisão de não abrir turma antes de ele estar fechado. Me escreva contando o que você constrói hoje e onde o agente que você tentou levar para produção emperrou — eu leio todos e uso as respostas para calibrar os módulos.',
+        body: 'O programa acima está fechado — são esses seis temas, nessa ordem. O que ainda não está é o comercial: formato, calendário e preço. Não abro turma antes de os três estarem definidos, e quem estiver na lista recebe os três de uma vez. Me escreva contando o que você constrói hoje e onde o agente que você tentou levar para produção emperrou — eu leio todos e uso as respostas para calibrar os módulos.',
         label: 'Entrar na lista',
         mailtoSubject: 'Lista de espera — Curso de engenharia de agentes',
       }}

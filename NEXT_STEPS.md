@@ -17,6 +17,19 @@ A próxima seção lista o que **identifiquei navegando o site real**, ordenado 
 
 ## Crítico — funcionalidade quebrada ou incompleta
 
+### 0. O `/radar` tem o mesmo problema que motivou esconder o Insights
+
+Decisão pendente do owner, deixada de fora da v2 de conteúdo de propósito — a spec só mandava esconder o Insights, e tirar o Radar do menu deixaria o site sem nenhuma seção de conteúdo. Mas o diagnóstico é o mesmo, e o Radar fica **acima** do Insights na navegação:
+
+- Os 6 itens de `src/content/radar/` têm título genérico, data de 2023/2024 e imagem de banco (Unsplash) — o item "Nenhuma imagem de banco genérico em conteúdo editorial" do checklist de exclusão falha nos seis.
+- Os itens externos apontam para homepages, não para conteúdo: `2.md` e `4.md` linkam `https://youtube.com` sob o rótulo "Assistir Agora"; `3.md` linka `https://devblogs.microsoft.com` sob "Ler na Fonte".
+- `/radar/article/1`, `/5` e `/6` renderizam **o mesmo** texto hardcoded (ver item 1 abaixo). O item 6 é um vídeo de 22:15 que abre um artigo de arquitetura sobre outro assunto.
+
+**Duas saídas, ambas de um commit:**
+
+1. **Despublicar**, igual ao Insights: tirar Radar de `navItems` (`Header.tsx`) e dos "Links Rápidos" (`Footer.tsx`), e passar `noindex` em `src/pages/radar.astro` e `src/pages/radar/article/[id].astro`. Rota e conteúdo ficam.
+2. **Tornar real**: substituir os 6 `.md` por itens verdadeiros (link que resolve, imagem própria) e resolver o item 1 abaixo, para a página de artigo mostrar o artigo certo.
+
 ### 1. Conteúdo dos artigos é hardcoded placeholder
 
 `src/components/pages/RadarArticlePage.tsx` e `src/components/pages/ArticlePage2.tsx` renderizam **o mesmo conteúdo "Domain-Driven Design"** independente de qual artigo o usuário clicou. O `id` que o componente recebe é literalmente ignorado para o body.
