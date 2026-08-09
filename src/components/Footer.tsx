@@ -28,9 +28,12 @@ export function Footer() {
           <div>
             <h4 className="text-white font-bold mb-4">Links Rápidos</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="/#about" className="text-slate-400 hover:text-orange-400 transition-colors">Home</a></li>
+              <li><a href="/" className="text-slate-400 hover:text-orange-400 transition-colors">Home</a></li>
               <li><a href="/radar" className="text-slate-400 hover:text-orange-400 transition-colors">Radar</a></li>
-              <li><a href="/insights" className="text-slate-400 hover:text-orange-400 transition-colors">Insights</a></li>
+              <li><a href="/#trajetoria" className="text-slate-400 hover:text-orange-400 transition-colors">Trajetória</a></li>
+              <li><a href="/cursos" className="text-slate-400 hover:text-orange-400 transition-colors">Curso online</a></li>
+              <li><a href="/workshops" className="text-slate-400 hover:text-orange-400 transition-colors">Workshop e grupo de estudo</a></li>
+              <li><a href="/mentoria" className="text-slate-400 hover:text-orange-400 transition-colors">Mentoria individual</a></li>
             </ul>
           </div>
 

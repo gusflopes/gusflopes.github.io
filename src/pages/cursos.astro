@@ -1,0 +1,11 @@
+---
+import Default from '../layouts/Default.astro';
+import { CursosPage } from '../components/pages/CursosPage';
+---
+
+<Default
+  title="Curso de engenharia de agentes — gusflopes.dev"
+  description="Curso online sobre colocar agente de IA em produção dentro de sistema que já existe: extração de legado, ferramenta com permissão, eval antes do deploy. Para quem escreve código."
+>
+  <CursosPage client:load />
+</Default>
