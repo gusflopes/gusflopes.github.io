@@ -29,7 +29,7 @@ export function PrivacyPolicyPage() {
             <h2 className="text-2xl text-white font-bold mb-4 font-serif">2. Quais dados coletamos</h2>
             <ul className="list-disc pl-6 space-y-4">
               <li>
-                <strong className="text-white">Dados fornecidos voluntariamente:</strong> Nome e endereço de e-mail, coletados apenas quando você se inscreve na Newsletter ou preenche o formulário de contato.
+                <strong className="text-white">Dados fornecidos voluntariamente:</strong> Nome e endereço de e-mail, coletados apenas quando você se inscreve na Newsletter ou quando nos escreve por e-mail.
               </li>
               <li>
                 <strong className="text-white">Dados de navegação (Cookies):</strong> Informações anônimas coletadas via Google Analytics (ou similar) para entender como você usa o site, tempo de permanência e artigos mais lidos. Isso ajuda a melhorar o conteúdo técnico oferecido.
@@ -41,10 +41,10 @@ export function PrivacyPolicyPage() {
             <h2 className="text-2xl text-white font-bold mb-4 font-serif">3. Como usamos seus dados</h2>
             <ul className="list-disc pl-6 space-y-4">
               <li>
-                <strong className="text-white">Newsletter:</strong> Para enviar insights sobre Arquitetura de Software, DDD, IA e atualizações de carreira. (Você pode se descadastrar a qualquer momento através do link no rodapé dos e-mails).
+                <strong className="text-white">Newsletter:</strong> Para enviar textos sobre engenharia de agentes em ambiente corporativo e avisar sobre a abertura de turmas. (Você pode se descadastrar a qualquer momento através do link no rodapé dos e-mails).
               </li>
               <li>
-                <strong className="text-white">Contato:</strong> Para responder às suas solicitações de consultoria, palestras ou dúvidas técnicas.
+                <strong className="text-white">Contato:</strong> Para responder ao seu e-mail — dúvida sobre curso, workshop ou mentoria, convite para palestra, ou dúvida técnica.
               </li>
               <li>
                 <strong className="text-white">Melhoria contínua:</strong> Para analisar métricas de acesso e otimizar a performance do site.

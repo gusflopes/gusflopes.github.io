@@ -17,7 +17,7 @@ export function TermsOfUsePage() {
           <section className="mb-10">
             <h2 className="text-2xl text-white font-bold mb-4 font-serif">1. Aceitação</h2>
             <p>
-              Ao acessar e utilizar o site <strong>Gusflopes.dev</strong>, você concorda com estes termos. O conteúdo deste site tem caráter educacional e informativo, focado em Engenharia de Software, Arquitetura e Liderança Técnica.
+              Ao acessar e utilizar o site <strong>Gusflopes.dev</strong>, você concorda com estes termos. O conteúdo deste site tem caráter educacional e informativo, focado em engenharia de agentes de IA em ambiente corporativo e nos produtos de formação individual oferecidos aqui.
             </p>
           </section>
 

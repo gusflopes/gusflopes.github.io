@@ -10,6 +10,19 @@ Site em **Astro 6** com React 18 islands (Radix UI + Tailwind 4 + framer-motion)
 - **Conteúdo**: Astro Content Collections (radar e insights) com schemas Zod em `src/content.config.ts`
 - **Deploy**: Cloudflare Workers Static Assets (sem código de Worker, só assets em `./dist`)
 
+## Posicionamento (governa qualquer texto que entrar no site)
+
+O gusflopes.dev tem duas funções, e só duas:
+
+1. **Verificação.** Quem já conversou com o Gustavo busca o nome e confirma em 90 segundos que existe engenheiro de verdade por trás.
+2. **Venda de formação individual.** Curso, workshop, grupo de estudo, mentoria — comprados por pessoas, para si mesmas.
+
+**Regra do pagador:** o critério de fronteira não é técnico × não-técnico, é quem paga. Indivíduo comprando para si → cabe aqui. Empresa comprando para um time → não cabe, ainda que o conteúdo fosse o mesmo.
+
+Não entra, em nenhuma página: consultoria, diagnóstico, workshop corporativo, turma fechada, caso de cliente, depoimento, logo de terceiro, nome do empregador em destaque, CTA morto (`href="#"` ou botão sem destino) e adjetivo sem lastro ("resultados reais", "excelência", "valor contínuo", "de ponta"). Mecanismo concreto no lugar de promessa.
+
+Bio canônica para reuso externo: `docs/bio.md`. Se a bio mudar, muda lá primeiro.
+
 ## Rotas
 
 | Path | Página Astro | Componente React (island) |
@@ -17,12 +30,19 @@ Site em **Astro 6** com React 18 islands (Radix UI + Tailwind 4 + framer-motion)
 | `/` | `src/pages/index.astro` | `HomePage` |
 | `/radar` | `src/pages/radar.astro` | `RadarPage` (recebe `items` da coleção) |
 | `/radar/article/[id]` | `src/pages/radar/article/[id].astro` | `RadarArticlePage` (recebe `id`) |
-| `/insights` | `src/pages/insights.astro` | `InsightsPage` (recebe `articles` da coleção) |
-| `/insights/article` | `src/pages/insights/article.astro` | `ArticlePage2` |
+| `/cursos` | `src/pages/cursos.astro` | `CursosPage` |
+| `/workshops` | `src/pages/workshops.astro` | `WorkshopsPage` |
+| `/mentoria` | `src/pages/mentoria.astro` | `MentoriaPage` |
+| `/insights` † | `src/pages/insights.astro` | `InsightsPage` (recebe `articles` da coleção) |
+| `/insights/article` † | `src/pages/insights/article.astro` | `ArticlePage2` |
 | `/privacy` | `src/pages/privacy.astro` | `PrivacyPolicyPage` |
 | `/terms` | `src/pages/terms.astro` | `TermsOfUsePage` |
 
+† **Despublicadas.** As rotas continuam no build, mas não são linkadas em lugar nenhum e recebem `robots: noindex` via prop `noindex` do layout. Motivo: o conteúdo ainda é placeholder (títulos genéricos, imagem de banco), e placeholder derruba a credibilidade de quem chega para verificar. Para republicar: conteúdo real → tirar o `noindex` → religar os links no `Header`/`Footer` → remontar `<LatestContent />` na `HomePage`.
+
 `Header` (recebe `pathname` via prop) e `Footer` ficam no layout `src/layouts/Default.astro`. Header se auto-esconde em páginas de artigo (`/radar/article/*`, `/insights/article`).
+
+A home é uma pilha de quatro seções, nesta ordem: `Hero` → `Provas` (`#provas`) → `Trajetoria` (`#trajetoria`, com âncora legada `#about`) → `Formacao` (`#formacao`).
 
 `/radar/article/[id]` é dinâmica: `getStaticPaths()` deriva os IDs da coleção `radar`, filtrando `isExternal: false`. Hoje gera 3 páginas (1, 5, 6).
 
@@ -70,7 +90,8 @@ Cada commit em branch não-produção gera versão nova. Para promover sem merge
 - `src/pages/` — uma `.astro` por rota; importa o componente React e passa props
 - `src/layouts/Default.astro` — layout compartilhado (`<head>`, Header, slot, Footer)
 - `src/content/` — markdown com frontmatter; schema em `src/content.config.ts`
-- `src/components/` — Hero, Themes, Services, LatestContent, primitives Radix em `ui/`
+- `src/components/` — Hero, Provas, Trajetoria, Formacao, primitives Radix em `ui/` (`LatestContent.tsx` existe mas está desmontado de propósito — ver nota no topo do arquivo)
+- `src/components/produto/ProdutoLanding.tsx` — shell compartilhado das três landings de produto; recebe seções como dados e aceita dois registros (`tecnico` e `aberto`)
 - `src/components/pages/` — componentes-página React; recebem dados via props
 - `src/index.css` — Tailwind 4 source (`@import "tailwindcss"` + `@theme` com font-sans/serif/mono)
 - `astro.config.mjs` — Astro config; `@tailwindcss/vite` plugado; aliases versionados (`vaul@1.1.2 → vaul` etc — herança Figma) ainda existem

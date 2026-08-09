@@ -1,16 +1,16 @@
 import React from 'react';
 import { Hero } from '../Hero';
-import { Themes } from '../Themes';
-import { Services } from '../Services';
-import { LatestContent } from '../LatestContent';
+import { Provas } from '../Provas';
+import { Trajetoria } from '../Trajetoria';
+import { Formacao } from '../Formacao';
 
 export function HomePage() {
   return (
     <main>
       <Hero />
-      <Themes />
-      <Services />
-      <LatestContent />
+      <Provas />
+      <Trajetoria />
+      <Formacao />
     </main>
   );
 }

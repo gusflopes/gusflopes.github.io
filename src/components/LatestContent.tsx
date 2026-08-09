@@ -1,3 +1,14 @@
+/**
+ * DESMONTADO DE PROPÓSITO — não está referenciado em nenhuma página.
+ *
+ * Este bloco mostrava dois artigos e um "vídeo em destaque" que não existem:
+ * títulos genéricos, imagens de banco e nenhum link de destino. Conteúdo
+ * placeholder derruba a credibilidade de quem chegou aqui para verificar se
+ * existe engenheiro de verdade por trás do nome — é pior que seção vazia.
+ *
+ * Para remontar em HomePage.tsx: é preciso haver artigo real publicado, com
+ * imagem própria e link que resolve. Enquanto não houver, melhor a ausência.
+ */
 import React from 'react';
 import { Card, CardContent, CardFooter } from './ui/card';
 import { Button } from './ui/button';

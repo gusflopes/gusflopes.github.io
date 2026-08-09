@@ -155,16 +155,16 @@ export function RadarArticlePage({ id: _id }: RadarArticlePageProps = {}) {
              <h4 className="font-sans font-bold text-orange-500 uppercase tracking-widest text-xs mb-2">Sobre o Autor</h4>
              <p className="font-serif text-3xl md:text-4xl text-white mb-2">Gustavo Lopes</p>
              <p className="text-sm text-slate-400 font-mono max-w-lg leading-relaxed mb-4">
-               Tech Lead & Arquiteto de Software. Especialista em traduzir complexidade de negócio em sistemas escaláveis através de DDD, Cloud e Estratégia.
+               Tech Lead e Staff Engineer em financial services, onde lidera três squads e o sistema de pricing do varejo automotivo. Advogado tributarista por dez anos antes da transição para engenharia em 2018. Trabalha na última milha entre IA e operação: legado, integração e prova de acurácia.
              </p>
              <div className="flex items-center gap-4 justify-center md:justify-start">
-               <a href="#" className="text-slate-400 hover:text-white transition-colors">
+               <a href="https://www.linkedin.com/in/gusflopes/" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="text-slate-400 hover:text-white transition-colors">
                  <Linkedin size={20} />
                </a>
-               <a href="#" className="text-slate-400 hover:text-white transition-colors">
+               <a href="https://github.com/gusflopes" target="_blank" rel="noreferrer" aria-label="GitHub" className="text-slate-400 hover:text-white transition-colors">
                  <Github size={20} />
                </a>
-               <a href="#" className="text-slate-400 hover:text-white transition-colors">
+               <a href="https://x.com/gusflopes" target="_blank" rel="noreferrer" aria-label="X" className="text-slate-400 hover:text-white transition-colors">
                  <Twitter size={20} />
                </a>
              </div>

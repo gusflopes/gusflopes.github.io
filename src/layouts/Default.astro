@@ -6,14 +6,18 @@ import '../index.css';
 interface Props {
   title?: string;
   description?: string;
+  /** Rota publicada mas ainda com conteúdo placeholder: fora dos menus e fora do índice. */
+  noindex?: boolean;
 }
 
 const {
   title = 'gusflopes.dev',
-  description = 'Engenharia de software, arquitetura, IA e DevOps por Gustavo Lopes.',
+  description = 'Gustavo Lopes — engenharia de agentes de IA em sistema legado, rede fechada e empresa de verdade.',
+  noindex = false,
 } = Astro.props;
 
 const pathname = Astro.url.pathname;
+const year = new Date().getFullYear();
 ---
 
 <!doctype html>
@@ -22,11 +26,12 @@ const pathname = Astro.url.pathname;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     <title>{title}</title>
   </head>
   <body class="bg-slate-950 min-h-screen text-slate-200 overflow-x-hidden font-sans selection:bg-orange-500/30">
     <Header pathname={pathname} client:load />
     <slot />
-    <Footer client:load />
+    <Footer year={year} client:load />
   </body>
 </html>

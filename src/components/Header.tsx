@@ -26,10 +26,11 @@ export function Header({ pathname }: HeaderProps) {
   const navItems = [
     { label: 'Home', href: '/' },
     { label: 'Radar', href: '/radar' },
-    { label: 'Insights', href: '/insights' },
-    { label: 'Trabalhe Comigo', href: '/#consulting' },
-    { label: 'Sobre', href: '/#about' },
+    { label: 'Formação', href: '/#formacao' },
+    { label: 'Trajetória', href: '/#trajetoria' },
   ];
+
+  const contatoHref = 'mailto:gustavo@gusflopes.dev?subject=Contato%20pelo%20site';
 
   const handleClick = (e: React.MouseEvent, href: string) => {
     setIsMenuOpen(false);
@@ -70,10 +71,11 @@ export function Header({ pathname }: HeaderProps) {
             </a>
           ))}
           <Button
+            asChild
             variant="outline"
             className="font-sans border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white bg-transparent rounded-full px-6"
           >
-            Contato
+            <a href={contatoHref}>Contato</a>
           </Button>
         </nav>
 
@@ -102,8 +104,10 @@ export function Header({ pathname }: HeaderProps) {
                 {item.label}
               </a>
             ))}
-            <Button className="font-sans bg-orange-500 text-white hover:bg-orange-600 w-full">
-              Contato
+            <Button asChild className="font-sans bg-orange-500 text-white hover:bg-orange-600 w-full">
+              <a href={contatoHref} onClick={() => setIsMenuOpen(false)}>
+                Contato
+              </a>
             </Button>
           </nav>
         </div>

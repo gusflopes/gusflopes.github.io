@@ -1,0 +1,11 @@
+---
+import Default from '../layouts/Default.astro';
+import { WorkshopsPage } from '../components/pages/WorkshopsPage';
+---
+
+<Default
+  title="Workshop e grupo de estudo — gusflopes.dev"
+  description="Encontros ao vivo sobre o que perguntar antes de aprovar um projeto de IA. Para quem decide, contrata ou aprova sem escrever código. Sem pré-requisito técnico."
+>
+  <WorkshopsPage client:load />
+</Default>
